@@ -129,6 +129,7 @@ export function lintNote(note: OfficeNote, ctx: LintContext): Finding[] {
 // Read MANDATE.md frontmatter into the knobs the linter honors.
 export function mandateSettings(mandateText: string | null): {
   maxPositionPct?: number;
+  satelliteTargetPct?: number;
   reviewStaleDays: number;
 } {
   const DEFAULT_REVIEW_STALE = 90;
@@ -136,6 +137,7 @@ export function mandateSettings(mandateText: string | null): {
   const { data } = parseFrontmatter(mandateText);
   return {
     maxPositionPct: asNumber(data["max-position-pct"]),
+    satelliteTargetPct: asNumber(data["satellite-target-pct"]),
     reviewStaleDays: asNumber(data["review-stale-days"]) ?? DEFAULT_REVIEW_STALE,
   };
 }

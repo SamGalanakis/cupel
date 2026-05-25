@@ -23,3 +23,6 @@ export type { ParsedFrontmatter, FrontmatterValue } from "./frontmatter.js";
 
 export { lintNote, mandateSettings, slugify } from "./lint.js";
 export type { Finding, LintContext, OfficeNote, Severity } from "./lint.js";
+
+export { summarizePortfolio } from "./portfolio.js";
+export type { PositionEntry, PortfolioSummary } from "./portfolio.js";

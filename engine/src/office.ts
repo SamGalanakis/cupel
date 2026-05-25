@@ -110,6 +110,7 @@ you stray into them._
 const MANDATE = `---
 type: mandate
 max-position-pct:
+satellite-target-pct:
 review-stale-days: 90
 last-reviewed:
 ---

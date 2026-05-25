@@ -6,11 +6,13 @@ import {
   OFFICE_MARKER,
   parseFrontmatter,
   slugify,
+  summarizePortfolio,
   type Finding,
   type LintContext,
   type Severity,
 } from "../../engine/dist/index.js";
 import { isOffice, officePath } from "./office.js";
+import { readPositions } from "./portfolio.js";
 
 const SOURCE_STALE_DAYS = 30;
 const PULSE_STALE_DAYS = 14;
@@ -65,7 +67,7 @@ export function cmdDoctor(): number {
   }
 
   const mandatePath = join(root, "MANDATE.md");
-  const { maxPositionPct, reviewStaleDays } = mandateSettings(
+  const { maxPositionPct, satelliteTargetPct, reviewStaleDays } = mandateSettings(
     existsSync(mandatePath) ? readFileSync(mandatePath, "utf8") : null,
   );
 
@@ -93,6 +95,14 @@ export function cmdDoctor(): number {
     /* marker unreadable; init would have created it */
   }
 
+  // Office-level: total satellite allocation vs. the declared target (pure
+  // arithmetic over the sizes you set; per-position cap breaches are flagged
+  // per note above). What to do about it is the model's call, not the code's.
+  const portfolio = summarizePortfolio(readPositions(root), { maxPositionPct, satelliteTargetPct });
+  const allocNote = portfolio.overTarget
+    ? `total satellite ${portfolio.totalPct}% over ${satelliteTargetPct}% target`
+    : null;
+
   // Report.
   const totals: Record<Severity, number> = { error: 0, warning: 0, info: 0 };
   const byPath = new Map<string, Finding[]>();
@@ -105,6 +115,7 @@ export function cmdDoctor(): number {
 
   console.log(c(`cupel doctor — ${root}`, BOLD));
   if (pulseNote) console.log(`  ${c("PULSE".padEnd(7), COLOR.info)} ${pulseNote}`);
+  if (allocNote) console.log(`  ${c("ALLOC".padEnd(7), COLOR.warning)} ${allocNote}`);
 
   if (findings.length === 0) {
     console.log(`  ${c("office is consistent", "\x1b[32m")}`);
