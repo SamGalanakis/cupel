@@ -73,7 +73,7 @@
   <span class="dir">positions/</span>    <span class="cmt">what you actually hold: cost basis, size, sell triggers</span>
   <span class="dir">theses/</span>       <span class="cmt">full write-ups, one per idea</span>
   <span class="dir">journal/</span>      <span class="cmt">a dated decision log: every buy, sell, and pass</span></div>
-      <p>Keep frontmatter minimal and put the thinking in the body. <code>EDGES.md</code> and <code>MANDATE.md</code> are singletons; <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code> and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal&rsquo;s value compounds as its history grows.</p>
+      <p>Keep frontmatter minimal and put the thinking in the body. <code>EDGES.md</code> and <code>MANDATE.md</code> are singletons; <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code>, <code>satellite-target-pct</code>, and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal&rsquo;s value compounds as its history grows.</p>
     </section>
 
     <section class="step" id="notes">
@@ -177,11 +177,14 @@ last-checked: 2026-05-20
       <ul>
         <li>Missing or malformed required frontmatter fields.</li>
         <li>Dangling <code>[[wikilinks]]</code> that point at no note.</li>
-        <li>Mandate breaches, such as a position over your <code>max-position-pct</code>.</li>
-        <li>Stale reviews, measured against <code>review-stale-days</code> from the dates on each note.</li>
+        <li>Mandate breaches: a position over your <code>max-position-pct</code>, or total satellite over your <code>satellite-target-pct</code>.</li>
+        <li>Stale reviews, measured against <code>review-stale-days</code>, and decisions whose <code>review-on</code> date has arrived.</li>
       </ul>
       <pre><code><span class="p">$</span> cupel doctor
 <span class="c"># reports time since last pulse, plus any inconsistencies</span></code></pre>
+      <p><code>cupel portfolio</code> sums your positions deterministically: each holding&rsquo;s size against the cap, and the total against your satellite target. The arithmetic is the CLI&rsquo;s; what to do about a concentrated or oversized book is the model&rsquo;s call.</p>
+      <pre><code><span class="p">$</span> cupel portfolio
+<span class="c"># CRWD 12% (over 8% cap) · total satellite 26% of 20% target</span></code></pre>
       <p>Because the linter is deterministic and the office is plain files, the slow-burning value, the dated decision journal, the provenance graph, the staleness checks, stays readable and yours, with or without cupel installed.</p>
     </section>
 

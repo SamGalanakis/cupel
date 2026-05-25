@@ -141,13 +141,15 @@
       <div class="ledger">
         <div class="ledger-row"><span class="ledger-cmd">init</span><span class="ledger-job">Scaffold a new office at <code>~/cupel</code> (or <code>CUPEL_HOME</code>).</span></div>
         <div class="ledger-row"><span class="ledger-cmd">where</span><span class="ledger-job">Print the office path so the skill knows where to read and write.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">doctor</span><span class="ledger-job">Check frontmatter, dangling links, mandate breaches, and stale reviews.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">doctor</span><span class="ledger-job">Check frontmatter, dangling links, mandate breaches, stale reviews, and reviews now due.</span></div>
         <div class="ledger-row"><span class="ledger-cmd">show &lt;TICKER&gt;</span><span class="ledger-job">Print every note for a ticker so a session resumes with full context.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">portfolio</span><span class="ledger-job">Sum positions: each size against the cap, the total against your satellite target.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">stamp &lt;event&gt;</span><span class="ledger-job">Timestamp an event (e.g. <code>cupel stamp pulse</code>) so the front door knows how fresh the office is.</span></div>
         <div class="ledger-row"><span class="ledger-cmd">skills</span><span class="ledger-job">Install, update, or check the cupel skill across your AI harnesses.</span></div>
       </div>
       <div class="assay-note">
         <p class="label">Division of labour</p>
-        <p>The LLM does the judgment; the linter guards the filing cabinet. <code>cupel doctor</code> catches a position over your <code>max-position-pct</code>, a holding unreviewed for months, or a source long unchecked, and the companion surfaces it before you act.</p>
+        <p>The LLM does the judgment; the linter guards the filing cabinet. <code>cupel doctor</code> catches a position over your <code>max-position-pct</code> (or the whole satellite over its target), a holding unreviewed for months, a decision whose review date has arrived, or a source long unchecked, and the companion surfaces it before you act.</p>
       </div>
     </section>
 
