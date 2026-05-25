@@ -1,0 +1,31 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "cupel",
+  "metadata": {
+    "description": "Make your clanker your investing analyst: a personal research companion that learns your edges and stress-tests ideas against the investing canon."
+  },
+  "owner": {
+    "name": "Samuel Galanakis"
+  },
+  "plugins": [
+    {
+      "name": "cupel",
+      "description": "Personal investing research companion. /cupel onboard, watch, assay, crux, premortem, pulse, brief — learns your edges (Lynch) and keeps you honest. Discipline only; never predicts prices or gives buy/sell calls.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Samuel Galanakis"
+      },
+      "source": ".",
+      "category": "finance",
+      "homepage": "https://github.com/SamGalanakis/cupel",
+      "tags": [
+        "investing",
+        "stocks",
+        "research",
+        "portfolio",
+        "value-investing",
+        "skills"
+      ]
+    }
+  ]
+}

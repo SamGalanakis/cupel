@@ -35,6 +35,25 @@ cupel skills check              # show installed version + content-hash status
 
 Then talk to it from any harness: `/cupel`.
 
+### Without the npm package
+
+The skill is committed at `skills/cupel/`, so you can pull it straight from GitHub without installing the npm package first:
+
+```
+npx skills add SamGalanakis/cupel          # via skills.sh (skills.sh/SamGalanakis/cupel)
+```
+
+Or add it as a Claude Code plugin marketplace:
+
+```
+/plugin marketplace add SamGalanakis/cupel
+/plugin install cupel@cupel
+```
+
+### Claude Cowork
+
+Cowork installs plugins from a zip. Every [release](https://github.com/SamGalanakis/cupel/releases/latest) ships a `cupel-cowork.zip` asset that bundles the CLI (zero npm deps, so `cupel init`/`doctor` run in the sandbox on `node` alone). Download it, then in Cowork: Customize : Plugins : Install : upload the zip. Build it yourself with `npm run build:cowork`.
+
 ## The office
 
 ```

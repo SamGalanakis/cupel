@@ -28,6 +28,8 @@ if (bump && !['patch', 'minor', 'major'].includes(bump)) {
 
 const PKG_PATH = path.join(repoRoot, 'package.json');
 const SKILL_PATH = path.join(repoRoot, 'skills/cupel/SKILL.md');
+const PLUGIN_PATH = path.join(repoRoot, '.claude-plugin/plugin.json');
+const MARKET_PATH = path.join(repoRoot, '.claude-plugin/marketplace.json');
 
 function fail(msg) {
   console.error(`✗ ${msg}`);
@@ -67,22 +69,57 @@ function bumpSemver(current, kind) {
   return `${maj}.${min}.${pat}`;
 }
 
-function syncSkill(version) {
+function syncSiblings(version) {
+  const changed = [];
+
   const skill = readFileSync(SKILL_PATH, 'utf8');
-  const updated = skill.replace(/^version:.*$/m, `version: ${version}`);
-  if (updated !== skill) {
-    writeFileSync(SKILL_PATH, updated);
-    return true;
+  const skillNew = skill.replace(/^version:.*$/m, `version: ${version}`);
+  if (skillNew !== skill) {
+    writeFileSync(SKILL_PATH, skillNew);
+    changed.push('skills/cupel/SKILL.md');
   }
-  return false;
+
+  const plugin = JSON.parse(readFileSync(PLUGIN_PATH, 'utf8'));
+  if (plugin.version !== version) {
+    plugin.version = version;
+    writeFileSync(PLUGIN_PATH, JSON.stringify(plugin, null, 2) + '\n');
+    changed.push('.claude-plugin/plugin.json');
+  }
+
+  const market = JSON.parse(readFileSync(MARKET_PATH, 'utf8'));
+  let marketChanged = false;
+  for (const p of market.plugins ?? []) {
+    if (p.name === 'cupel' && p.version !== version) {
+      p.version = version;
+      marketChanged = true;
+    }
+  }
+  if (marketChanged) {
+    writeFileSync(MARKET_PATH, JSON.stringify(market, null, 2) + '\n');
+    changed.push('.claude-plugin/marketplace.json');
+  }
+
+  return changed;
 }
 
-function verifySkill(version) {
+function verifySiblings(version) {
   const skill = readFileSync(SKILL_PATH, 'utf8');
   const match = skill.match(/^version:\s*(\S+)$/m);
   if (!match) fail('skills/cupel/SKILL.md has no version: frontmatter field');
   if (match[1] !== version) {
     fail(`skills/cupel/SKILL.md version "${match[1]}" disagrees with package.json "${version}". Re-run with --bump or sync manually.`);
+  }
+
+  const plugin = JSON.parse(readFileSync(PLUGIN_PATH, 'utf8'));
+  if (plugin.version !== version) {
+    fail(`.claude-plugin/plugin.json version "${plugin.version}" disagrees with package.json "${version}".`);
+  }
+
+  const market = JSON.parse(readFileSync(MARKET_PATH, 'utf8'));
+  const entry = (market.plugins ?? []).find((p) => p.name === 'cupel');
+  if (!entry) fail('.claude-plugin/marketplace.json has no cupel plugin entry');
+  if (entry.version !== version) {
+    fail(`.claude-plugin/marketplace.json cupel version "${entry.version}" disagrees with package.json "${version}".`);
   }
 }
 
@@ -102,14 +139,14 @@ if (bump) {
   pkg.version = next;
   if (!dryRun) {
     writePkg(pkg);
-    const changed = syncSkill(next);
-    ok(`updated package.json${changed ? ' + skills/cupel/SKILL.md' : ''}`);
+    const changed = syncSiblings(next);
+    ok(`updated package.json${changed.length ? ' + ' + changed.join(', ') : ''}`);
   } else {
-    ok('would update package.json + skills/cupel/SKILL.md');
+    ok('would update package.json + skill + plugin manifests');
   }
 
   step('Committing the bump');
-  runMutating('git add package.json skills/cupel/SKILL.md');
+  runMutating('git add package.json skills/cupel/SKILL.md .claude-plugin/plugin.json .claude-plugin/marketplace.json');
   runMutating(`git commit -m "Release v${next}"`);
   step('Pushing to origin');
   runMutating('git push');
@@ -122,9 +159,9 @@ const tag = `v${version}`;
 step(`Releasing ${pkg.name} ${version}`);
 
 if (!justBumped) {
-  step('Verifying skill version matches');
-  verifySkill(version);
-  ok('skills/cupel/SKILL.md matches');
+  step('Verifying sibling versions match');
+  verifySiblings(version);
+  ok('skill + plugin manifests match');
 }
 
 step('Checking working tree is clean');
