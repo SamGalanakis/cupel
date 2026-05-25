@@ -4,7 +4,12 @@ The refresh primitive: bring the office up to date. Side-effecting and terse —
 
 ## Steps
 
-1. **Sweep sources due for a check.** Read `sources/`; for each whose `last-checked` is older than its cadence (default ~30 days), use web search/fetch to see what that source has been saying lately. Capture anything that intersects the user's edges as a *seed* (note it for [`watch`](watch.md)); update `last-checked` to today. Cite "as of" dates; never fabricate. If fetching a source fails, say so and leave its date unchanged — don't pretend.
+1. **Sweep sources due for a check.** `cupel doctor` already lists which sources are stale (`stale-source`). For each, use web search/fetch to see what that source has been saying lately. Update its `last-checked` to today. Cite "as of" dates; never fabricate. If a fetch fails, say so and leave the date unchanged — don't pretend.
+
+   **Turning a sweep into a seed (use judgment here).** Infra and tech sources mostly discuss *themes*, private companies, and open-source projects — not investable tickers. So:
+   - If a theme maps to an **investable company inside the user's edge**, that's a seed → [`watch`](watch.md).
+   - If it's a **risk or support to something the user already holds or is researching**, record it *there* — a dated `journal/` note linked to the `[[thesis]]`, updating the falsifiers — rather than inventing a new idea.
+   - If it names a **private company or OSS project** (not investable), or sits outside the edge, note it in the pulse output and move on. Don't force a ticker that isn't real.
 2. **Refresh held positions (within limits).** For each `positions/` note, note what's changed since `last-synced` from public info if relevant, and update `last-synced`. (Real holdings/price sync is a later broker-MCP feature; for now this is light and honest about staleness.)
 3. **Surface reviews that are due.** Find `journal/` entries past their `review-on` date and `[[thesis]]`/`position` notes past `review-stale-days` — these need the user's attention.
 4. **Run `cupel doctor`.** Report inconsistencies: missing fields, dangling links, mandate breaches, stale reviews.
