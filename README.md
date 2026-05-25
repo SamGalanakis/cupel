@@ -41,13 +41,30 @@ Then talk to it from any harness: `/cupel`.
 ~/cupel/
   EDGES.md      your circle of competence — what you see before Wall Street does
   MANDATE.md    your investment policy: goals, horizon, risk, position-size & sell rules
-  watchlist/    ideas you're tracking, and why they're on your radar
-  positions/    what you actually hold: cost basis, thesis, sell triggers
+  sources/      people and sources you trust, each with context and a last-checked date
+  watchlist/    ideas you're tracking, with provenance back to a source or hunch
+  positions/    what you actually hold: cost basis, size, sell triggers
   theses/       full write-ups, one per idea
   journal/      a dated decision log — every buy, sell, and pass, with the reasoning
 ```
 
-Keep it under git if you like — the decision journal is far more valuable when every change is versioned and timestamped.
+It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal compounds in value when every change is versioned.
+
+`cupel doctor` keeps the vault honest: it checks frontmatter, dangling links, mandate breaches (e.g. a position over your `max-position-pct`), and stale reviews. The LLM does the judgment; the linter guards the filing cabinet.
+
+## Commands inside the harness
+
+Talk to `/cupel` and it figures out what you need. Or go direct:
+
+| Command | Job |
+|---|---|
+| `onboard` | Interview you; write your edges, mandate, and trusted sources |
+| `watch` | Turn a seed (a source's idea or your hunch) into a provenance-tracked watchlist entry |
+| `assay` | Test one idea: a good business at a fair price, inside your edge? |
+| `crux` | Find the single load-bearing claim a thesis rests on, and test it |
+| `premortem` | Assume it failed in three years; surface the risks you're underweighting |
+| `pulse` | Refresh the office: sweep sources, re-check staleness, run `doctor` |
+| `brief` | A `pulse` plus the executive readout: what changed, what needs attention |
 
 ## The canon
 

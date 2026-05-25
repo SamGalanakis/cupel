@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { VERSION } from "../../engine/dist/index.js";
-import { cmdInit, cmdWhere } from "./office.js";
+import { cmdInit, cmdStamp, cmdWhere } from "./office.js";
+import { cmdDoctor } from "./doctor.js";
 import { runSkills } from "./skills.js";
 
 function cmdHelp(): number {
@@ -9,21 +10,23 @@ function cmdHelp(): number {
 Usage:
   cupel init                       Create your office (defaults to ~/cupel; set CUPEL_HOME to override)
   cupel where                      Print the office path
+  cupel doctor                     Check the office for inconsistencies (schema, links, mandate, staleness)
+  cupel stamp <event>              Record that an event happened now (e.g. cupel stamp pulse)
   cupel skills <subcommand>        Install or update the skill in your AI harness
   cupel version
   cupel help
 
 Most of cupel lives inside your AI harness. After installing the skill, talk to
-it with \`/cupel\` — it reads and writes your office (edges, watchlist, theses,
-positions, decision journal).
+it with \`/cupel\` — it reads and writes your office (edges, sources, watchlist,
+theses, positions, decision journal).
 
 Install once globally:
   npm install -g cupel
   cupel init
   cd your-project && cupel skills install
 
-Detection and discipline only: cupel sharpens your own reasoning. It does not
-predict prices, place trades, or give buy/sell calls.
+Discipline only: cupel sharpens your own reasoning. It does not predict prices,
+place trades, or give buy/sell calls.
 `);
   return 0;
 }
@@ -36,6 +39,12 @@ switch (command) {
     break;
   case "where":
     exit = cmdWhere();
+    break;
+  case "doctor":
+    exit = cmdDoctor();
+    break;
+  case "stamp":
+    exit = cmdStamp(rest);
     break;
   case "skills":
     exit = await runSkills(rest);

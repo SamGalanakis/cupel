@@ -9,5 +9,17 @@ export const VERSION: string = JSON.parse(
   readFileSync(join(here, "../../package.json"), "utf8"),
 ).version;
 
-export { OFFICE_MARKER, OFFICE_DIRS, OFFICE_FILES } from "./office.js";
-export type { OfficeDir, OfficeFile } from "./office.js";
+export {
+  OFFICE_MARKER,
+  OFFICE_DIRS,
+  OFFICE_FILES,
+  REQUIRED_FIELDS,
+  noteTypeForPath,
+} from "./office.js";
+export type { OfficeDir, OfficeFile, NoteType } from "./office.js";
+
+export { parseFrontmatter, extractWikilinks } from "./frontmatter.js";
+export type { ParsedFrontmatter, FrontmatterValue } from "./frontmatter.js";
+
+export { lintNote, mandateSettings } from "./lint.js";
+export type { Finding, LintContext, OfficeNote, Severity } from "./lint.js";
