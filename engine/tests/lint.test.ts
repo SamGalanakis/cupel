@@ -71,6 +71,13 @@ describe("lintNote", () => {
     expect(f.some((x) => x.rule === "dangling-link")).toBe(false);
   });
 
+  it("flags a journal entry whose review-on date has passed, not a future one", () => {
+    const past = ["---", "date: 2026-01-15", "kind: review", "ticker: CRWD", "review-on: 2026-04-01", "---", "x"].join("\n");
+    const future = ["---", "date: 2026-05-20", "kind: buy", "ticker: NVDA", "review-on: 2026-08-25", "---", "x"].join("\n");
+    expect(lintNote({ path: "journal/2026-01-15-crwd.md", text: past }, ctx()).some((f) => f.rule === "review-due")).toBe(true);
+    expect(lintNote({ path: "journal/2026-05-20-nvda.md", text: future }, ctx()).some((f) => f.rule === "review-due")).toBe(false);
+  });
+
   it("flags a stale review", () => {
     const text = [
       "---",

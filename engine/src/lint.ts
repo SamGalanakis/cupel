@@ -122,6 +122,15 @@ export function lintNote(note: OfficeNote, ctx: LintContext): Finding[] {
       add("info", "stale-source", `last checked ${d} days ago (over ${ctx.sourceStaleDays})`);
     }
   }
+  // A journal entry whose review-on date has arrived (or passed) is due for the
+  // user's attention. Pure date comparison — what to conclude is the model's job.
+  if (type === "journal") {
+    const due = daysSince(data["review-on"], ctx.today);
+    if (due !== null && due >= 0) {
+      const on = typeof data["review-on"] === "string" ? data["review-on"].slice(0, 10) : "";
+      add("info", "review-due", `flagged for review (review-on ${on})`);
+    }
+  }
 
   return findings;
 }
