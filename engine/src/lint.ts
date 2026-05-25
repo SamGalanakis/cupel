@@ -44,8 +44,21 @@ function daysSince(dateStr: FrontmatterValue | undefined, today: Date): number |
   return Math.floor(ms / 86_400_000);
 }
 
-function normalizeLink(target: string): string {
-  return target.replace(/\.md$/i, "").split("/").pop()!.toLowerCase();
+// Slugify a note name or wikilink target so display-name links resolve the way
+// humans (and Obsidian, with aliases) expect: "[[Pragmatic Infra Letter]]" and
+// "pragmatic-infra-letter.md" compare equal. Case, spaces, underscores, and
+// punctuation are normalized away.
+export function slugify(s: string): string {
+  return s
+    .replace(/\.md$/i, "")
+    .split("/")
+    .pop()!
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
 // Lint a single note. Returns zero or more findings.
@@ -78,7 +91,7 @@ export function lintNote(note: OfficeNote, ctx: LintContext): Finding[] {
   // boilerplate documentation whose [[examples]] are illustrative, not links.
   if (type !== "readme") {
     for (const target of extractWikilinks(note.text)) {
-      if (!ctx.knownNotes.has(normalizeLink(target))) {
+      if (!ctx.knownNotes.has(slugify(target))) {
         add("warning", "dangling-link", `[[${target}]] points to no note in the vault`);
       }
     }

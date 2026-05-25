@@ -21,5 +21,5 @@ export type { OfficeDir, OfficeFile, NoteType } from "./office.js";
 export { parseFrontmatter, extractWikilinks } from "./frontmatter.js";
 export type { ParsedFrontmatter, FrontmatterValue } from "./frontmatter.js";
 
-export { lintNote, mandateSettings } from "./lint.js";
+export { lintNote, mandateSettings, slugify } from "./lint.js";
 export type { Finding, LintContext, OfficeNote, Severity } from "./lint.js";

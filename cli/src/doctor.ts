@@ -1,9 +1,11 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join } from "node:path";
 import {
   lintNote,
   mandateSettings,
   OFFICE_MARKER,
+  parseFrontmatter,
+  slugify,
   type Finding,
   type LintContext,
   type Severity,
@@ -47,10 +49,20 @@ export function cmdDoctor(): number {
     return 1;
   }
 
-  const relPaths = [...walkMarkdown(root)];
-  const knownNotes = new Set(
-    relPaths.map((p) => p.replace(/\.md$/i, "").split("/").pop()!.toLowerCase()),
-  );
+  const notes = [...walkMarkdown(root)].map((rel) => ({
+    rel,
+    text: readFileSync(join(root, rel), "utf8"),
+  }));
+
+  // Every note resolves by its slugified basename and by any frontmatter alias,
+  // so display-name links like [[Pragmatic Infra Letter]] find the slug file.
+  const knownNotes = new Set<string>();
+  for (const n of notes) {
+    knownNotes.add(slugify(n.rel));
+    const aliases = parseFrontmatter(n.text).data.aliases;
+    if (typeof aliases === "string" && aliases.trim()) knownNotes.add(slugify(aliases));
+    else if (Array.isArray(aliases)) for (const a of aliases) knownNotes.add(slugify(a));
+  }
 
   const mandatePath = join(root, "MANDATE.md");
   const { maxPositionPct, reviewStaleDays } = mandateSettings(
@@ -66,8 +78,8 @@ export function cmdDoctor(): number {
   };
 
   const findings: Finding[] = [];
-  for (const rel of relPaths) {
-    findings.push(...lintNote({ path: rel, text: readFileSync(join(root, rel), "utf8") }, ctx));
+  for (const n of notes) {
+    findings.push(...lintNote({ path: n.rel, text: n.text }, ctx));
   }
 
   // Office-level: how long since the last pulse?
@@ -91,7 +103,7 @@ export function cmdDoctor(): number {
     else byPath.set(f.path, [f]);
   }
 
-  console.log(c(`cupel doctor — ${relative(process.cwd(), root) || root}`, BOLD));
+  console.log(c(`cupel doctor — ${root}`, BOLD));
   if (pulseNote) console.log(`  ${c("PULSE".padEnd(7), COLOR.info)} ${pulseNote}`);
 
   if (findings.length === 0) {

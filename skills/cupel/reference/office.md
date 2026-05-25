@@ -79,7 +79,14 @@ wrong. Links: [[NVDA-thesis]]. (On review, judge the reasoning, not just the pri
 ## Conventions
 
 - **Provenance is mandatory** on watchlist entries — every idea traces to a `[[source]]`, an edge, or a stated hunch. No orphan ideas.
-- **Wikilinks** build the graph: thesis → its `[[source]]` and `[[EDGES]]`; position → its `[[thesis]]`; journal → the `[[thesis]]`/`[[position]]` it concerns. `cupel doctor` flags dangling links.
+- **Wikilinks** build the graph: thesis → its `[[source]]` and `[[EDGES]]`; position → its `[[thesis]]`; journal → the `[[thesis]]`/`[[position]]` it concerns. `cupel doctor` flags dangling links. Links match by slug, so `[[Pragmatic Infra Letter]]` resolves to `pragmatic-infra-letter.md` (case, spaces, and hyphens are ignored). For a note whose natural title differs from its filename, add an `aliases:` frontmatter field with the display name so the link resolves in Obsidian too:
+  ```
+  ---
+  name: Pragmatic Infra Letter
+  aliases: [Pragmatic Infra Letter]
+  last-checked: 2026-05-20
+  ---
+  ```
 - **Tags** classify: Lynch's six categories (`#slow-grower`, `#stalwart`, `#fast-grower`, `#cyclical`, `#turnaround`, `#asset-play`) and status (`#held`, `#passed`).
 - **Dates are `YYYY-MM-DD`.** Keep `last-reviewed` / `last-checked` / `last-synced` current; the linter measures staleness from them.
 - `EDGES.md` and `MANDATE.md` are singleton notes; `MANDATE.md` frontmatter holds `max-position-pct` and `review-stale-days`, which the linter honors.

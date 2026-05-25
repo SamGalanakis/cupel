@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { lintNote, mandateSettings, type LintContext } from "../src/index.js";
+import { lintNote, mandateSettings, slugify, type LintContext } from "../src/index.js";
 
 function ctx(overrides: Partial<LintContext> = {}): LintContext {
   return {
@@ -54,6 +54,21 @@ describe("lintNote", () => {
     ].join("\n");
     const f = lintNote({ path: "positions/NVDA.md", text }, ctx());
     expect(f.some((x) => x.rule === "mandate-position-size")).toBe(true);
+  });
+
+  it("resolves a display-name wikilink to a slug note (no false dangling)", () => {
+    const c = ctx({ knownNotes: new Set(["pragmatic-infra-letter", "ddog-thesis"]) });
+    const text = [
+      "---",
+      "ticker: DDOG",
+      "status: researching",
+      "provenance: hunch",
+      "last-reviewed: 2026-05-20",
+      "---",
+      "From [[Pragmatic Infra Letter]]; writeup [[DDOG-thesis]].",
+    ].join("\n");
+    const f = lintNote({ path: "watchlist/DDOG.md", text }, c);
+    expect(f.some((x) => x.rule === "dangling-link")).toBe(false);
   });
 
   it("flags a stale review", () => {
