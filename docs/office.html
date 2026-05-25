@@ -28,7 +28,7 @@
 
   <header class="site-nav">
     <a class="site-nav-home" href="./">
-      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="nm" cx="0.4" cy="0.34" r="0.72"><stop offset="0" stop-color="#fff1d2"/><stop offset="0.45" stop-color="#f4a93a"/><stop offset="1" stop-color="#c44f17"/></radialGradient></defs><path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="currentColor"/><circle cx="32" cy="26" r="8" fill="url(#nm)"/></svg>
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="nm" cx="0.4" cy="0.34" r="0.72"><stop offset="0" stop-color="#f6ead0"/><stop offset="0.45" stop-color="#d8b264"/><stop offset="1" stop-color="#97742f"/></radialGradient></defs><path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="currentColor"/><circle cx="32" cy="26" r="8" fill="url(#nm)"/></svg>
       cupel
     </a>
     <nav class="site-nav-links" aria-label="Primary">
@@ -50,33 +50,23 @@
     </div>
   </section>
 
-  <main class="book" id="main">
-    <aside class="spine" aria-label="Contents">
-      <p class="spine-label">Contents</p>
-      <ol class="spine-tree">
-        <li><a class="spine-item" href="#layout">The layout</a></li>
-        <li><a class="spine-item" href="#notes">Note types</a>
-          <ol class="spine-sub">
-            <li><a href="#sources"><code>sources</code></a></li>
-            <li><a href="#watchlist"><code>watchlist</code></a></li>
-            <li><a href="#theses"><code>theses</code></a></li>
-            <li><a href="#positions"><code>positions</code></a></li>
-            <li><a href="#journal"><code>journal</code></a></li>
-          </ol>
-        </li>
-        <li><a class="spine-item" href="#provenance">Provenance</a></li>
-        <li><a class="spine-item" href="#journal-discipline">The journal</a></li>
-        <li><a class="spine-item" href="#doctor"><code>cupel doctor</code></a></li>
-      </ol>
-    </aside>
+  <nav class="rail" aria-label="Sections">
+    <ol>
+      <li><a href="#layout"><span class="n">001</span> Layout</a></li>
+      <li><a href="#notes"><span class="n">002</span> Note types</a></li>
+      <li><a href="#provenance"><span class="n">003</span> Provenance</a></li>
+      <li><a href="#journal-discipline"><span class="n">004</span> The journal</a></li>
+      <li><a href="#doctor"><span class="n">005</span> doctor</a></li>
+    </ol>
+  </nav>
 
-    <article class="book-body">
+  <main class="reader" id="main">
 
-      <section class="chapter" id="layout">
-        <p class="chapter-mark">The layout</p>
-        <h2 class="chapter-title">A filing cabinet, not a database</h2>
-        <p><span class="newthought">The office</span> is a flat, legible folder you can read with your eyes or open in Obsidian for the graph view. Two singleton notes describe you; five folders hold the work.</p>
-        <div class="vault">
+    <section class="step" id="layout">
+      <div class="step-rule"><span class="step-num">001</span><span class="step-kicker">The layout</span><span class="step-line"></span></div>
+      <h2 class="step-title">A filing cabinet, not a database</h2>
+      <p><span class="newthought">The office</span> is a flat, legible folder you can read with your eyes or open in Obsidian for the graph view. Two singleton notes describe you; five folders hold the work.</p>
+      <div class="vault">
 <span class="dir">~/cupel/</span>
   <span class="note">EDGES.md</span>      <span class="cmt">your circle of competence: what you see before Wall Street does</span>
   <span class="note">MANDATE.md</span>    <span class="cmt">goals, horizon, risk, position-size and sell rules</span>
@@ -85,18 +75,18 @@
   <span class="dir">positions/</span>    <span class="cmt">what you actually hold: cost basis, size, sell triggers</span>
   <span class="dir">theses/</span>       <span class="cmt">full write-ups, one per idea</span>
   <span class="dir">journal/</span>      <span class="cmt">a dated decision log: every buy, sell, and pass</span>
-        </div>
-        <p>Keep frontmatter minimal and put the thinking in the body. <code>EDGES.md</code> and <code>MANDATE.md</code> are singletons; <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code> and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal compounds in value when every change is versioned.</p>
-      </section>
+      </div>
+      <p>Keep frontmatter minimal and put the thinking in the body. <code>EDGES.md</code> and <code>MANDATE.md</code> are singletons; <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code> and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal compounds in value when every change is versioned.</p>
+    </section>
 
-      <section class="chapter" id="notes">
-        <p class="chapter-mark">Note types</p>
-        <h2 class="chapter-title">Five shapes, each with required fields</h2>
-        <p><code>cupel doctor</code> infers a note&rsquo;s type from its directory and enforces a small set of required frontmatter fields. The rest is prose.</p>
+    <section class="step" id="notes">
+      <div class="step-rule"><span class="step-num">002</span><span class="step-kicker">Note types</span><span class="step-line"></span></div>
+      <h2 class="step-title">Five shapes, each with required fields</h2>
+      <p><code>cupel doctor</code> infers a note&rsquo;s type from its directory and enforces a small set of required frontmatter fields. The rest is prose.</p>
 
-        <h3 id="sources"><code>sources/&lt;slug&gt;.md</code></h3>
-        <p>A person or source you trust. What they are good for, their track record, how to read them.</p>
-        <pre><code><span class="p">---</span>
+      <h3 id="sources"><code>sources/&lt;slug&gt;.md</code></h3>
+      <p>A person or source you trust. What they are good for, their track record, how to read them.</p>
+      <pre><code><span class="p">---</span>
 name: Dave Chen (semiconductors)
 domain: semis, foundries
 trust: former fab engineer; calls supply gluts early
@@ -105,9 +95,9 @@ url: https://example.com/feed        <span class="c"># optional: where to check<
 last-checked: 2026-05-20
 <span class="p">---</span></code></pre>
 
-        <h3 id="watchlist"><code>watchlist/&lt;TICKER&gt;.md</code></h3>
-        <p>An idea you are tracking. Every entry traces to a seed.</p>
-        <pre><code><span class="p">---</span>
+      <h3 id="watchlist"><code>watchlist/&lt;TICKER&gt;.md</code></h3>
+      <p>An idea you are tracking. Every entry traces to a seed.</p>
+      <pre><code><span class="p">---</span>
 ticker: NVDA
 company: NVIDIA
 status: watching          <span class="c"># watching | researching | passed | promoted</span>
@@ -117,9 +107,9 @@ last-reviewed: 2026-05-20
 #fast-grower
 Why it is on the radar, what would have to be true, the open questions.</code></pre>
 
-        <h3 id="theses"><code>theses/&lt;TICKER&gt;-thesis.md</code></h3>
-        <p>The full write-up: the story in two minutes, the load-bearing claim, valuation and what is priced in, risks, and falsifiers.</p>
-        <pre><code><span class="p">---</span>
+      <h3 id="theses"><code>theses/&lt;TICKER&gt;-thesis.md</code></h3>
+      <p>The full write-up: the story in two minutes, the load-bearing claim, valuation and what is priced in, risks, and falsifiers.</p>
+      <pre><code><span class="p">---</span>
 ticker: NVDA
 company: NVIDIA
 last-reviewed: 2026-05-20
@@ -127,9 +117,9 @@ last-reviewed: 2026-05-20
 The story in two minutes. The load-bearing claim. Valuation and what is
 priced in. Risks. Falsifiers. Links: [[Dave Chen]], [[EDGES]].</code></pre>
 
-        <h3 id="positions"><code>positions/&lt;TICKER&gt;.md</code></h3>
-        <p>Something actually held. <code>doctor</code> flags a <code>size-pct</code> that breaches your mandate cap.</p>
-        <pre><code><span class="p">---</span>
+      <h3 id="positions"><code>positions/&lt;TICKER&gt;.md</code></h3>
+      <p>Something actually held. <code>doctor</code> flags a <code>size-pct</code> that breaches your mandate cap.</p>
+      <pre><code><span class="p">---</span>
 ticker: NVDA
 company: NVIDIA
 size-pct: 6              <span class="c"># doctor flags breaches of max-position-pct</span>
@@ -143,9 +133,9 @@ sell-triggers:
 <span class="p">---</span>
 Held since 2025. Thesis: [[NVDA-thesis]].</code></pre>
 
-        <h3 id="journal"><code>journal/&lt;YYYY-MM-DD&gt;-&lt;slug&gt;.md</code></h3>
-        <p>A decision. The <code>review-on</code> date is when <code>pulse</code> resurfaces it.</p>
-        <pre><code><span class="p">---</span>
+      <h3 id="journal"><code>journal/&lt;YYYY-MM-DD&gt;-&lt;slug&gt;.md</code></h3>
+      <p>A decision. The <code>review-on</code> date is when <code>pulse</code> resurfaces it.</p>
+      <pre><code><span class="p">---</span>
 date: 2026-05-20
 kind: buy               <span class="c"># buy | sell | trim | add | pass | review</span>
 ticker: NVDA
@@ -153,57 +143,57 @@ review-on: 2026-08-20   <span class="c"># when pulse should resurface this</span
 <span class="p">---</span>
 What was decided and why, in plain words. Falsifiers: what would prove
 this wrong. Links: [[NVDA-thesis]].</code></pre>
-      </section>
+    </section>
 
-      <section class="chapter" id="provenance">
-        <p class="chapter-mark">Provenance</p>
-        <h2 class="chapter-title">No orphan ideas</h2>
-        <p>Provenance is mandatory on watchlist entries: every idea traces to a <code>[[source]]</code>, an edge, or a stated hunch. Wikilinks build the graph, and <code>cupel doctor</code> flags dangling ones.</p>
-        <ul>
-          <li>A thesis links its <code>[[source]]</code> and <code>[[EDGES]]</code>.</li>
-          <li>A position links its <code>[[thesis]]</code>.</li>
-          <li>A journal entry links the <code>[[thesis]]</code> or <code>[[position]]</code> it concerns.</li>
-        </ul>
-        <p>Links match by slug, so <code>[[Pragmatic Infra Letter]]</code> resolves to <code>pragmatic-infra-letter.md</code> (case, spaces, and hyphens are ignored). For a note whose natural title differs from its filename, add an <code>aliases:</code> field with the display name so the link resolves in Obsidian too.<span class="sidenote">Tags classify alongside links: Lynch&rsquo;s six categories (<code>#fast-grower</code>, <code>#cyclical</code>, and the rest) plus status (<code>#held</code>, <code>#passed</code>). Dates are always <code>YYYY-MM-DD</code>; the linter measures staleness from <code>last-reviewed</code>, <code>last-checked</code>, and <code>last-synced</code>.</span></p>
-        <pre><code><span class="p">---</span>
+    <section class="step" id="provenance">
+      <div class="step-rule"><span class="step-num">003</span><span class="step-kicker">Provenance</span><span class="step-line"></span></div>
+      <h2 class="step-title">No orphan ideas</h2>
+      <p>Provenance is mandatory on watchlist entries: every idea traces to a <code>[[source]]</code>, an edge, or a stated hunch. Wikilinks build the graph, and <code>cupel doctor</code> flags dangling ones.</p>
+      <ul>
+        <li>A thesis links its <code>[[source]]</code> and <code>[[EDGES]]</code>.</li>
+        <li>A position links its <code>[[thesis]]</code>.</li>
+        <li>A journal entry links the <code>[[thesis]]</code> or <code>[[position]]</code> it concerns.</li>
+      </ul>
+      <p>Links match by slug, so <code>[[Pragmatic Infra Letter]]</code> resolves to <code>pragmatic-infra-letter.md</code> (case, spaces, and hyphens are ignored). For a note whose natural title differs from its filename, add an <code>aliases:</code> field with the display name so the link resolves in Obsidian too.</p>
+      <pre><code><span class="p">---</span>
 name: Pragmatic Infra Letter
 aliases: [Pragmatic Infra Letter]
 last-checked: 2026-05-20
 <span class="p">---</span></code></pre>
-      </section>
+      <span class="sidenote">Tags classify alongside links: Lynch&rsquo;s six categories (<code>#fast-grower</code>, <code>#cyclical</code>, and the rest) plus status (<code>#held</code>, <code>#passed</code>). Dates are always <code>YYYY-MM-DD</code>; the linter measures staleness from <code>last-reviewed</code>, <code>last-checked</code>, and <code>last-synced</code>.</span>
+    </section>
 
-      <section class="chapter" id="journal-discipline">
-        <p class="chapter-mark">The journal</p>
-        <h2 class="chapter-title">Judge the reasoning, not the price</h2>
-        <p>Whenever a conversation reaches a decision, a buy, sell, trim, or a deliberate pass, cupel writes a dated note to <code>journal/</code> as a byproduct: the date, what was decided, the thesis in a sentence, the provenance, and the falsifiers, what would prove this wrong.</p>
-        <div class="assay-note">
-          <p class="label">On review</p>
-          <p>When <code>pulse</code> or <code>brief</code> resurfaces an entry whose review is due, cupel judges reasoning quality first. A sound decision can have a bad outcome and a poor decision a good one, so separate the decision from the result. Profit and loss is secondary; if you want it, cupel asks for the current price rather than guessing. It never fabricates a number.</p>
-        </div>
-      </section>
+    <section class="step" id="journal-discipline">
+      <div class="step-rule"><span class="step-num">004</span><span class="step-kicker">The journal</span><span class="step-line"></span></div>
+      <h2 class="step-title">Judge the reasoning, not the price</h2>
+      <p>Whenever a conversation reaches a decision, a buy, sell, trim, or a deliberate pass, cupel writes a dated note to <code>journal/</code> as a byproduct: the date, what was decided, the thesis in a sentence, the provenance, and the falsifiers, what would prove this wrong.</p>
+      <div class="assay-note">
+        <p class="label">On review</p>
+        <p>When <code>pulse</code> or <code>brief</code> resurfaces an entry whose review is due, cupel judges reasoning quality first. A sound decision can have a bad outcome and a poor decision a good one, so separate the decision from the result. Profit and loss is secondary; if you want it, cupel asks for the current price rather than guessing. It never fabricates a number.</p>
+      </div>
+    </section>
 
-      <section class="chapter" id="doctor">
-        <p class="chapter-mark">The linter</p>
-        <h2 class="chapter-title"><code>cupel doctor</code> keeps it honest</h2>
-        <p>The LLM does the judgment; the linter guards the filing cabinet. After any write, cupel runs <code>doctor</code> and fixes what it flags:</p>
-        <ul>
-          <li>Missing or malformed required frontmatter fields.</li>
-          <li>Dangling <code>[[wikilinks]]</code> that point at no note.</li>
-          <li>Mandate breaches, such as a position over your <code>max-position-pct</code>.</li>
-          <li>Stale reviews, measured against <code>review-stale-days</code> from the dates on each note.</li>
-        </ul>
-        <pre><code><span class="p">$</span> cupel doctor
+    <section class="step" id="doctor">
+      <div class="step-rule"><span class="step-num">005</span><span class="step-kicker">The linter</span><span class="step-line"></span></div>
+      <h2 class="step-title">cupel doctor keeps it honest</h2>
+      <p>The LLM does the judgment; the linter guards the filing cabinet. After any write, cupel runs <code>doctor</code> and fixes what it flags:</p>
+      <ul>
+        <li>Missing or malformed required frontmatter fields.</li>
+        <li>Dangling <code>[[wikilinks]]</code> that point at no note.</li>
+        <li>Mandate breaches, such as a position over your <code>max-position-pct</code>.</li>
+        <li>Stale reviews, measured against <code>review-stale-days</code> from the dates on each note.</li>
+      </ul>
+      <pre><code><span class="p">$</span> cupel doctor
 <span class="c"># reports time since last pulse, plus any inconsistencies</span></code></pre>
-        <p>Because the linter is deterministic and the office is plain files, the slow-burning value, the dated decision journal, the provenance graph, the staleness checks, stays readable and yours, with or without cupel installed.</p>
-      </section>
+      <p>Because the linter is deterministic and the office is plain files, the slow-burning value, the dated decision journal, the provenance graph, the staleness checks, stays readable and yours, with or without cupel installed.</p>
+    </section>
 
-    </article>
   </main>
 
   <footer class="site-foot">
     <div class="site-foot-wrap">
       <p class="site-foot-brand">
-        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="fm" cx="0.4" cy="0.34" r="0.72"><stop offset="0" stop-color="#fff1d2"/><stop offset="0.45" stop-color="#f4a93a"/><stop offset="1" stop-color="#c44f17"/></radialGradient></defs><path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="currentColor"/><circle cx="32" cy="26" r="8" fill="url(#fm)"/></svg>
+        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="fm" cx="0.4" cy="0.34" r="0.72"><stop offset="0" stop-color="#f6ead0"/><stop offset="0.45" stop-color="#d8b264"/><stop offset="1" stop-color="#97742f"/></radialGradient></defs><path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="currentColor"/><circle cx="32" cy="26" r="8" fill="url(#fm)"/></svg>
         cupel
       </p>
       <nav class="site-foot-links" aria-label="Site links">

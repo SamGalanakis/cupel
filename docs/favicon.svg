@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
     <radialGradient id="bead" cx="0.4" cy="0.34" r="0.72">
-      <stop offset="0" stop-color="#fff1d2"/>
-      <stop offset="0.45" stop-color="#f4a93a"/>
-      <stop offset="1" stop-color="#c44f17"/>
+      <stop offset="0" stop-color="#f8efd9"/>
+      <stop offset="0.45" stop-color="#d8b264"/>
+      <stop offset="1" stop-color="#97742f"/>
     </radialGradient>
   </defs>
   <rect width="64" height="64" rx="13" fill="#f3ecde"/>
-  <!-- heat haze rising from the bead -->
-  <circle cx="32" cy="26" r="13" fill="#e8821f" opacity="0.22"/>
+  <!-- soft heat haze rising from the bead -->
+  <circle cx="32" cy="26" r="13" fill="#d8b86a" opacity="0.18"/>
   <!-- the cupel: a shallow bone-ash vessel -->
-  <path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="#8a3c1a"/>
-  <path d="M16 38 H48 L46.8 41.2 Q32 44.8 17.2 41.2 Z" fill="#a85a30"/>
+  <path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="#6f5630"/>
+  <path d="M16 38 H48 L46.8 41.2 Q32 44.8 17.2 41.2 Z" fill="#947743"/>
   <!-- the refined bead of metal -->
   <circle cx="32" cy="26" r="8" fill="url(#bead)"/>
-  <circle cx="29.3" cy="23.3" r="2.1" fill="#fff6e6" opacity="0.85"/>
+  <circle cx="29.3" cy="23.3" r="2.1" fill="#fff6e6" opacity="0.8"/>
 </svg>

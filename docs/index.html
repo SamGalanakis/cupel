@@ -26,11 +26,11 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
-  <a class="skip" href="#start">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
   <header class="site-nav">
     <a class="site-nav-home" href="./">
-      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="nm" cx="0.4" cy="0.34" r="0.72"><stop offset="0" stop-color="#fff1d2"/><stop offset="0.45" stop-color="#f4a93a"/><stop offset="1" stop-color="#c44f17"/></radialGradient></defs><path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="currentColor"/><circle cx="32" cy="26" r="8" fill="url(#nm)"/></svg>
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="nm" cx="0.4" cy="0.34" r="0.72"><stop offset="0" stop-color="#f6ead0"/><stop offset="0.45" stop-color="#d8b264"/><stop offset="1" stop-color="#97742f"/></radialGradient></defs><path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="currentColor"/><circle cx="32" cy="26" r="8" fill="url(#nm)"/></svg>
       cupel
     </a>
     <nav class="site-nav-links" aria-label="Primary">
@@ -44,116 +44,71 @@
     </nav>
   </header>
 
-  <section class="furnace">
-    <div class="furnace-wrap">
-      <div class="furnace-text">
-        <p class="furnace-eyebrow"><span class="dot">&#9670;</span> cupel.trading &nbsp;&middot;&nbsp; v0.1 &nbsp;&middot;&nbsp; MIT</p>
-        <h1 class="furnace-title">Burn off the dross.<br>Keep the <span class="em">gold</span>.</h1>
-        <p class="furnace-lede">cupel turns the LLM in your harness into a personal investing analyst that learns your edges and assays your ideas against the canon.</p>
-        <div class="furnace-cta">
-          <a class="btn btn-primary" href="#install">Install cupel</a>
-          <a class="btn btn-ghost" href="#commands">See the commands</a>
-        </div>
-        <p class="furnace-meta">
-          <code>npm install -g cupel</code><br>
-          Not a screener. Not a tip bot. Discipline, not prediction.
-        </p>
-      </div>
-      <div class="assay" aria-hidden="true">
-        <svg class="cupel-fig" viewBox="0 0 300 320" role="img" aria-label="A bone-ash cupel cradling a glowing bead of refined metal">
-          <defs>
-            <radialGradient id="heroBead" cx="0.4" cy="0.32" r="0.75">
-              <stop offset="0" stop-color="#fff3d6"/>
-              <stop offset="0.4" stop-color="#ffc25e"/>
-              <stop offset="0.75" stop-color="#ed8a2a"/>
-              <stop offset="1" stop-color="#bc4914"/>
-            </radialGradient>
-            <radialGradient id="heroGlow" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0" stop-color="#f59a2e" stop-opacity="0.85"/>
-              <stop offset="0.55" stop-color="#e07320" stop-opacity="0.35"/>
-              <stop offset="1" stop-color="#e07320" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <!-- heat haze -->
-          <circle class="bead-glow" cx="150" cy="118" r="118" fill="url(#heroGlow)"/>
-          <!-- cupel vessel -->
-          <ellipse cx="150" cy="196" rx="118" ry="30" fill="#e7dcc6"/>
-          <path d="M40 196 Q150 250 260 196 L236 286 Q150 322 64 286 Z" fill="#e2d6bd"/>
-          <path d="M40 196 Q150 250 260 196 L252 226 Q150 276 48 226 Z" fill="#cdbfa2"/>
-          <ellipse cx="150" cy="196" rx="86" ry="20" fill="#b89a6f"/>
-          <ellipse cx="150" cy="193" rx="86" ry="19" fill="#1c1712"/>
-          <!-- the bead -->
-          <circle cx="150" cy="150" r="46" fill="url(#heroBead)"/>
-          <circle class="bead-core" cx="135" cy="135" r="13" fill="#fff7e8" opacity="0.9"/>
-        </svg>
-      </div>
+  <section class="masthead">
+    <div class="masthead-wrap">
+      <p class="masthead-eyebrow">cupel &middot; v0.1 &middot; MIT</p>
+      <h1 class="masthead-title">A personal investing analyst</h1>
+      <p class="masthead-lede">cupel turns the LLM in your AI harness into a research companion that learns your edges and tests your ideas against the investing canon. It lives in one folder and keeps a dated record of your thinking. Discipline, not prediction: it does not predict prices, place trades, or give buy or sell calls.</p>
     </div>
   </section>
 
-  <main class="book" id="main">
-    <aside class="spine" aria-label="Contents">
-      <p class="spine-label">Contents</p>
-      <ol class="spine-tree">
-        <li><a class="spine-item" href="#start">Start</a></li>
-        <li>
-          <a class="spine-item" href="#install">Install</a>
-          <ol class="spine-sub">
-            <li><a href="#install-skill">the skill</a></li>
-            <li><a href="#install-cowork">Cowork</a></li>
-          </ol>
-        </li>
-        <li><a class="spine-item" href="#office">The office</a></li>
-        <li><a class="spine-item" href="#commands">Commands</a></li>
-        <li><a class="spine-item" href="#cli">The CLI</a></li>
-        <li><a class="spine-item" href="#canon">The canon</a></li>
-      </ol>
-    </aside>
+  <nav class="rail" aria-label="Sections">
+    <ol>
+      <li><a href="#start"><span class="n">001</span> Start</a></li>
+      <li><a href="#install"><span class="n">002</span> Install</a></li>
+      <li><a href="#office"><span class="n">003</span> Office</a></li>
+      <li><a href="#commands"><span class="n">004</span> Commands</a></li>
+      <li><a href="#cli"><span class="n">005</span> CLI</a></li>
+      <li><a href="#canon"><span class="n">006</span> Canon</a></li>
+    </ol>
+  </nav>
 
-    <article class="book-body">
+  <main class="reader" id="main">
 
-      <section class="chapter" id="start">
-        <p class="chapter-mark">Start</p>
-        <h2 class="chapter-title">A cupel is where you find the gold</h2>
-        <p><span class="newthought">A cupel</span> is the bone-ash vessel used in fire assay. You melt a sample in it under heat and the base metal burns away into the ash, leaving a bright bead of pure gold or silver. The dross goes; what is truly valuable stays.</p>
-        <p>cupel does that for your investing ideas. It turns the LLM in your AI harness into a personal research analyst: a stateful companion that learns <em>your</em> edges and stress-tests your ideas against the investing canon. The premise is Peter Lynch&rsquo;s, that your advantage is what you already know from your work and your life. cupel&rsquo;s job is to capture that edge, turn it into disciplined ideas, and keep you honest.<span class="sidenote">It is not a stock screener and not a per-project linter. It is a companion that lives in one folder, your <a href="office.html">office</a>, and amasses everything it learns about you there.</span></p>
-        <p><strong>Detection and discipline only.</strong> cupel sharpens your own reasoning and surfaces what you are missing. It does not predict prices, place trades, or give buy or sell calls.</p>
-        <div class="assay-note">
-          <p class="label">The stance</p>
-          <p>Edge before opinion. A familiar product or a hot tip is only a lead; it still has to survive the homework. A wonderful business at the wrong price is a poor investment. Most of a normal person&rsquo;s money can sensibly sit in a low-cost index; individual picks are a considered satellite, only where you have a real edge.</p>
-        </div>
-        <p>Inspired by Paul Bakaus&rsquo;s <a href="https://impeccable.style/">impeccable</a> and built as a sibling to <a href="https://pilcrow.ink/">pilcrow</a>: same idea, pointed at investing instead of UI or prose.</p>
-      </section>
+    <section class="step" id="start">
+      <div class="step-rule"><span class="step-num">001</span><span class="step-kicker">Start</span><span class="step-line"></span></div>
+      <h2 class="step-title">A cupel is where you find the gold</h2>
+      <p><span class="newthought">A cupel</span> is the bone-ash vessel used in fire assay. You melt a sample in it under heat and the base metal burns away into the ash, leaving a bright bead of pure gold or silver. The dross goes; what is truly valuable stays.</p>
+      <p>cupel does that for your investing ideas. It turns the LLM in your AI harness into a personal research analyst: a stateful companion that learns <em>your</em> edges and stress-tests your ideas against the investing canon. The premise is Peter Lynch&rsquo;s, that your advantage is what you already know from your work and your life. cupel&rsquo;s job is to capture that edge, turn it into disciplined ideas, and keep you honest.</p>
+      <span class="sidenote">cupel is not a stock screener and not a per-project linter. It is a companion that lives in one folder, your <a href="office.html">office</a>, and amasses everything it learns about you there.</span>
+      <p><strong>Detection and discipline only.</strong> cupel sharpens your own reasoning and surfaces what you are missing. It does not predict prices, place trades, or give buy or sell calls.</p>
+      <div class="assay-note">
+        <p class="label">The stance</p>
+        <p>Edge before opinion. A familiar product or a hot tip is only a lead; it still has to survive the homework. A wonderful business at the wrong price is a poor investment. Most of a normal person&rsquo;s money can sensibly sit in a low-cost index; individual picks are a considered satellite, only where you have a real edge.</p>
+      </div>
+      <p>Inspired by Paul Bakaus&rsquo;s <a href="https://impeccable.style/">impeccable</a> and built as a sibling to <a href="https://pilcrow.ink/">pilcrow</a>: same idea, pointed at investing instead of UI or prose.</p>
+    </section>
 
-      <section class="chapter" id="install">
-        <p class="chapter-mark">Install</p>
-        <h2 class="chapter-title">Set up the office, add the skill</h2>
-        <p>Install the package:</p>
-        <pre><code><span class="p">$</span> npm install -g cupel</code></pre>
-        <p>Set up your office, the vault where cupel keeps everything it learns. It defaults to <code>~/cupel</code>; override with <code>CUPEL_HOME</code>:</p>
-        <pre><code><span class="p">$</span> cupel init</code></pre>
+    <section class="step" id="install">
+      <div class="step-rule"><span class="step-num">002</span><span class="step-kicker">Install</span><span class="step-line"></span></div>
+      <h2 class="step-title">Set up the office, add the skill</h2>
+      <p>Install the package:</p>
+      <pre><code><span class="p">$</span> npm install -g cupel</code></pre>
+      <p>Set up your office, the vault where cupel keeps everything it learns. It defaults to <code>~/cupel</code>; override with <code>CUPEL_HOME</code>:</p>
+      <pre><code><span class="p">$</span> cupel init</code></pre>
 
-        <h3 id="install-skill">Add the skill to your harness</h3>
-        <p>cupel ships as a skill for Claude Code, Cursor, Gemini CLI, Codex, OpenCode, Kiro, Pi, Qoder, Trae, and GitHub Copilot. Install auto-detects which harness directories exist:</p>
-        <pre><code><span class="p">$</span> cupel skills install        <span class="c"># auto-detect installed harnesses</span>
+      <h3 id="install-skill">Add the skill to your harness</h3>
+      <p>cupel ships as a skill for Claude Code, Cursor, Gemini CLI, Codex, OpenCode, Kiro, Pi, Qoder, Trae, and GitHub Copilot. Install auto-detects which harness directories exist:</p>
+      <pre><code><span class="p">$</span> cupel skills install        <span class="c"># auto-detect installed harnesses</span>
 <span class="p">$</span> cupel skills install --all  <span class="c"># every supported provider</span>
 <span class="p">$</span> cupel skills update         <span class="c"># re-sync after npm update -g cupel</span>
 <span class="p">$</span> cupel skills check          <span class="c"># installed version + content-hash status</span></code></pre>
-        <p>Then talk to it from any harness: <code>/cupel</code>.</p>
-        <p><span class="newthought">Without the npm package</span>, the skill is committed at <code>skills/cupel/</code>, so you can pull it straight from GitHub:</p>
-        <pre><code><span class="p">$</span> npx skills add SamGalanakis/cupel</code></pre>
-        <p>Or add it as a Claude Code plugin marketplace:</p>
-        <pre><code><span class="p">/</span>plugin marketplace add SamGalanakis/cupel
+      <p>Then talk to it from any harness: <code>/cupel</code>.</p>
+      <p><span class="newthought">Without the npm package</span>, the skill is committed at <code>skills/cupel/</code>, so you can pull it straight from GitHub:</p>
+      <pre><code><span class="p">$</span> npx skills add SamGalanakis/cupel</code></pre>
+      <p>Or add it as a Claude Code plugin marketplace:</p>
+      <pre><code><span class="p">/</span>plugin marketplace add SamGalanakis/cupel
 <span class="p">/</span>plugin install cupel@cupel</code></pre>
+      <h3 id="install-cowork">Claude Cowork</h3>
+      <p>Cowork installs plugins from a zip, not from npm. Every <a href="https://github.com/SamGalanakis/cupel/releases/latest">release</a> ships a <code>cupel-cowork.zip</code> asset that bundles the CLI with zero npm dependencies, so <code>cupel init</code> and <code>cupel doctor</code> run inside the sandbox on <code>node</code> alone.</p>
+      <span class="sidenote">Download the zip, then in Cowork choose Customize, Plugins, Install, and upload it. Build it yourself with <code>npm run build:cowork</code>.</span>
+    </section>
 
-        <h3 id="install-cowork">Claude Cowork</h3>
-        <p>Cowork installs plugins from a zip, not from npm. Every <a href="https://github.com/SamGalanakis/cupel/releases/latest">release</a> ships a <code>cupel-cowork.zip</code> asset that bundles the CLI with zero npm dependencies, so <code>cupel init</code> and <code>cupel doctor</code> run inside the sandbox on <code>node</code> alone.<span class="sidenote">Download it, then in Cowork choose Customize, Plugins, Install, and upload the zip. Build it yourself with <code>npm run build:cowork</code>.</span></p>
-      </section>
-
-      <section class="chapter" id="office">
-        <p class="chapter-mark">The office</p>
-        <h2 class="chapter-title">One folder that remembers everything</h2>
-        <p>cupel keeps all of its state in one Obsidian-compatible vault, the office, never in the current project. It is plain markdown with YAML frontmatter for structure and <code>[[wikilinks]]</code> for provenance: a thesis links its <code>[[source]]</code>; a position links its <code>[[thesis]]</code>.</p>
-        <div class="vault">
+    <section class="step" id="office">
+      <div class="step-rule"><span class="step-num">003</span><span class="step-kicker">The office</span><span class="step-line"></span></div>
+      <h2 class="step-title">One folder that remembers everything</h2>
+      <p>cupel keeps all of its state in one Obsidian-compatible vault, the office, never in the current project. It is plain markdown with YAML frontmatter for structure and <code>[[wikilinks]]</code> for provenance: a thesis links its <code>[[source]]</code>; a position links its <code>[[thesis]]</code>.</p>
+      <div class="vault">
 <span class="dir">~/cupel/</span>
   <span class="note">EDGES.md</span>      <span class="cmt">your circle of competence: what you see before Wall Street does</span>
   <span class="note">MANDATE.md</span>    <span class="cmt">your policy: goals, horizon, risk, position-size and sell rules</span>
@@ -162,58 +117,56 @@
   <span class="dir">positions/</span>    <span class="cmt">what you actually hold: cost basis, size, sell triggers</span>
   <span class="dir">theses/</span>       <span class="cmt">full write-ups, one per idea</span>
   <span class="dir">journal/</span>      <span class="cmt">a dated decision log: every buy, sell, and pass, with the reasoning</span>
-        </div>
-        <p>Open it in Obsidian for the graph view, or just read the markdown. Keep it under git: the decision journal compounds in value when every change is versioned. <a href="office.html">Read the full office schema</a>, including note types, the <code>cupel doctor</code> linter, and the journal discipline.</p>
-      </section>
+      </div>
+      <p>Open it in Obsidian for the graph view, or just read the markdown. Keep it under git: the decision journal compounds in value when every change is versioned. <a href="office.html">Read the full office schema</a>, including note types, the <code>cupel doctor</code> linter, and the journal discipline.</p>
+    </section>
 
-      <section class="chapter" id="commands">
-        <p class="chapter-mark">Commands</p>
-        <h2 class="chapter-title">Talk to it, or go direct</h2>
-        <p>Say <code>/cupel</code> and it figures out what you need: it locates your office, takes its pulse, and routes you to the right job. Or name the command yourself.</p>
-        <div class="ledger">
-          <div class="ledger-row"><span class="ledger-cmd">onboard</span><span class="ledger-job">Interview you; write your edges, mandate, and trusted sources. The foundation.</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">watch</span><span class="ledger-job">Turn a seed, a source&rsquo;s idea or your own hunch, into a provenance-tracked watchlist entry.</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">assay</span><span class="ledger-job">Test one idea: a good business at a fair price, inside your edge?</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">crux</span><span class="ledger-job">Find the single load-bearing claim a thesis rests on, and test it.</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">premortem</span><span class="ledger-job">Assume it failed in three years; surface the risks you are underweighting.</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">pulse</span><span class="ledger-job">Refresh the office: sweep sources, re-check staleness, run <code>cupel doctor</code>.</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">brief</span><span class="ledger-job">A <code>pulse</code> plus the executive readout: what changed, what needs attention, next moves.</span></div>
-        </div>
-        <p>When you name a specific company, cupel runs <code>cupel show &lt;TICKER&gt;</code> first to resume exactly where you left off. It never starts cold on something the office already knows.</p>
-      </section>
+    <section class="step" id="commands">
+      <div class="step-rule"><span class="step-num">004</span><span class="step-kicker">Commands</span><span class="step-line"></span></div>
+      <h2 class="step-title">Talk to it, or go direct</h2>
+      <p>Say <code>/cupel</code> and it figures out what you need: it locates your office, takes its pulse, and routes you to the right job. Or name the command yourself.</p>
+      <div class="ledger">
+        <div class="ledger-row"><span class="ledger-cmd">onboard</span><span class="ledger-job">Interview you; write your edges, mandate, and trusted sources. The foundation.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">watch</span><span class="ledger-job">Turn a seed, a source&rsquo;s idea or your own hunch, into a provenance-tracked watchlist entry.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">assay</span><span class="ledger-job">Test one idea: a good business at a fair price, inside your edge?</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">crux</span><span class="ledger-job">Find the single load-bearing claim a thesis rests on, and test it.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">premortem</span><span class="ledger-job">Assume it failed in three years; surface the risks you are underweighting.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">pulse</span><span class="ledger-job">Refresh the office: sweep sources, re-check staleness, run <code>cupel doctor</code>.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">brief</span><span class="ledger-job">A <code>pulse</code> plus the executive readout: what changed, what needs attention, next moves.</span></div>
+      </div>
+      <p>When you name a specific company, cupel runs <code>cupel show &lt;TICKER&gt;</code> first to resume exactly where you left off. It never starts cold on something the office already knows.</p>
+    </section>
 
-      <section class="chapter" id="cli">
-        <p class="chapter-mark">The CLI</p>
-        <h2 class="chapter-title">The filing cabinet, kept honest</h2>
-        <p>The <code>cupel</code> binary does the deterministic bookkeeping so the LLM can do the judgment. It manages the office, validates it, and installs the skill.</p>
-        <div class="ledger">
-          <div class="ledger-row"><span class="ledger-cmd">init</span><span class="ledger-job">Scaffold a new office at <code>~/cupel</code> (or <code>CUPEL_HOME</code>).</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">where</span><span class="ledger-job">Print the office path so the skill knows where to read and write.</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">doctor</span><span class="ledger-job">Check frontmatter, dangling links, mandate breaches, and stale reviews.</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">show &lt;TICKER&gt;</span><span class="ledger-job">Print every note for a ticker so a session resumes with full context.</span></div>
-          <div class="ledger-row"><span class="ledger-cmd">skills</span><span class="ledger-job">Install, update, or check the cupel skill across your AI harnesses.</span></div>
-        </div>
-        <div class="assay-note">
-          <p class="label">Division of labour</p>
-          <p>The LLM does the judgment; the linter guards the filing cabinet. <code>cupel doctor</code> catches a position over your <code>max-position-pct</code>, a holding unreviewed for months, or a source long unchecked, and the companion surfaces it before you act.</p>
-        </div>
-      </section>
+    <section class="step" id="cli">
+      <div class="step-rule"><span class="step-num">005</span><span class="step-kicker">The CLI</span><span class="step-line"></span></div>
+      <h2 class="step-title">The filing cabinet, kept honest</h2>
+      <p>The <code>cupel</code> binary does the deterministic bookkeeping so the LLM can do the judgment. It manages the office, validates it, and installs the skill.</p>
+      <div class="ledger">
+        <div class="ledger-row"><span class="ledger-cmd">init</span><span class="ledger-job">Scaffold a new office at <code>~/cupel</code> (or <code>CUPEL_HOME</code>).</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">where</span><span class="ledger-job">Print the office path so the skill knows where to read and write.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">doctor</span><span class="ledger-job">Check frontmatter, dangling links, mandate breaches, and stale reviews.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">show &lt;TICKER&gt;</span><span class="ledger-job">Print every note for a ticker so a session resumes with full context.</span></div>
+        <div class="ledger-row"><span class="ledger-cmd">skills</span><span class="ledger-job">Install, update, or check the cupel skill across your AI harnesses.</span></div>
+      </div>
+      <div class="assay-note">
+        <p class="label">Division of labour</p>
+        <p>The LLM does the judgment; the linter guards the filing cabinet. <code>cupel doctor</code> catches a position over your <code>max-position-pct</code>, a holding unreviewed for months, or a source long unchecked, and the companion surfaces it before you act.</p>
+      </div>
+    </section>
 
-      <section class="chapter" id="canon">
-        <p class="chapter-mark">The canon</p>
-        <h2 class="chapter-title">Anchored in the classics</h2>
-        <p>cupel&rsquo;s judgment is anchored in a small canon chosen for accessible, individual investing. The audience is a smart person who is an expert in some other field, not a finance professional, so the principles are plain, concrete, and free of jargon.</p>
-        <p>Lead with <strong>Lynch</strong> to find the edge; gate with <strong>Graham</strong> and <strong>Marks</strong> on price and what is already priced in. <strong>Dorsey</strong> judges whether quality is durable, <strong>Mayer</strong> sets the holding horizon, <strong>Housel</strong> and <strong>Bernstein</strong> check that you are not about to sabotage yourself, and <strong>Bogle</strong> keeps the whole thing humble.</p>
-        <p><a href="canon.html">Read the full canon</a>, eight thinkers as operating lenses, plus the six Lynch categories that drive the story, the numbers, and the sell signal.</p>
-      </section>
+    <section class="step" id="canon">
+      <div class="step-rule"><span class="step-num">006</span><span class="step-kicker">The canon</span><span class="step-line"></span></div>
+      <h2 class="step-title">Anchored in the classics</h2>
+      <p>cupel&rsquo;s judgment is anchored in a small canon chosen for accessible, individual investing: Lynch and Mayer on edge, Dorsey on moats, Housel and Bernstein on temperament and risk, Bogle on humility, Graham and Marks on price. The audience is a smart person who is an expert in some other field, so the principles stay plain and free of jargon.</p>
+      <p><a href="canon.html">Read the full canon</a>: eight thinkers as operating lenses, plus the six Lynch categories that drive the story, the numbers, and the sell signal.</p>
+    </section>
 
-    </article>
   </main>
 
   <footer class="site-foot">
     <div class="site-foot-wrap">
       <p class="site-foot-brand">
-        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="fm" cx="0.4" cy="0.34" r="0.72"><stop offset="0" stop-color="#fff1d2"/><stop offset="0.45" stop-color="#f4a93a"/><stop offset="1" stop-color="#c44f17"/></radialGradient></defs><path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="currentColor"/><circle cx="32" cy="26" r="8" fill="url(#fm)"/></svg>
+        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="fm" cx="0.4" cy="0.34" r="0.72"><stop offset="0" stop-color="#f6ead0"/><stop offset="0.45" stop-color="#d8b264"/><stop offset="1" stop-color="#97742f"/></radialGradient></defs><path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="currentColor"/><circle cx="32" cy="26" r="8" fill="url(#fm)"/></svg>
         cupel
       </p>
       <nav class="site-foot-links" aria-label="Site links">

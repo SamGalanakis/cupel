@@ -10,7 +10,7 @@ It is not a stock screener or a per-project linter. It is a stateful companion t
 
 ## Status
 
-Early. The repo scaffolding, the office folder convention, and skill distribution are in place; the companion's onboarding and command set are being designed.
+Early but working. The companion — onboarding, the `watch → assay → crux`/`premortem` discipline loop, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
 
 ## Install
 
@@ -69,7 +69,21 @@ Cowork installs plugins from a zip. Every [release](https://github.com/SamGalana
 
 It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal compounds in value when every change is versioned.
 
-`cupel doctor` keeps the vault honest: it checks frontmatter, dangling links, mandate breaches (e.g. a position over your `max-position-pct`), and stale reviews. The LLM does the judgment; the linter guards the filing cabinet.
+`cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches (a position over your `max-position-pct`, or total satellite over your `satellite-target-pct`), stale reviews, and decisions whose `review-on` date has arrived. The LLM does the judgment; the linter guards the filing cabinet — pure arithmetic, dates, and string matching, no heuristics.
+
+## CLI
+
+The deterministic tooling. You can run these yourself; the companion runs them too.
+
+```
+cupel init                 Scaffold the office (~/cupel, or $CUPEL_HOME)
+cupel where                Print the office path
+cupel show <ticker>        Print every note for a ticker — "where were we?"
+cupel portfolio            Sum positions: sizing vs the cap, total vs the satellite target
+cupel doctor               Check the office for inconsistencies
+cupel stamp <event>        Timestamp an event (e.g. cupel stamp pulse)
+cupel skills <subcommand>  Install / update the skill in your AI harness
+```
 
 ## Commands inside the harness
 
@@ -94,6 +108,9 @@ cupel's judgment is anchored in accessible investing classics, aimed at smart pe
 - **Behavior / temperament** — Morgan Housel (*The Psychology of Money*)
 - **Humility / risk / cost** — Bogle, William Bernstein
 - **Don't overpay** — Benjamin Graham
+- **What's already priced in** — Howard Marks
+
+Ideas are classified into Lynch's six categories (slow grower, stalwart, fast grower, cyclical, turnaround, asset play) — the category drives which numbers matter and what signals a sell.
 
 ## Develop
 
