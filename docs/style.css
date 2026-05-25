@@ -5,8 +5,8 @@
    inscriptional (Hedvig Letters Serif); the reading body is Spectral; data and
    code are JetBrains Mono.
 
-   Layout is an assay report: a single reading column of numbered steps, each
-   opened by a fineness-rule divider, with a sticky horizontal section rail. */
+   Layout is an assay report: a persistent left sidebar of section links beside
+   a reading column of numbered steps, each opened by a fineness-rule divider. */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,7 +15,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
-  scroll-padding-top: 108px;
+  scroll-padding-top: 72px;
 }
 
 :root {
@@ -145,80 +145,84 @@ img, svg { display: block; max-width: 100%; }
 [data-theme="dark"] .theme-toggle-dark { display: none; }
 [data-theme="dark"] .theme-toggle-light { display: inline-flex; align-items: center; gap: 6px; }
 
-/* ── MASTHEAD (every page header) ────────────────────────── */
+/* ── SHELL: persistent left sidebar + reading column ─────── */
 
-.masthead {
-  border-bottom: 1px solid var(--rule);
-  padding: clamp(44px, 6vw, 84px) 0 clamp(36px, 5vw, 60px);
-  background: radial-gradient(120% 140% at 100% 0%, oklch(0.72 0.085 84 / 0.05), transparent 55%);
+.shell {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 40px) clamp(72px, 9vw, 112px);
+  display: grid;
+  grid-template-columns: 196px minmax(0, 720px);
+  column-gap: clamp(36px, 5vw, 56px);
+  justify-content: center;
+  align-items: start;
 }
-.masthead-wrap { max-width: 860px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 40px); }
+
+.sidebar {
+  position: sticky;
+  top: var(--nav-h);
+  align-self: start;
+  max-height: calc(100vh - var(--nav-h));
+  overflow-y: auto;
+  padding: clamp(40px, 5vw, 72px) 8px clamp(32px, 4vw, 56px) 0;
+  scrollbar-width: thin; scrollbar-color: var(--rule) transparent;
+}
+.sidebar-label {
+  font-family: var(--mono); text-transform: uppercase;
+  letter-spacing: 0.14em; font-size: 10.5px; color: var(--ink-4);
+  margin-bottom: 18px;
+}
+.sidebar ol { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.sidebar a {
+  display: flex; align-items: baseline; gap: 10px;
+  text-decoration: none;
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.4;
+  letter-spacing: 0.01em; color: var(--ink-3);
+  transition: color var(--dur-quick);
+}
+.sidebar a .n {
+  font-size: 10.5px; font-weight: 600; color: var(--ink-4);
+  font-variant-numeric: lining-nums; transition: color var(--dur-quick);
+}
+.sidebar a:hover { color: var(--ink); }
+.sidebar a:hover .n { color: var(--gold-deep); }
+.sidebar a.is-current { color: var(--ink); font-weight: 600; }
+.sidebar a.is-current .n { color: var(--gold-deep); }
+
+/* ── READER: the reading column of assay steps ───────────── */
+
+.reader {
+  padding: clamp(40px, 5vw, 72px) 0 0;
+  font-size: var(--t-body); line-height: 1.68; color: var(--ink);
+  hanging-punctuation: first last;
+}
+
+/* ── MASTHEAD: the page header, top of the reading column ── */
+.masthead {
+  margin-bottom: clamp(36px, 5vw, 56px);
+  padding-bottom: clamp(28px, 4vw, 44px);
+  border-bottom: 1px solid var(--rule);
+}
 .masthead-eyebrow {
   font-family: var(--mono); font-size: 12.5px;
   letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gold-deep); margin-bottom: 18px;
+  color: var(--gold-deep); margin-bottom: 16px;
 }
 .masthead-title {
   font-family: var(--display); font-weight: 400;
-  font-size: var(--t-h-cover); line-height: 0.94;
+  font-size: clamp(40px, 5vw, 68px); line-height: 1.0;
   letter-spacing: -0.01em; color: var(--ink);
-  margin-bottom: 22px; max-width: 16ch;
+  margin-bottom: 20px; max-width: 18ch;
 }
 .masthead-lede {
-  font-size: clamp(19px, 1.7vw, 24px); line-height: 1.5;
+  font-size: clamp(19px, 1.6vw, 23px); line-height: 1.5;
   color: var(--ink-2); max-width: 60ch;
-}
-
-/* ── RAIL: sticky horizontal section nav (replaces the spine) ── */
-
-.rail {
-  position: sticky; top: var(--nav-h); z-index: 40;
-  background: color-mix(in oklab, var(--bg) 92%, transparent);
-  backdrop-filter: saturate(140%) blur(8px);
-  -webkit-backdrop-filter: saturate(140%) blur(8px);
-  border-bottom: 1px solid var(--rule);
-}
-.rail ol {
-  list-style: none;
-  max-width: 1180px; margin: 0 auto;
-  padding: 0 clamp(16px, 5vw, 40px);
-  display: flex; align-items: stretch; gap: clamp(14px, 2.4vw, 30px);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.rail ol::-webkit-scrollbar { display: none; }
-.rail a {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 0 11px;
-  text-decoration: none; white-space: nowrap;
-  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em;
-  color: var(--ink-3);
-  border-bottom: 2px solid transparent;
-  transition: color var(--dur-quick), border-color var(--dur-quick);
-}
-.rail a .n {
-  font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em;
-  color: var(--ink-4); font-variant-numeric: lining-nums;
-  transition: color var(--dur-quick);
-}
-.rail a:hover { color: var(--ink); }
-.rail a:hover .n { color: var(--gold-deep); }
-.rail a.is-current { color: var(--ink); border-bottom-color: var(--gold); }
-.rail a.is-current .n { color: var(--gold-deep); }
-
-/* ── READER: a single column of assay steps ──────────────── */
-
-.reader {
-  max-width: 740px; margin: 0 auto;
-  padding: clamp(44px, 6vw, 88px) clamp(20px, 5vw, 40px) clamp(72px, 9vw, 112px);
-  font-size: var(--t-body); line-height: 1.68; color: var(--ink);
-  hanging-punctuation: first last;
 }
 
 .step {
   padding-bottom: clamp(38px, 5vw, 64px);
   margin-bottom: clamp(36px, 5vw, 60px);
-  scroll-margin-top: 112px;
+  scroll-margin-top: 72px;
 }
 .step:last-child { margin-bottom: 0; padding-bottom: 0; }
 
@@ -246,7 +250,7 @@ img, svg { display: block; max-width: 100%; }
 .step h3 {
   font-family: var(--display); font-weight: 400;
   font-size: 1.32em; color: var(--ink);
-  margin: 1.7em 0 0.35em; line-height: 1.25; scroll-margin-top: 112px;
+  margin: 1.7em 0 0.35em; line-height: 1.25; scroll-margin-top: 72px;
 }
 .step p { margin-bottom: 1.05em; }
 .step p:last-child { margin-bottom: 0; }
@@ -358,7 +362,7 @@ img, svg { display: block; max-width: 100%; }
 /* ── CANON: the thinkers ─────────────────────────────────── */
 .thinker {
   padding: clamp(22px, 3vw, 32px) 0; border-bottom: 1px solid var(--rule);
-  scroll-margin-top: 112px;
+  scroll-margin-top: 72px;
 }
 .thinker:last-of-type { border-bottom: none; }
 .thinker-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
@@ -373,6 +377,7 @@ img, svg { display: block; max-width: 100%; }
 /* ── OFFICE: the vault tree ──────────────────────────────── */
 .vault {
   font-family: var(--mono); font-size: 13.5px; line-height: 1.9;
+  white-space: pre;
   background: var(--bg-alt); color: var(--ink-2);
   border: 1px solid var(--border); border-radius: 5px;
   padding: 20px 22px; margin: 1.6em 0; overflow-x: auto;
@@ -387,7 +392,7 @@ img, svg { display: block; max-width: 100%; }
   border-top: 1px solid var(--rule);
   padding: clamp(44px, 6vw, 72px) 0 30px;
 }
-.site-foot-wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 40px); }
+.site-foot-wrap { max-width: 740px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 40px); }
 .site-foot-brand {
   font-family: var(--display); font-size: 26px; color: var(--ink);
   display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px;
@@ -416,15 +421,30 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ── NARROW ──────────────────────────────────────────────── */
+/* Below the two-column threshold the sidebar folds to a compact wrapped
+   section list above the content. */
+@media (max-width: 860px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .sidebar {
+    position: static; max-height: none; overflow: visible;
+    padding: clamp(28px, 5vw, 44px) 0 0;
+    margin-bottom: clamp(4px, 2vw, 14px);
+  }
+  .sidebar ol { flex-direction: row; flex-wrap: wrap; gap: 7px 18px; }
+  .reader { padding-top: clamp(24px, 4vw, 36px); }
+}
+
 @media (max-width: 600px) {
   .site-nav { gap: 14px; padding: 0 18px; }
   .site-nav-links { gap: 14px; font-size: 14px; }
-  .reader { padding-left: 18px; padding-right: 18px; }
   .ledger-row { grid-template-columns: 1fr; gap: 4px; }
   .ledger-job { font-size: 16px; }
   .site-foot-rule { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
 
-  /* Stack the categories table into cards on phones. */
+/* Stack the four-column categories table into labelled cards before its
+   columns get too cramped to read. */
+@media (max-width: 720px) {
   .data-table thead { display: none; }
   .data-table tr { display: block; padding: 14px 0; border-bottom: 1px solid var(--rule); }
   .data-table td { display: block; border-bottom: none; padding: 2px 0; }

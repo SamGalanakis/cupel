@@ -67,7 +67,7 @@ Cowork installs plugins from a zip. Every [release](https://github.com/SamGalana
   journal/      a dated decision log — every buy, sell, and pass, with the reasoning
 ```
 
-It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal compounds in value when every change is versioned.
+It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal's value compounds as its history grows.
 
 `cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches (a position over your `max-position-pct`, or total satellite over your `satellite-target-pct`), stale reviews, and decisions whose `review-on` date has arrived. The LLM does the judgment; the linter guards the filing cabinet — pure arithmetic, dates, and string matching, no heuristics.
 
@@ -103,12 +103,14 @@ Talk to `/cupel` and it figures out what you need. Or go direct:
 
 cupel's judgment is anchored in accessible investing classics, aimed at smart people who are experts in other fields rather than finance professionals:
 
-- **Edge / what to buy** — Peter Lynch (*One Up on Wall Street*), Christopher Mayer (*100 Baggers*)
-- **Quality / moats** — Pat Dorsey
-- **Behavior / temperament** — Morgan Housel (*The Psychology of Money*)
-- **Humility / risk / cost** — Bogle, William Bernstein
-- **Don't overpay** — Benjamin Graham
-- **What's already priced in** — Howard Marks
+| Lens | Thinkers |
+|---|---|
+| Edge / what to buy | Peter Lynch (*One Up on Wall Street*), Christopher Mayer (*100 Baggers*) |
+| Quality / moats | Pat Dorsey |
+| Behavior / temperament | Morgan Housel (*The Psychology of Money*) |
+| Humility / risk / cost | Bogle, William Bernstein |
+| Don't overpay | Benjamin Graham |
+| What's already priced in | Howard Marks |
 
 Ideas are classified into Lynch's six categories (slow grower, stalwart, fast grower, cyclical, turnaround, asset play) — the category drives which numbers matter and what signals a sell.
 

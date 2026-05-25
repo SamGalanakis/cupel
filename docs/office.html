@@ -42,41 +42,38 @@
     </nav>
   </header>
 
-  <section class="masthead">
-    <div class="masthead-wrap">
-      <p class="masthead-eyebrow">The office</p>
-      <h1 class="masthead-title">One vault that remembers</h1>
-      <p class="masthead-lede">cupel keeps all of its state in one Obsidian-compatible vault, the office, not in the current project. Every note is plain markdown with a small YAML frontmatter block, <code>[[wikilinks]]</code> for provenance, and <code>#tags</code> for classification. Find it with <code>cupel where</code>; it is <code>~/cupel</code> unless <code>CUPEL_HOME</code> is set.</p>
-    </div>
-  </section>
+  <div class="shell">
+    <nav class="sidebar" aria-label="Contents">
+      <p class="sidebar-label">Contents</p>
+      <ol>
+        <li><a href="#layout"><span class="n">001</span> Layout</a></li>
+        <li><a href="#notes"><span class="n">002</span> Note types</a></li>
+        <li><a href="#provenance"><span class="n">003</span> Provenance</a></li>
+        <li><a href="#journal-discipline"><span class="n">004</span> The journal</a></li>
+        <li><a href="#doctor"><span class="n">005</span> doctor</a></li>
+      </ol>
+    </nav>
 
-  <nav class="rail" aria-label="Sections">
-    <ol>
-      <li><a href="#layout"><span class="n">001</span> Layout</a></li>
-      <li><a href="#notes"><span class="n">002</span> Note types</a></li>
-      <li><a href="#provenance"><span class="n">003</span> Provenance</a></li>
-      <li><a href="#journal-discipline"><span class="n">004</span> The journal</a></li>
-      <li><a href="#doctor"><span class="n">005</span> doctor</a></li>
-    </ol>
-  </nav>
-
-  <main class="reader" id="main">
+    <main class="reader" id="main">
+      <header class="masthead">
+        <p class="masthead-eyebrow">The office</p>
+        <h1 class="masthead-title">One vault that remembers</h1>
+        <p class="masthead-lede">cupel keeps all of its state in one Obsidian-compatible vault, the office, not in the current project. Every note is plain markdown with a small YAML frontmatter block, <code>[[wikilinks]]</code> for provenance, and <code>#tags</code> for classification. Find it with <code>cupel where</code>; it is <code>~/cupel</code> unless <code>CUPEL_HOME</code> is set.</p>
+      </header>
 
     <section class="step" id="layout">
       <div class="step-rule"><span class="step-num">001</span><span class="step-kicker">The layout</span><span class="step-line"></span></div>
       <h2 class="step-title">A filing cabinet, not a database</h2>
       <p><span class="newthought">The office</span> is a flat, legible folder you can read with your eyes or open in Obsidian for the graph view. Two singleton notes describe you; five folders hold the work.</p>
-      <div class="vault">
-<span class="dir">~/cupel/</span>
-  <span class="note">EDGES.md</span>      <span class="cmt">your circle of competence: what you see before Wall Street does</span>
+      <div class="vault"><span class="dir">~/cupel/</span>
+  <span class="note">EDGES.md</span>      <span class="cmt">your circle of competence: what you see first</span>
   <span class="note">MANDATE.md</span>    <span class="cmt">goals, horizon, risk, position-size and sell rules</span>
   <span class="dir">sources/</span>      <span class="cmt">people and sources you trust, each with a last-checked date</span>
   <span class="dir">watchlist/</span>    <span class="cmt">ideas you are tracking, with provenance</span>
   <span class="dir">positions/</span>    <span class="cmt">what you actually hold: cost basis, size, sell triggers</span>
   <span class="dir">theses/</span>       <span class="cmt">full write-ups, one per idea</span>
-  <span class="dir">journal/</span>      <span class="cmt">a dated decision log: every buy, sell, and pass</span>
-      </div>
-      <p>Keep frontmatter minimal and put the thinking in the body. <code>EDGES.md</code> and <code>MANDATE.md</code> are singletons; <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code> and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal compounds in value when every change is versioned.</p>
+  <span class="dir">journal/</span>      <span class="cmt">a dated decision log: every buy, sell, and pass</span></div>
+      <p>Keep frontmatter minimal and put the thinking in the body. <code>EDGES.md</code> and <code>MANDATE.md</code> are singletons; <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code> and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal&rsquo;s value compounds as its history grows.</p>
     </section>
 
     <section class="step" id="notes">
@@ -188,7 +185,8 @@ last-checked: 2026-05-20
       <p>Because the linter is deterministic and the office is plain files, the slow-burning value, the dated decision journal, the provenance graph, the staleness checks, stays readable and yours, with or without cupel installed.</p>
     </section>
 
-  </main>
+    </main>
+  </div>
 
   <footer class="site-foot">
     <div class="site-foot-wrap">

@@ -1,8 +1,8 @@
-// Rail scroll-spy: mark the section currently in view as current in the top rail.
+// Scroll-spy: mark the section currently in view as current in the sidebar.
 (function () {
   const steps = document.querySelectorAll('.step');
   const items = new Map();
-  for (const link of document.querySelectorAll('.rail a')) {
+  for (const link of document.querySelectorAll('.sidebar a')) {
     const href = link.getAttribute('href');
     if (!href || !href.startsWith('#')) continue;
     items.set(href.slice(1), link);
@@ -12,11 +12,12 @@
   let lastCurrent = null;
   const setCurrent = (id) => {
     if (lastCurrent === id) return;
-    if (lastCurrent && items.get(lastCurrent)) items.get(lastCurrent).classList.remove('is-current');
+    const prev = lastCurrent && items.get(lastCurrent);
+    if (prev) { prev.classList.remove('is-current'); prev.removeAttribute('aria-current'); }
     const link = id && items.get(id);
     if (link) {
       link.classList.add('is-current');
-      // Keep the active rail item in view when it scrolls horizontally.
+      link.setAttribute('aria-current', 'true');
       link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     }
     lastCurrent = id;

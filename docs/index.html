@@ -44,26 +44,25 @@
     </nav>
   </header>
 
-  <section class="masthead">
-    <div class="masthead-wrap">
-      <p class="masthead-eyebrow">cupel &middot; v0.1 &middot; MIT</p>
-      <h1 class="masthead-title">A personal investing analyst</h1>
-      <p class="masthead-lede">cupel turns the LLM in your AI harness into a research companion that learns your edges and tests your ideas against the investing canon. It lives in one folder and keeps a dated record of your thinking. Discipline, not prediction: it does not predict prices, place trades, or give buy or sell calls.</p>
-    </div>
-  </section>
+  <div class="shell">
+    <nav class="sidebar" aria-label="Contents">
+      <p class="sidebar-label">Contents</p>
+      <ol>
+        <li><a href="#start"><span class="n">001</span> Start</a></li>
+        <li><a href="#install"><span class="n">002</span> Install</a></li>
+        <li><a href="#office"><span class="n">003</span> Office</a></li>
+        <li><a href="#commands"><span class="n">004</span> Commands</a></li>
+        <li><a href="#cli"><span class="n">005</span> CLI</a></li>
+        <li><a href="#canon"><span class="n">006</span> Canon</a></li>
+      </ol>
+    </nav>
 
-  <nav class="rail" aria-label="Sections">
-    <ol>
-      <li><a href="#start"><span class="n">001</span> Start</a></li>
-      <li><a href="#install"><span class="n">002</span> Install</a></li>
-      <li><a href="#office"><span class="n">003</span> Office</a></li>
-      <li><a href="#commands"><span class="n">004</span> Commands</a></li>
-      <li><a href="#cli"><span class="n">005</span> CLI</a></li>
-      <li><a href="#canon"><span class="n">006</span> Canon</a></li>
-    </ol>
-  </nav>
-
-  <main class="reader" id="main">
+    <main class="reader" id="main">
+      <header class="masthead">
+        <p class="masthead-eyebrow">cupel &middot; v0.1 &middot; MIT</p>
+        <h1 class="masthead-title">A personal investing analyst</h1>
+        <p class="masthead-lede">cupel turns the LLM in your AI harness into a research companion that learns your edges and tests your ideas against the investing canon. It lives in one folder and keeps a dated record of your thinking. Discipline, not prediction: it does not predict prices, place trades, or give buy or sell calls.</p>
+      </header>
 
     <section class="step" id="start">
       <div class="step-rule"><span class="step-num">001</span><span class="step-kicker">Start</span><span class="step-line"></span></div>
@@ -107,18 +106,16 @@
     <section class="step" id="office">
       <div class="step-rule"><span class="step-num">003</span><span class="step-kicker">The office</span><span class="step-line"></span></div>
       <h2 class="step-title">One folder that remembers everything</h2>
-      <p>cupel keeps all of its state in one Obsidian-compatible vault, the office, never in the current project. It is plain markdown with YAML frontmatter for structure and <code>[[wikilinks]]</code> for provenance: a thesis links its <code>[[source]]</code>; a position links its <code>[[thesis]]</code>.</p>
-      <div class="vault">
-<span class="dir">~/cupel/</span>
-  <span class="note">EDGES.md</span>      <span class="cmt">your circle of competence: what you see before Wall Street does</span>
-  <span class="note">MANDATE.md</span>    <span class="cmt">your policy: goals, horizon, risk, position-size and sell rules</span>
-  <span class="dir">sources/</span>      <span class="cmt">people and sources you trust, each with a last-checked date</span>
-  <span class="dir">watchlist/</span>    <span class="cmt">ideas you are tracking, with provenance back to a source or hunch</span>
-  <span class="dir">positions/</span>    <span class="cmt">what you actually hold: cost basis, size, sell triggers</span>
+      <p>cupel keeps all of its state in one Obsidian-compatible vault, the office, never in the current project. The vault is plain markdown with YAML frontmatter for structure and <code>[[wikilinks]]</code> for provenance: a thesis links its <code>[[source]]</code>; a position links its <code>[[thesis]]</code>.</p>
+      <div class="vault"><span class="dir">~/cupel/</span>
+  <span class="note">EDGES.md</span>      <span class="cmt">your circle of competence</span>
+  <span class="note">MANDATE.md</span>    <span class="cmt">goals, risk, sizing, sell rules</span>
+  <span class="dir">sources/</span>      <span class="cmt">people and sources you trust</span>
+  <span class="dir">watchlist/</span>    <span class="cmt">ideas you are tracking</span>
+  <span class="dir">positions/</span>    <span class="cmt">what you actually hold</span>
   <span class="dir">theses/</span>       <span class="cmt">full write-ups, one per idea</span>
-  <span class="dir">journal/</span>      <span class="cmt">a dated decision log: every buy, sell, and pass, with the reasoning</span>
-      </div>
-      <p>Open it in Obsidian for the graph view, or just read the markdown. Keep it under git: the decision journal compounds in value when every change is versioned. <a href="office.html">Read the full office schema</a>, including note types, the <code>cupel doctor</code> linter, and the journal discipline.</p>
+  <span class="dir">journal/</span>      <span class="cmt">a dated decision log</span></div>
+      <p>Open it in Obsidian for the graph view, or just read the markdown. Keep it under git: the decision journal&rsquo;s value compounds as its history grows. <a href="office.html">Read the full office schema</a>, including note types, the <code>cupel doctor</code> linter, and the journal discipline.</p>
     </section>
 
     <section class="step" id="commands">
@@ -161,7 +158,8 @@
       <p><a href="canon.html">Read the full canon</a>: eight thinkers as operating lenses, plus the six Lynch categories that drive the story, the numbers, and the sell signal.</p>
     </section>
 
-  </main>
+    </main>
+  </div>
 
   <footer class="site-foot">
     <div class="site-foot-wrap">
