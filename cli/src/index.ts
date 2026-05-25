@@ -2,6 +2,7 @@
 import { VERSION } from "../../engine/dist/index.js";
 import { cmdInit, cmdStamp, cmdWhere } from "./office.js";
 import { cmdDoctor } from "./doctor.js";
+import { cmdShow } from "./show.js";
 import { runSkills } from "./skills.js";
 
 function cmdHelp(): number {
@@ -10,6 +11,7 @@ function cmdHelp(): number {
 Usage:
   cupel init                       Create your office (defaults to ~/cupel; set CUPEL_HOME to override)
   cupel where                      Print the office path
+  cupel show <ticker>              Print every office note for a ticker (where were we?)
   cupel doctor                     Check the office for inconsistencies (schema, links, mandate, staleness)
   cupel stamp <event>              Record that an event happened now (e.g. cupel stamp pulse)
   cupel skills <subcommand>        Install or update the skill in your AI harness
@@ -39,6 +41,9 @@ switch (command) {
     break;
   case "where":
     exit = cmdWhere();
+    break;
+  case "show":
+    exit = cmdShow(rest);
     break;
   case "doctor":
     exit = cmdDoctor();

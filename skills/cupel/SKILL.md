@@ -31,6 +31,8 @@ When invoked as a bare `/cupel` (no clear command), triage before doing anything
    - "where do I stand / what needs attention" → [`brief`](reference/brief.md)
    - "just get current" → [`pulse`](reference/pulse.md)
    - first run, or edges/mandate empty → [`onboard`](reference/onboard.md)
+
+   When the user names a specific company or ticker, run `cupel show <TICKER>` first to resume exactly where you left off (it prints every note for that ticker) — never start cold on something the office already knows.
 5. **If intent is unclear,** propose the most useful next move based on the office state (e.g. "your NVDA thesis hasn't been reviewed in 5 months — want to revisit it?"), and offer the menu.
 
 A user may also invoke a command directly (`/cupel assay AAPL`, `/cupel pulse`). Then skip the triage and run that playbook.
@@ -69,3 +71,5 @@ See [canon](reference/canon.md) for the operating principles. In short: **edge &
 | [`premortem`](reference/premortem.md) | Assume it failed in three years; surface the risks the user is underweighting. |
 | [`pulse`](reference/pulse.md) | Refresh the office: sweep due sources, re-check staleness, run `cupel doctor`, stamp the time. |
 | [`brief`](reference/brief.md) | A `pulse` plus the executive readout: what changed, what needs attention, next moves. |
+
+Reasoning references: [categories](reference/categories.md) (the six Lynch types — they drive the story, the numbers, and the sell signal), the [office schema](reference/office.md), and the [canon](reference/canon.md).

@@ -10,7 +10,7 @@ The executive readout: a [`pulse`](pulse.md) followed by a plain-language status
 - **Headline** — one or two lines: is anything actually urgent, or is this a quiet week? Don't manufacture action.
 - **What changed** — new seeds from your sources, news touching your holdings, any `doctor` findings (mandate breaches, stale reviews, broken links).
 - **Portfolio at a glance** — positions and rough sizing against the mandate; concentration and obvious correlation; anything over the `max-position-pct` cap. (Use only figures you can verify or that the user supplied; flag staleness, never guess.)
-- **Reviews due** — `journal`/thesis entries past their review date. For each, restate the original thesis and **falsifiers**, and ask: has anything broken them? Judge the *reasoning*, not just the price (a good decision can have a bad outcome). P&L only if the user gives you a current price.
+- **Reviews due** — `journal`/thesis entries past their review date. For each, **re-tell the two-minute story** for its [category](categories.md): which "act" are you in now, and has the category's specific **sell signal** triggered (a fast grower decelerating, a cyclical's inventories building, a turnaround completed)? Restate the **falsifiers** and ask whether any has broken. Judge the *reasoning*, not the price (a good decision can have a bad outcome). If a winner is simply up, that is **not** a reason to sell — don't pull the flowers (Lynch/Mayer); the trigger is the story changing. P&L only if the user gives you a current price.
 - **Watchlist movement** — ideas worth promoting to a thesis, or quietly retiring.
 - **Next moves** — the one to three most useful things to do, framed as questions or investigations, **never as buy/sell instructions**.
 
