@@ -1,18 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <radialGradient id="bead" cx="0.4" cy="0.34" r="0.72">
-      <stop offset="0" stop-color="#f8efd9"/>
-      <stop offset="0.45" stop-color="#d8b264"/>
-      <stop offset="1" stop-color="#97742f"/>
-    </radialGradient>
-  </defs>
+  <!-- The assayer's hallmark: a stamped 'c' under the refined gold bead. -->
   <rect width="64" height="64" rx="13" fill="#f3ecde"/>
-  <!-- soft heat haze rising from the bead -->
-  <circle cx="32" cy="26" r="13" fill="#d8b86a" opacity="0.18"/>
-  <!-- the cupel: a shallow bone-ash vessel -->
-  <path d="M16 38 H48 L43.5 50.5 Q32 54.5 20.5 50.5 Z" fill="#6f5630"/>
-  <path d="M16 38 H48 L46.8 41.2 Q32 44.8 17.2 41.2 Z" fill="#947743"/>
-  <!-- the refined bead of metal -->
-  <circle cx="32" cy="26" r="8" fill="url(#bead)"/>
-  <circle cx="29.3" cy="23.3" r="2.1" fill="#fff6e6" opacity="0.8"/>
+  <rect x="5" y="5" width="54" height="54" rx="10" fill="none" stroke="#211f1b" stroke-width="2.5"/>
+  <circle cx="32" cy="18.5" r="5" fill="#c4a462"/>
+  <text x="32.5" y="47.5" text-anchor="middle" font-family="'Hedvig Letters Serif', Georgia, 'Times New Roman', serif" font-size="40" fill="#211f1b">c</text>
 </svg>
