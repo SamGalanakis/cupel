@@ -14,16 +14,9 @@ coverage/
 .idea/
 .DS_Store
 
-# project-local skill installs (not source). Every harness provider dir
-# cupel can target — keep this in sync with PROVIDER_DIRS in cli/src/skills.ts.
-.agents/
-.claude/
-.cursor/
-.gemini/
-.github/skills/
-.kiro/
-.opencode/
-.pi/
-.qoder/
-.trae/
+# Harness skill copies (.claude/skills, .cursor/skills, etc.) are committed so
+# skills.sh and each agent can discover the skill. They mirror skills/cupel;
+# re-sync with `cupel skills install --all` after editing the source.
+
+# the skills CLI's lockfile is local state, not source
 skills-lock.json
