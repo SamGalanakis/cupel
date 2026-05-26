@@ -34,8 +34,8 @@ html {
   /* Ink */
   --ink:       light-dark(oklch(0.245 0.018 50), oklch(0.930 0.012 75));
   --ink-2:     light-dark(oklch(0.380 0.020 50), oklch(0.800 0.014 72));
-  --ink-3:     light-dark(oklch(0.500 0.020 52), oklch(0.660 0.014 70));
-  --ink-4:     light-dark(oklch(0.610 0.016 55), oklch(0.500 0.014 68));
+  --ink-3:     light-dark(oklch(0.470 0.020 52), oklch(0.730 0.014 70));
+  --ink-4:     light-dark(oklch(0.520 0.018 55), oklch(0.695 0.014 68));
 
   /* Gold — a restrained, refined accent. Used sparingly: a hint, not a flood.
      Muted (low chroma), warm hue ~85; never the bright incandescent orange. */
@@ -132,6 +132,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .site-nav-links a {
   color: var(--ink-3); text-decoration: none;
+  padding: 8px 0;
   transition: color var(--dur-quick);
 }
 .site-nav-links a:hover { color: var(--ink); }
@@ -139,7 +140,7 @@ img, svg { display: block; max-width: 100%; }
 
 .theme-toggle {
   color: var(--ink-3);
-  padding: 3px 10px; border-radius: 2px;
+  padding: 7px 10px; border-radius: 2px;
   display: inline-flex; align-items: center; gap: 6px;
   transition: color var(--dur-quick), background-color var(--dur-quick);
 }
@@ -183,9 +184,10 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: 0.14em; font-size: var(--text-micro); color: var(--ink-4);
   margin-bottom: 18px;
 }
-.sidebar ol { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.sidebar ol { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 .sidebar a {
   display: flex; align-items: baseline; gap: 10px;
+  padding: 4px 0;
   text-decoration: none;
   font-family: var(--mono); font-size: var(--text-mono); line-height: 1.4;
   letter-spacing: 0.01em; color: var(--ink-3);
@@ -199,6 +201,26 @@ img, svg { display: block; max-width: 100%; }
 .sidebar a:hover .n { color: var(--gold-deep); }
 .sidebar a.is-current { color: var(--ink); font-weight: 600; }
 .sidebar a.is-current .n { color: var(--gold-deep); }
+
+/* Subsection links: a quiet nested list, revealed only under the current
+   section so the spine stays calm. Indented past the section number, hung
+   off a single hairline. */
+.sidebar .sub {
+  display: none;
+  list-style: none;
+  flex-direction: column;
+  margin: 3px 0 6px 5px;
+  padding-left: 14px;
+  border-left: 1px solid var(--rule);
+}
+.sidebar li.is-open > .sub { display: flex; }
+.sidebar .sub a {
+  padding: 5px 0;
+  font-size: var(--text-micro); letter-spacing: 0.04em;
+  color: var(--ink-4);
+}
+.sidebar .sub a:hover { color: var(--ink); }
+.sidebar .sub a.is-subcurrent { color: var(--gold-deep); }
 
 /* ── READER: the reading column of assay steps ───────────── */
 
@@ -306,12 +328,6 @@ img, svg { display: block; max-width: 100%; }
 .step pre .c { color: var(--ink-4); font-style: italic; }
 .step pre .p { color: var(--gold-deep); }
 
-.step blockquote {
-  margin: 1.5em 0; padding: 2px 0 2px 22px;
-  border-left: 2px solid var(--gold);
-  font-style: italic; color: var(--ink-2);
-}
-
 /* Aside — a quiet supplementary line. No box: just smaller, lighter text. */
 .sidenote {
   display: block;
@@ -325,6 +341,7 @@ img, svg { display: block; max-width: 100%; }
   display: grid; grid-template-columns: minmax(120px, max-content) 1fr;
   gap: 6px 26px; align-items: baseline;
   padding: 15px 0; border-top: 1px solid var(--rule);
+  scroll-margin-top: 72px;
 }
 .ledger-row:last-child { border-bottom: 1px solid var(--rule); }
 .ledger-cmd {
@@ -417,6 +434,7 @@ img, svg { display: block; max-width: 100%; }
 .site-foot a {
   color: var(--ink-2); text-decoration: underline;
   text-decoration-color: var(--gold-soft); text-underline-offset: 3px;
+  padding: 4px 0;
   transition: color var(--dur-quick);
 }
 .site-foot a:hover { color: var(--gold-deep); }

@@ -2,11 +2,9 @@
 
 **cupel** turns the LLM in your AI harness into a personal investing analyst: a research companion that learns *your* edges and stress-tests your ideas against the investing canon.
 
-It is not a stock screener or a per-project linter. It is a stateful companion that lives in one folder — your *office* — and amasses everything it learns about you there: your circle of competence, your watchlist, your theses, your positions, and a dated decision journal. The premise is Peter Lynch's: your advantage is what you already know from your work and your life. cupel's job is to capture that edge, turn it into disciplined ideas, and keep you honest.
+It lives in one folder — your *office* — and accumulates what it learns about you: your circle of competence, watchlist, theses, positions, and a dated decision journal. The premise is Peter Lynch's: your edge is what you already know from your work and daily life. cupel captures that edge, turns it into researched ideas, and keeps your reasoning honest over time.
 
-**Detection and discipline only.** cupel sharpens your own reasoning and surfaces what you are missing. It does not predict prices, place trades, or give buy/sell calls.
-
-> A *cupel* is the bone-ash vessel used in fire assay: you melt a sample in it and the base metal burns away, leaving only the pure gold or silver. Burn off the dross; keep what is truly valuable.
+cupel does not predict prices, place trades, or give buy or sell calls. It sharpens your own reasoning and surfaces what you're missing; the decisions stay yours.
 
 ## Status
 

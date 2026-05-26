@@ -4,24 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>cupel: make your clanker your investing analyst</title>
-  <meta name="description" content="cupel turns the LLM in your AI harness into a personal investing analyst: a research companion that learns your edges and stress-tests your ideas against the investing canon. Discipline, not prediction.">
+  <meta name="description" content="cupel turns the LLM in your AI harness into a personal investing analyst: a research companion that learns your edges and stress-tests your ideas against the investing canon.">
   <meta name="theme-color" content="#f3ecde" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#171410" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="cupel">
   <meta property="og:url" content="https://cupel.money/">
   <meta property="og:title" content="cupel: make your clanker your investing analyst">
-  <meta property="og:description" content="Burn off the dross; keep the gold. A stateful research companion that learns your edges and tests your ideas against the investing canon.">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:description" content="A research companion that learns your edges and tests your ideas against the investing canon.">
+  <meta property="og:image" content="https://cupel.money/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="cupel: a skill suite for investing">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cupel.money/og.png">
   <meta name="twitter:title" content="cupel: make your clanker your investing analyst">
-  <meta name="twitter:description" content="Burn off the dross; keep the gold. Discipline, not prediction.">
+  <meta name="twitter:description" content="A personal investing analyst that learns your edges and keeps your reasoning honest.">
   <script>
     (function(){try{var s=localStorage.getItem('theme');var p=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';var t=(s==='light'||s==='dark')?s:p;document.documentElement.dataset.theme=t;}catch(e){}document.addEventListener('click',function(e){var b=e.target.closest('.theme-toggle');if(!b)return;var c=document.documentElement.dataset.theme;var n=c==='dark'?'light':'dark';document.documentElement.dataset.theme=n;try{localStorage.setItem('theme',n);}catch(e){}});})();
   </script>
   <link rel="canonical" href="https://cupel.money/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
@@ -49,10 +54,35 @@
       <p class="sidebar-label">Contents</p>
       <ol>
         <li><a href="#start"><span class="n">001</span> Start</a></li>
-        <li><a href="#install"><span class="n">002</span> Install</a></li>
+        <li><a href="#install"><span class="n">002</span> Install</a>
+          <ol class="sub">
+            <li><a href="#install-skill">Add the skill</a></li>
+            <li><a href="#install-cowork">Claude Cowork</a></li>
+          </ol>
+        </li>
         <li><a href="#office"><span class="n">003</span> Office</a></li>
-        <li><a href="#commands"><span class="n">004</span> Commands</a></li>
-        <li><a href="#cli"><span class="n">005</span> CLI</a></li>
+        <li><a href="#commands"><span class="n">004</span> Commands</a>
+          <ol class="sub">
+            <li><a href="#cmd-onboard">onboard</a></li>
+            <li><a href="#cmd-watch">watch</a></li>
+            <li><a href="#cmd-assay">assay</a></li>
+            <li><a href="#cmd-crux">crux</a></li>
+            <li><a href="#cmd-premortem">premortem</a></li>
+            <li><a href="#cmd-pulse">pulse</a></li>
+            <li><a href="#cmd-brief">brief</a></li>
+          </ol>
+        </li>
+        <li><a href="#cli"><span class="n">005</span> CLI</a>
+          <ol class="sub">
+            <li><a href="#cli-init">init</a></li>
+            <li><a href="#cli-where">where</a></li>
+            <li><a href="#cli-doctor">doctor</a></li>
+            <li><a href="#cli-show">show</a></li>
+            <li><a href="#cli-portfolio">portfolio</a></li>
+            <li><a href="#cli-stamp">stamp</a></li>
+            <li><a href="#cli-skills">skills</a></li>
+          </ol>
+        </li>
         <li><a href="#canon"><span class="n">006</span> Canon</a></li>
       </ol>
     </nav>
@@ -61,16 +91,16 @@
       <header class="masthead">
         <p class="masthead-eyebrow">cupel &middot; v0.1 &middot; MIT</p>
         <h1 class="masthead-title">A personal investing analyst</h1>
-        <p class="masthead-lede">cupel turns the LLM in your AI harness into a research companion that learns your edges and tests your ideas against the investing canon. It lives in one folder and keeps a dated record of your thinking. Discipline, not prediction: it does not predict prices, place trades, or give buy or sell calls.</p>
+        <p class="masthead-lede">cupel turns the LLM in your AI harness into a research companion that learns your edges and tests your ideas against the investing canon. It lives in one folder and keeps a dated record of your thinking. It does not predict prices, place trades, or give buy or sell calls; the decisions stay yours.</p>
       </header>
 
     <section class="step" id="start">
       <div class="step-rule"><span class="step-num">001</span><span class="step-kicker">Start</span><span class="step-line"></span></div>
-      <h2 class="step-title">A cupel is where you find the gold</h2>
-      <p><span class="newthought">A cupel</span> is the bone-ash vessel used in fire assay. You melt a sample in it under heat and the base metal burns away into the ash, leaving a bright bead of pure gold or silver. The dross goes; what is truly valuable stays.</p>
-      <p>cupel does that for your investing ideas. It turns the LLM in your AI harness into a personal research analyst: a stateful companion that learns <em>your</em> edges and stress-tests your ideas against the investing canon. The premise is Peter Lynch&rsquo;s, that your advantage is what you already know from your work and your life. cupel&rsquo;s job is to capture that edge, turn it into disciplined ideas, and keep you honest.</p>
-      <span class="sidenote">cupel is not a stock screener and not a per-project linter. It is a companion that lives in one folder, your <a href="office.html">office</a>, and amasses everything it learns about you there.</span>
-      <p><strong>Detection and discipline only.</strong> cupel sharpens your own reasoning and surfaces what you are missing. It does not predict prices, place trades, or give buy or sell calls.</p>
+      <h2 class="step-title">Use what you already know</h2>
+      <p><span class="newthought">The premise is Peter Lynch&rsquo;s:</span> your edge is what you already know from your work and daily life — the products you watch take off, the industry shifts you see before the analysts do. A familiar name is only a lead, though; it still has to survive the homework.</p>
+      <p>cupel turns the LLM in your AI harness into a personal research analyst that captures those edges, researches an idea properly, and keeps your reasoning honest as your thinking accumulates in one place.</p>
+      <span class="sidenote">cupel lives in one folder, your <a href="office.html">office</a>, and accumulates everything it learns about you there.</span>
+      <p>cupel sharpens your own reasoning and surfaces what you are missing. It does not predict prices, place trades, or give buy or sell calls; the decisions stay yours.</p>
       <div class="assay-note">
         <p class="label">The stance</p>
         <p>Edge before opinion. A familiar product or a hot tip is only a lead; it still has to survive the homework. A wonderful business at the wrong price is a poor investment. Most of a normal person&rsquo;s money can sensibly sit in a low-cost index; individual picks are a considered satellite, only where you have a real edge.</p>
@@ -124,13 +154,13 @@
       <h2 class="step-title">Talk to it, or go direct</h2>
       <p>Say <code>/cupel</code> and it figures out what you need: it locates your office, takes its pulse, and routes you to the right job. Or name the command yourself.</p>
       <div class="ledger">
-        <div class="ledger-row"><span class="ledger-cmd">onboard</span><span class="ledger-job">Interview you; write your edges, mandate, and trusted sources. The foundation.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">watch</span><span class="ledger-job">Turn a seed, a source&rsquo;s idea or your own hunch, into a provenance-tracked watchlist entry.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">assay</span><span class="ledger-job">Test one idea: a good business at a fair price, inside your edge?</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">crux</span><span class="ledger-job">Find the single load-bearing claim a thesis rests on, and test it.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">premortem</span><span class="ledger-job">Assume it failed in three years; surface the risks you are underweighting.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">pulse</span><span class="ledger-job">Refresh the office: sweep sources, re-check staleness, run <code>cupel doctor</code>.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">brief</span><span class="ledger-job">A <code>pulse</code> plus the executive readout: what changed, what needs attention, next moves.</span></div>
+        <div class="ledger-row" id="cmd-onboard"><span class="ledger-cmd">onboard</span><span class="ledger-job">Interview you; write your edges, mandate, and trusted sources. The foundation.</span></div>
+        <div class="ledger-row" id="cmd-watch"><span class="ledger-cmd">watch</span><span class="ledger-job">Turn a seed, a source&rsquo;s idea or your own hunch, into a provenance-tracked watchlist entry.</span></div>
+        <div class="ledger-row" id="cmd-assay"><span class="ledger-cmd">assay</span><span class="ledger-job">Test one idea: a good business at a fair price, inside your edge?</span></div>
+        <div class="ledger-row" id="cmd-crux"><span class="ledger-cmd">crux</span><span class="ledger-job">Find the single load-bearing claim a thesis rests on, and test it.</span></div>
+        <div class="ledger-row" id="cmd-premortem"><span class="ledger-cmd">premortem</span><span class="ledger-job">Assume it failed in three years; surface the risks you are underweighting.</span></div>
+        <div class="ledger-row" id="cmd-pulse"><span class="ledger-cmd">pulse</span><span class="ledger-job">Refresh the office: sweep sources, re-check staleness, run <code>cupel doctor</code>.</span></div>
+        <div class="ledger-row" id="cmd-brief"><span class="ledger-cmd">brief</span><span class="ledger-job">A <code>pulse</code> plus the executive readout: what changed, what needs attention, next moves.</span></div>
       </div>
       <p>When you name a specific company, cupel runs <code>cupel show &lt;TICKER&gt;</code> first to resume exactly where you left off. It never starts cold on something the office already knows.</p>
     </section>
@@ -140,13 +170,13 @@
       <h2 class="step-title">The filing cabinet, kept honest</h2>
       <p>The <code>cupel</code> binary does the deterministic bookkeeping so the LLM can do the judgment. It manages the office, validates it, and installs the skill.</p>
       <div class="ledger">
-        <div class="ledger-row"><span class="ledger-cmd">init</span><span class="ledger-job">Scaffold a new office at <code>~/cupel</code> (or <code>CUPEL_HOME</code>).</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">where</span><span class="ledger-job">Print the office path so the skill knows where to read and write.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">doctor</span><span class="ledger-job">Check frontmatter, dangling links, mandate breaches, stale reviews, and reviews now due.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">show &lt;TICKER&gt;</span><span class="ledger-job">Print every note for a ticker so a session resumes with full context.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">portfolio</span><span class="ledger-job">Sum positions: each size against the cap, the total against your satellite target.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">stamp &lt;event&gt;</span><span class="ledger-job">Timestamp an event (e.g. <code>cupel stamp pulse</code>) so the front door knows how fresh the office is.</span></div>
-        <div class="ledger-row"><span class="ledger-cmd">skills</span><span class="ledger-job">Install, update, or check the cupel skill across your AI harnesses.</span></div>
+        <div class="ledger-row" id="cli-init"><span class="ledger-cmd">init</span><span class="ledger-job">Scaffold a new office at <code>~/cupel</code> (or <code>CUPEL_HOME</code>).</span></div>
+        <div class="ledger-row" id="cli-where"><span class="ledger-cmd">where</span><span class="ledger-job">Print the office path so the skill knows where to read and write.</span></div>
+        <div class="ledger-row" id="cli-doctor"><span class="ledger-cmd">doctor</span><span class="ledger-job">Check frontmatter, dangling links, mandate breaches, stale reviews, and reviews now due.</span></div>
+        <div class="ledger-row" id="cli-show"><span class="ledger-cmd">show &lt;TICKER&gt;</span><span class="ledger-job">Print every note for a ticker so a session resumes with full context.</span></div>
+        <div class="ledger-row" id="cli-portfolio"><span class="ledger-cmd">portfolio</span><span class="ledger-job">Sum positions: each size against the cap, the total against your satellite target.</span></div>
+        <div class="ledger-row" id="cli-stamp"><span class="ledger-cmd">stamp &lt;event&gt;</span><span class="ledger-job">Timestamp an event (e.g. <code>cupel stamp pulse</code>) so the front door knows how fresh the office is.</span></div>
+        <div class="ledger-row" id="cli-skills"><span class="ledger-cmd">skills</span><span class="ledger-job">Install, update, or check the cupel skill across your AI harnesses.</span></div>
       </div>
       <div class="assay-note">
         <p class="label">Division of labour</p>
