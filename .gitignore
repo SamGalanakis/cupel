@@ -3,6 +3,11 @@ dist/
 coverage/
 *.tsbuildinfo
 *.log
+*.tgz
+
+# secrets / local env (broker creds live in the harness MCP config, never the repo)
+.env
+.env.*
 
 # editor / OS
 .vscode/
