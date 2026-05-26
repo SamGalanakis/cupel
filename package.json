@@ -1,6 +1,9 @@
 {
-  "name": "cupel",
+  "name": "@samgalanakis/cupel",
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Make your clanker your investing analyst. A personal research companion that learns your edges and stress-tests your ideas against the investing canon.",
   "license": "MIT",
   "author": "Samuel Galanakis",

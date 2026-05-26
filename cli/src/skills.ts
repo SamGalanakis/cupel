@@ -359,7 +359,7 @@ export function cmdSkillsHelp(): number {
 
 Supported providers: ${PROVIDER_DIRS.join(", ")}
 
-  npm install -g cupel
+  npm install -g @samgalanakis/cupel
   cd your-project && cupel skills install
 `);
   return 0;

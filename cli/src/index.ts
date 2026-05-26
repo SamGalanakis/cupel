@@ -25,7 +25,7 @@ it with \`/cupel\` — it reads and writes your office (edges, sources, watchlis
 theses, positions, decision journal).
 
 Install once globally:
-  npm install -g cupel
+  npm install -g @samgalanakis/cupel
   cupel init
   cd your-project && cupel skills install
 

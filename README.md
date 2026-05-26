@@ -13,7 +13,7 @@ Early but working. The companion — onboarding, the `watch → assay → crux`/
 ## Quickstart
 
 ```
-npm install -g cupel        # 1 · install
+npm install -g @samgalanakis/cupel        # 1 · install
 cupel init                  # 2 · create your office at ~/cupel
 cupel skills install        # 3 · add the skill to your AI harness
 ```
@@ -29,7 +29,7 @@ cupel reads and writes your office; you make every call. It never predicts price
 ## Install
 
 ```
-npm install -g cupel
+npm install -g @samgalanakis/cupel
 ```
 
 Set up your office (defaults to `~/cupel`, override with `CUPEL_HOME`):
@@ -43,7 +43,7 @@ Add the skill to your AI harness (Claude Code, Cursor, Gemini CLI, Codex/Agents,
 ```
 cupel skills install            # auto-detects which harness dirs exist
 cupel skills install --all      # install into every supported provider
-cupel skills update             # re-sync after `npm update -g cupel`
+cupel skills update             # re-sync after `npm update -g @samgalanakis/cupel`
 cupel skills check              # show installed version + content-hash status
 ```
 

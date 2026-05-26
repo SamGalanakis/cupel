@@ -112,7 +112,7 @@
       <div class="step-rule"><span class="step-num">002</span><span class="step-kicker">Install</span><span class="step-line"></span></div>
       <h2 class="step-title">Set up the office, add the skill</h2>
       <p>Install the package:</p>
-      <pre><code><span class="p">$</span> npm install -g cupel</code></pre>
+      <pre><code><span class="p">$</span> npm install -g @samgalanakis/cupel</code></pre>
       <p>Set up your office, the vault where cupel keeps everything it learns. It defaults to <code>~/cupel</code>; override with <code>CUPEL_HOME</code>:</p>
       <pre><code><span class="p">$</span> cupel init</code></pre>
 
@@ -120,7 +120,7 @@
       <p>cupel ships as a skill for Claude Code, Cursor, Gemini CLI, Codex, OpenCode, Kiro, Pi, Qoder, Trae, and GitHub Copilot. Install auto-detects which harness directories exist:</p>
       <pre><code><span class="p">$</span> cupel skills install        <span class="c"># auto-detect installed harnesses</span>
 <span class="p">$</span> cupel skills install --all  <span class="c"># every supported provider</span>
-<span class="p">$</span> cupel skills update         <span class="c"># re-sync after npm update -g cupel</span>
+<span class="p">$</span> cupel skills update         <span class="c"># re-sync after npm update -g @samgalanakis/cupel</span>
 <span class="p">$</span> cupel skills check          <span class="c"># installed version + content-hash status</span></code></pre>
       <p>Then talk to it from any harness: <code>/cupel</code>.</p>
       <p><span class="newthought">Your first session.</span> Say <code>/cupel</code> and, on a fresh office, it interviews you, writing your profile, edges, mandate, and a few trusted sources. Then hand it an edge-driven idea, like <code>/cupel I keep seeing this product everywhere at work</code>: it resumes any prior notes, researches the company, runs the discipline gate, and files a thesis with explicit falsifiers. Come back with <code>/cupel brief</code> any time for a status check. cupel reads and writes your office; you make every call.</p>
