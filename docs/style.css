@@ -11,7 +11,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
-  font-size: 16px;
+  font-size: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
@@ -46,9 +46,20 @@ html {
   --rule:      light-dark(oklch(0.890 0.008 80), oklch(0.310 0.010 60));
   --border:    light-dark(oklch(0.910 0.007 80), oklch(0.275 0.010 60));
 
-  --t-body:    19px;
-  --t-h-step:  clamp(28px, 3vw, 40px);
-  --t-h-cover: clamp(58px, 9vw, 116px);
+  /* Type scale — rem so it honours the reader's browser font size. Reading
+     sizes climb ~1.18x; the two small mono-label steps stay tight because
+     uppercase data labels must read compact. */
+  --text-micro: 0.6875rem;  /* 11px  uppercase mono labels: eyebrow, kicker, tag, th */
+  --text-mono:  0.8125rem;  /* 13px  mono UI + code: sidebar, step no., code, vault */
+  --text-sm:    0.875rem;   /* 14px  compact prose / nav */
+  --text-ui:    0.9375rem;  /* 15px  nav links, command name, footer links */
+  --text-md:    1.0625rem;  /* 17px  secondary prose: command job, cited work */
+  --text-body:  1.1875rem;  /* 19px  the reading body */
+  --text-lede:  clamp(1.1875rem, 1.6vw, 1.4375rem);  /* 19->23  masthead lede */
+  --text-h2:    1.625rem;   /* 26px  footer wordmark */
+  --text-name:  clamp(1.4375rem, 2vw, 1.875rem);     /* 23->30  thinker names */
+  --text-title: clamp(1.75rem, 3vw, 2.5rem);         /* 28->40  step titles */
+  --text-mast:  clamp(2.5rem, 5vw, 4.25rem);         /* 40->68  page masthead */
 
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
@@ -86,7 +97,7 @@ img, svg { display: block; max-width: 100%; }
   position: absolute; left: -10000px; top: 8px;
   background: var(--ink); color: var(--bg);
   padding: 8px 14px;
-  font-family: var(--mono); font-weight: 500; font-size: 13px;
+  font-family: var(--mono); font-weight: 500; font-size: var(--text-mono);
   z-index: 999;
 }
 .skip:focus { left: 8px; }
@@ -107,7 +118,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .site-nav-home {
   font-family: var(--display);
-  font-size: 19px;
+  font-size: var(--text-body);
   letter-spacing: 0.01em;
   color: var(--ink);
   text-decoration: none;
@@ -117,7 +128,7 @@ img, svg { display: block; max-width: 100%; }
 .site-nav-links {
   margin-left: auto;
   display: flex; align-items: center; gap: 26px;
-  font-size: 15px; font-weight: 500;
+  font-size: var(--text-ui); font-weight: 500;
 }
 .site-nav-links a {
   color: var(--ink-3); text-decoration: none;
@@ -169,19 +180,19 @@ img, svg { display: block; max-width: 100%; }
 }
 .sidebar-label {
   font-family: var(--mono); text-transform: uppercase;
-  letter-spacing: 0.14em; font-size: 10.5px; color: var(--ink-4);
+  letter-spacing: 0.14em; font-size: var(--text-micro); color: var(--ink-4);
   margin-bottom: 18px;
 }
 .sidebar ol { list-style: none; display: flex; flex-direction: column; gap: 11px; }
 .sidebar a {
   display: flex; align-items: baseline; gap: 10px;
   text-decoration: none;
-  font-family: var(--mono); font-size: 12.5px; line-height: 1.4;
+  font-family: var(--mono); font-size: var(--text-mono); line-height: 1.4;
   letter-spacing: 0.01em; color: var(--ink-3);
   transition: color var(--dur-quick);
 }
 .sidebar a .n {
-  font-size: 10.5px; font-weight: 600; color: var(--ink-4);
+  font-size: var(--text-micro); font-weight: 600; color: var(--ink-4);
   font-variant-numeric: lining-nums; transition: color var(--dur-quick);
 }
 .sidebar a:hover { color: var(--ink); }
@@ -193,7 +204,7 @@ img, svg { display: block; max-width: 100%; }
 
 .reader {
   padding: clamp(40px, 5vw, 72px) 0 0;
-  font-size: var(--t-body); line-height: 1.68; color: var(--ink);
+  font-size: var(--text-body); line-height: 1.68; color: var(--ink);
   hanging-punctuation: first last;
 }
 
@@ -204,18 +215,18 @@ img, svg { display: block; max-width: 100%; }
   border-bottom: 1px solid var(--rule);
 }
 .masthead-eyebrow {
-  font-family: var(--mono); font-size: 12.5px;
+  font-family: var(--mono); font-size: var(--text-mono);
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--gold-deep); margin-bottom: 16px;
 }
 .masthead-title {
   font-family: var(--display); font-weight: 400;
-  font-size: clamp(40px, 5vw, 68px); line-height: 1.0;
+  font-size: var(--text-mast); line-height: 1.0;
   letter-spacing: -0.01em; color: var(--ink);
   margin-bottom: 20px; max-width: 18ch;
 }
 .masthead-lede {
-  font-size: clamp(19px, 1.6vw, 23px); line-height: 1.5;
+  font-size: var(--text-lede); line-height: 1.5;
   color: var(--ink-2); max-width: 60ch;
 }
 
@@ -230,19 +241,19 @@ img, svg { display: block; max-width: 100%; }
    one line, opening each step. */
 .step-rule { display: flex; align-items: center; gap: 13px; margin-bottom: 16px; }
 .step-num {
-  font-family: var(--mono); font-size: 13px; font-weight: 600;
+  font-family: var(--mono); font-size: var(--text-mono); font-weight: 600;
   letter-spacing: 0.12em; color: var(--gold-deep);
   font-variant-numeric: lining-nums;
 }
 .step-kicker {
   font-family: var(--mono); text-transform: uppercase;
-  letter-spacing: 0.13em; font-size: 11px; color: var(--ink-4);
+  letter-spacing: 0.13em; font-size: var(--text-micro); color: var(--ink-4);
   white-space: nowrap;
 }
 .step-line { flex: 1; height: 0; border-top: 1px dashed var(--rule); }
 .step-title {
   font-family: var(--display); font-weight: 400;
-  font-size: var(--t-h-step); line-height: 1.08;
+  font-size: var(--text-title); line-height: 1.08;
   letter-spacing: -0.005em; color: var(--ink);
   margin-bottom: 24px; max-width: 22ch;
 }
@@ -285,7 +296,7 @@ img, svg { display: block; max-width: 100%; }
   font-variant-numeric: lining-nums;
 }
 .step pre {
-  font-family: var(--mono); font-size: 13.5px; line-height: 1.65;
+  font-family: var(--mono); font-size: var(--text-mono); line-height: 1.65;
   background: var(--bg-alt); border: 1px solid var(--border); border-radius: 4px;
   padding: 15px 18px; overflow-x: auto; margin: 1.4em 0;
   scrollbar-width: thin; scrollbar-color: var(--ink-4) transparent;
@@ -317,9 +328,9 @@ img, svg { display: block; max-width: 100%; }
 }
 .ledger-row:last-child { border-bottom: 1px solid var(--rule); }
 .ledger-cmd {
-  font-family: var(--mono); font-size: 15px; font-weight: 600; color: var(--gold-deep);
+  font-family: var(--mono); font-size: var(--text-ui); font-weight: 600; color: var(--gold-deep);
 }
-.ledger-job { color: var(--ink-2); font-size: 17px; line-height: 1.5; }
+.ledger-job { color: var(--ink-2); font-size: var(--text-md); line-height: 1.5; }
 .ledger-job code { font-size: 0.86em; }
 
 /* ── TABLES (incl. categories) ───────────────────────────── */
@@ -331,14 +342,14 @@ img, svg { display: block; max-width: 100%; }
   padding: 11px 16px 11px 0; text-align: left; vertical-align: top; line-height: 1.5;
 }
 .step th, .data-table th {
-  font-family: var(--mono); text-transform: uppercase; font-size: 11.5px;
+  font-family: var(--mono); text-transform: uppercase; font-size: var(--text-micro);
   font-weight: 500; letter-spacing: 0.08em; color: var(--ink-3);
 }
 .data-table td:first-child {
   font-family: var(--display); font-size: 1.06em; color: var(--ink); white-space: nowrap;
 }
 .data-table .tag {
-  font-family: var(--mono); font-size: 11px; color: var(--gold-deep);
+  font-family: var(--mono); font-size: var(--text-micro); color: var(--gold-deep);
   display: block; margin-top: 3px; font-variant-numeric: lining-nums;
 }
 
@@ -349,7 +360,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .assay-note .label {
   font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.1em;
-  font-size: 11px; font-weight: 600; color: var(--gold-deep);
+  font-size: var(--text-micro); font-weight: 600; color: var(--gold-deep);
   display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
 }
 .assay-note .label::before {
@@ -366,17 +377,17 @@ img, svg { display: block; max-width: 100%; }
 }
 .thinker:last-of-type { border-bottom: none; }
 .thinker-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
-.thinker-name { font-family: var(--display); font-size: clamp(23px, 2vw, 30px); line-height: 1.1; color: var(--ink); }
-.thinker-work { font-style: italic; color: var(--ink-3); font-size: 17px; }
+.thinker-name { font-family: var(--display); font-size: var(--text-name); line-height: 1.1; color: var(--ink); }
+.thinker-work { font-style: italic; color: var(--ink-3); font-size: var(--text-md); }
 .thinker-tag {
   font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.08em;
-  font-size: 11px; color: var(--gold-deep); margin-left: auto; white-space: nowrap;
+  font-size: var(--text-micro); color: var(--gold-deep); margin-left: auto; white-space: nowrap;
 }
 .thinker p { color: var(--ink-2); margin-bottom: 0; }
 
 /* ── OFFICE: the vault tree ──────────────────────────────── */
 .vault {
-  font-family: var(--mono); font-size: 13.5px; line-height: 1.9;
+  font-family: var(--mono); font-size: var(--text-mono); line-height: 1.9;
   white-space: pre;
   background: var(--bg-alt); color: var(--ink-2);
   border: 1px solid var(--border); border-radius: 5px;
@@ -394,13 +405,13 @@ img, svg { display: block; max-width: 100%; }
 }
 .site-foot-wrap { max-width: 740px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 40px); }
 .site-foot-brand {
-  font-family: var(--display); font-size: 26px; color: var(--ink);
+  font-family: var(--display); font-size: var(--text-h2); color: var(--ink);
   display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px;
 }
 .site-foot-brand .mark { width: 24px; height: 24px; }
 .site-foot-links {
   display: flex; flex-wrap: wrap; align-items: baseline;
-  gap: 0 14px; row-gap: 8px; margin-bottom: 26px; font-size: 15px;
+  gap: 0 14px; row-gap: 8px; margin-bottom: 26px; font-size: var(--text-ui);
 }
 .site-foot-sep { color: var(--ink-4); user-select: none; }
 .site-foot a {
@@ -412,11 +423,11 @@ img, svg { display: block; max-width: 100%; }
 .site-foot-rule {
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 22px; border-top: 1px solid var(--rule);
-  flex-wrap: wrap; gap: 12px; font-size: 13.5px; color: var(--ink-4);
+  flex-wrap: wrap; gap: 12px; font-size: var(--text-mono); color: var(--ink-4);
 }
 .site-foot-rule .mono { font-family: var(--mono); letter-spacing: 0.03em; }
 .site-foot-note {
-  margin-top: 16px; font-size: 13px; font-style: italic;
+  margin-top: 16px; font-size: var(--text-mono); font-style: italic;
   color: var(--ink-4); max-width: 64ch;
 }
 
@@ -436,9 +447,9 @@ img, svg { display: block; max-width: 100%; }
 
 @media (max-width: 600px) {
   .site-nav { gap: 14px; padding: 0 18px; }
-  .site-nav-links { gap: 14px; font-size: 14px; }
+  .site-nav-links { gap: 14px; font-size: var(--text-sm); }
   .ledger-row { grid-template-columns: 1fr; gap: 4px; }
-  .ledger-job { font-size: 16px; }
+  .ledger-job { font-size: 1rem; }
   .site-foot-rule { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
 
@@ -452,7 +463,7 @@ img, svg { display: block; max-width: 100%; }
   .data-table td::before {
     content: attr(data-label);
     font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.07em;
-    font-size: 10.5px; color: var(--ink-4); display: block; margin-top: 6px;
+    font-size: var(--text-micro); color: var(--ink-4); display: block; margin-top: 6px;
   }
   .data-table td:first-child::before { content: none; }
 }
