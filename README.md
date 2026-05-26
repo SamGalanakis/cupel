@@ -12,6 +12,22 @@ It is not a stock screener or a per-project linter. It is a stateful companion t
 
 Early but working. The companion — onboarding, the `watch → assay → crux`/`premortem` discipline loop, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
 
+## Quickstart
+
+```
+npm install -g cupel        # 1 · install
+cupel init                  # 2 · create your office at ~/cupel
+cupel skills install        # 3 · add the skill to your AI harness
+```
+
+Then, inside your harness:
+
+1. **`/cupel`** — on the first run it interviews you and writes your `PROFILE`, `EDGES`, `MANDATE`, and a few trusted `sources/`. A few minutes; stop and resume any time.
+2. **`/cupel I keep seeing <product> everywhere at work`** — hand it an edge-driven idea. It resumes any prior notes, researches the company, runs the discipline gate (good business at a fair price, inside your edge?), and files a thesis with explicit falsifiers.
+3. **`/cupel brief`** — any time later, a status check: what changed, what's over your mandate, what's due for review.
+
+cupel reads and writes your office; you make every call. It never predicts prices or tells you to buy or sell.
+
 ## Install
 
 ```
