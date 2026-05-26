@@ -64,8 +64,9 @@
     <section class="step" id="layout">
       <div class="step-rule"><span class="step-num">001</span><span class="step-kicker">The layout</span><span class="step-line"></span></div>
       <h2 class="step-title">A filing cabinet, not a database</h2>
-      <p><span class="newthought">The office</span> is a flat, legible folder you can read with your eyes or open in Obsidian for the graph view. Two singleton notes describe you; five folders hold the work.</p>
+      <p><span class="newthought">The office</span> is a flat, legible folder you can read with your eyes or open in Obsidian for the graph view. Three singleton notes describe you; five folders hold the work.</p>
       <div class="vault"><span class="dir">~/cupel/</span>
+  <span class="note">PROFILE.md</span>    <span class="cmt">brokers, currency, constraints, how you work</span>
   <span class="note">EDGES.md</span>      <span class="cmt">your circle of competence: what you see first</span>
   <span class="note">MANDATE.md</span>    <span class="cmt">goals, horizon, risk, position-size and sell rules</span>
   <span class="dir">sources/</span>      <span class="cmt">people and sources you trust, each with a last-checked date</span>
@@ -73,7 +74,7 @@
   <span class="dir">positions/</span>    <span class="cmt">what you actually hold: cost basis, size, sell triggers</span>
   <span class="dir">theses/</span>       <span class="cmt">full write-ups, one per idea</span>
   <span class="dir">journal/</span>      <span class="cmt">a dated decision log: every buy, sell, and pass</span></div>
-      <p>Keep frontmatter minimal and put the thinking in the body. <code>EDGES.md</code> and <code>MANDATE.md</code> are singletons; <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code>, <code>satellite-target-pct</code>, and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal&rsquo;s value compounds as its history grows.</p>
+      <p>Keep frontmatter minimal and put the thinking in the body. <code>PROFILE.md</code>, <code>EDGES.md</code>, and <code>MANDATE.md</code> are singletons cupel always reads; <code>PROFILE.md</code> is free-form (brokers, currency, constraints, preferences), and <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code>, <code>satellite-target-pct</code>, and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal&rsquo;s value compounds as its history grows.</p>
     </section>
 
     <section class="step" id="notes">
@@ -122,6 +123,7 @@ company: NVIDIA
 size-pct: 6              <span class="c"># doctor flags breaches of max-position-pct</span>
 cost-basis: 110.40
 opened: 2025-02-11
+broker: DeGiro          <span class="c"># optional: which account holds it (you may use several)</span>
 source: manual          <span class="c"># manual | broker</span>
 last-reviewed: 2026-05-20
 sell-triggers:

@@ -54,6 +54,7 @@ company: NVIDIA
 size-pct: 6              # % of the portfolio; doctor flags breaches of MANDATE max-position-pct
 cost-basis: 110.40
 opened: 2025-02-11
+broker: DeGiro          # optional — which account holds it (you may use several)
 source: manual          # manual | broker   (broker = synced later via MCP)
 last-synced: 2026-05-20
 last-reviewed: 2026-05-20
@@ -89,4 +90,4 @@ wrong. Links: [[NVDA-thesis]]. (On review, judge the reasoning, not just the pri
   ```
 - **Tags** classify: Lynch's six categories (`#slow-grower`, `#stalwart`, `#fast-grower`, `#cyclical`, `#turnaround`, `#asset-play`) and status (`#held`, `#passed`).
 - **Dates are `YYYY-MM-DD`.** Keep `last-reviewed` / `last-checked` / `last-synced` current; the linter measures staleness from them.
-- `EDGES.md` and `MANDATE.md` are singleton notes; `MANDATE.md` frontmatter holds `max-position-pct` and `review-stale-days`, which the linter honors.
+- `PROFILE.md`, `EDGES.md`, and `MANDATE.md` are singleton top-level notes the companion always reads. `PROFILE.md` is free-form (brokers, currency, constraints, preferences — no fixed shape). `MANDATE.md` frontmatter holds `max-position-pct`, `satellite-target-pct`, and `review-stale-days`, which the linter honors.

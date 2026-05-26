@@ -58,16 +58,17 @@ Cowork installs plugins from a zip. Every [release](https://github.com/SamGalana
 
 ```
 ~/cupel/
+  PROFILE.md    who you are operationally: brokers, currency, constraints, how you work
   EDGES.md      your circle of competence — what you see before Wall Street does
   MANDATE.md    your investment policy: goals, horizon, risk, position-size & sell rules
   sources/      people and sources you trust, each with context and a last-checked date
   watchlist/    ideas you're tracking, with provenance back to a source or hunch
-  positions/    what you actually hold: cost basis, size, sell triggers
+  positions/    what you actually hold: cost basis, size, broker, sell triggers
   theses/       full write-ups, one per idea
   journal/      a dated decision log — every buy, sell, and pass, with the reasoning
 ```
 
-It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal's value compounds as its history grows.
+`PROFILE.md`, `EDGES.md`, and `MANDATE.md` are the three top-level notes cupel reads every session; `PROFILE.md` is free-form (your brokers, base currency, constraints, and preferences — and a place cupel records durable facts it should always remember). It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal's value compounds as its history grows.
 
 `cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches (a position over your `max-position-pct`, or total satellite over your `satellite-target-pct`), stale reviews, and decisions whose `review-on` date has arrived. The LLM does the judgment; the linter guards the filing cabinet — pure arithmetic, dates, and string matching, no heuristics.
 

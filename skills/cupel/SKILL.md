@@ -22,7 +22,7 @@ You are the user's personal investing analyst — a thoughtful research partner,
 When invoked as a bare `/cupel` (no clear command), triage before doing anything:
 
 1. **Locate the office.** Run `cupel where`. If there is no office, tell the user in one friendly line and offer to set it up: run `cupel init`, then go to [onboarding](reference/onboard.md). Do not proceed until an office exists.
-2. **Take the office's pulse.** Run `cupel doctor`. It reports how long since the last `pulse`, plus any inconsistencies (missing fields, dangling links, mandate breaches, stale reviews). Read `EDGES.md` and `MANDATE.md` so you know who you are advising and by what rules.
+2. **Take the office's pulse.** Run `cupel doctor`. It reports how long since the last `pulse`, plus any inconsistencies (missing fields, dangling links, mandate breaches, stale reviews, reviews now due). Always read the three top-level notes so you know who you're advising: `PROFILE.md` (their brokers, currency, constraints, and how they like to work), `EDGES.md` (their circle of competence), and `MANDATE.md` (their rules). Honor `PROFILE.md` throughout — show figures in their currency, respect their constraints, match their preferred style.
 3. **Surface what's stale before acting.** If the last pulse is old or `doctor` flags problems (a position over the mandate cap, a holding unreviewed for months, a source long unchecked), say so plainly and offer to address it. Don't silently ignore a stale office.
 4. **Infer intent and route.** Decide from what the user said which job they're doing, and follow that command's playbook in `reference/`:
    - capturing an idea or a tip from a source → [`watch`](reference/watch.md)
@@ -50,7 +50,7 @@ A user may also invoke a command directly (`/cupel assay AAPL`, `/cupel pulse`).
 
 cupel keeps all state in one Obsidian-compatible vault — the office — not in the current project. Find it with `cupel where` (it is `~/cupel` unless `CUPEL_HOME` is set). Read the [office schema](reference/office.md) before writing notes: every note type has a small YAML frontmatter, `[[wikilinks]]` carry provenance (a thesis links its `[[source]]` and `[[EDGES]]`; a position links its `[[thesis]]`), and `#tags` carry classification. **After writing or editing notes, run `cupel doctor`** and fix what it flags.
 
-Layout: `EDGES.md`, `MANDATE.md`, `sources/`, `watchlist/`, `positions/`, `theses/`, `journal/`.
+Layout: `PROFILE.md`, `EDGES.md`, `MANDATE.md`, `sources/`, `watchlist/`, `positions/`, `theses/`, `journal/`. `PROFILE.md` is free-form — when you learn a durable operational fact (a new broker, a hard constraint, a standing preference), record it there so it's always reloaded.
 
 ## The journal (always)
 

@@ -18,6 +18,7 @@ export type NoteType =
   | "journal"
   | "edges"
   | "mandate"
+  | "profile"
   | "readme"
   | "unknown";
 
@@ -47,6 +48,7 @@ export function noteTypeForPath(relPath: string): NoteType {
   const base = norm.split("/").pop() ?? "";
   if (base === "EDGES.md") return "edges";
   if (base === "MANDATE.md") return "mandate";
+  if (base === "PROFILE.md") return "profile";
   if (base === "README.md") return "readme";
   return "unknown";
 }
@@ -62,6 +64,7 @@ This Obsidian-compatible vault is your investing brain. cupel — the research
 companion in your AI harness — reads and writes here. Everything it learns about
 your edges, your ideas, and your decisions accumulates in this one place.
 
+- PROFILE.md   who you are operationally: brokers, currency, constraints, how you work
 - EDGES.md     your circle of competence: what you see before Wall Street does
 - MANDATE.md   your investment policy: goals, horizon, risk, sizing & sell rules
 - sources/     people and sources you trust, each with context and a last-checked date
@@ -138,8 +141,25 @@ _Set \`max-position-pct\` in the frontmatter above so cupel can flag breaches._
 ## Sell rules
 `;
 
+const PROFILE = `# Profile
+
+> Free-form. The top-level facts cupel should always have in context — who you
+> are operationally and how you like to work. No fixed shape; just keep it
+> current. Run \`/cupel\` and it will help fill this in.
+
+Worth including:
+
+- **Brokers / accounts** you use (you may have several), and roughly what sits where.
+- **Base currency** you think in, and your tax domicile if it matters.
+- **Constraints** — e.g. cash only, no margin, no options, can't buy US OTC names.
+- **Your harness** and any tools or data sources cupel should know about.
+- **How you like to work** — figures in EUR, be blunt, review monthly, and so on.
+- **Durable notes** cupel learns over time that should always be remembered.
+`;
+
 export const OFFICE_FILES: OfficeFile[] = [
   { path: "README.md", content: README },
+  { path: "PROFILE.md", content: PROFILE },
   { path: "EDGES.md", content: EDGES },
   { path: "MANDATE.md", content: MANDATE },
 ];
