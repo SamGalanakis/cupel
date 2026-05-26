@@ -95,13 +95,24 @@ export function cmdDoctor(): number {
     /* marker unreadable; init would have created it */
   }
 
-  // Office-level: total satellite allocation vs. the declared target (pure
-  // arithmetic over the sizes you set; per-position cap breaches are flagged
-  // per note above). What to do about it is the model's call, not the code's.
+  // Office-level: satellite allocation vs. the declared target, and how much
+  // sits in cash (the remainder once core + satellite are counted). Pure
+  // arithmetic over the sizes you set; per-position cap breaches are flagged per
+  // note above. What to do about it is the model's call, not the code's.
   const portfolio = summarizePortfolio(readPositions(root), { maxPositionPct, satelliteTargetPct });
   const allocNote = portfolio.overTarget
-    ? `total satellite ${portfolio.totalPct}% over ${satelliteTargetPct}% target`
+    ? `satellite ${portfolio.satellitePct}% over ${satelliteTargetPct}% target`
     : null;
+  // Surface a large idle-cash remainder or an over-allocation (sizes summing
+  // past 100% means stale size-pcts) — both are easy to miss in prose.
+  const cashNote =
+    portfolio.count === 0
+      ? null
+      : portfolio.cashPct < 0
+        ? `positions sum to ${portfolio.investedPct}% (>100%) — size-pcts need a refresh`
+        : portfolio.cashPct >= 25
+          ? `${portfolio.cashPct}% sits in cash (core ${portfolio.corePct}% / satellite ${portfolio.satellitePct}%)`
+          : null;
 
   // Report.
   const totals: Record<Severity, number> = { error: 0, warning: 0, info: 0 };
@@ -116,6 +127,7 @@ export function cmdDoctor(): number {
   console.log(c(`cupel doctor — ${root}`, BOLD));
   if (pulseNote) console.log(`  ${c("PULSE".padEnd(7), COLOR.info)} ${pulseNote}`);
   if (allocNote) console.log(`  ${c("ALLOC".padEnd(7), COLOR.warning)} ${allocNote}`);
+  if (cashNote) console.log(`  ${c("CASH".padEnd(7), COLOR.info)} ${cashNote}`);
 
   if (findings.length === 0) {
     console.log(`  ${c("office is consistent", "\x1b[32m")}`);

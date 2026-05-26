@@ -1,38 +1,52 @@
 import { describe, expect, it } from "vitest";
-import { summarizePortfolio } from "../src/index.js";
+import { summarizePortfolio, type PositionEntry } from "../src/index.js";
 
 describe("summarizePortfolio", () => {
-  const entries = [
-    { ticker: "NET", sizePct: 6 },
-    { ticker: "MDB", sizePct: 5 },
-    { ticker: "CRWD", sizePct: 12 },
-    { ticker: "ESTC", sizePct: 3 },
+  // A realistic shape: a big diversified core, a couple of edge picks, the rest cash.
+  const entries: PositionEntry[] = [
+    { ticker: "VWCE", role: "core", sizePct: 41 },
+    { ticker: "AMD", role: "satellite", sizePct: 12 },
+    { ticker: "NET", role: "satellite", sizePct: 6 },
   ];
 
-  it("sums sizes and sorts largest first", () => {
+  it("splits core from satellite and derives cash as the remainder", () => {
     const s = summarizePortfolio(entries, {});
-    expect(s.totalPct).toBe(26);
-    expect(s.count).toBe(4);
-    expect(s.bySize[0]).toEqual({ ticker: "CRWD", sizePct: 12 });
+    expect(s.corePct).toBe(41);
+    expect(s.satellitePct).toBe(18);
+    expect(s.investedPct).toBe(59);
+    expect(s.cashPct).toBe(41);
+    expect(s.count).toBe(3);
   });
 
-  it("flags positions over the cap", () => {
-    const s = summarizePortfolio(entries, { maxPositionPct: 8 });
-    expect(s.breaches.map((b) => b.ticker)).toEqual(["CRWD"]);
+  it("sorts each sleeve largest first and reports the largest overall", () => {
+    const s = summarizePortfolio(entries, {});
+    expect(s.satellite[0]).toEqual({ ticker: "AMD", sizePct: 12 });
+    expect(s.largest).toEqual({ ticker: "VWCE", sizePct: 41 });
   });
 
-  it("flags total over the satellite target", () => {
-    expect(summarizePortfolio(entries, { satelliteTargetPct: 20 }).overTarget).toBe(true);
+  it("caps satellites only — a large core holding is never a breach", () => {
+    const s = summarizePortfolio(entries, { maxPositionPct: 30 });
+    expect(s.breaches.map((b) => b.ticker)).toEqual([]); // VWCE 41% core is exempt
+    const s2 = summarizePortfolio(entries, { maxPositionPct: 10 });
+    expect(s2.breaches.map((b) => b.ticker)).toEqual(["AMD"]); // satellite over cap
+  });
+
+  it("measures the satellite target against satellites only, not the core", () => {
+    expect(summarizePortfolio(entries, { satelliteTargetPct: 15 }).overTarget).toBe(true);
     expect(summarizePortfolio(entries, { satelliteTargetPct: 30 }).overTarget).toBe(false);
   });
 
-  it("lists positions missing a size rather than guessing", () => {
-    const s = summarizePortfolio([{ ticker: "FOO" }, { ticker: "NET", sizePct: 6 }], {});
-    expect(s.unknown).toEqual(["FOO"]);
-    expect(s.totalPct).toBe(6);
+  it("flags over-allocation (sizes summing past 100) as negative cash", () => {
+    const over: PositionEntry[] = [
+      { ticker: "A", role: "core", sizePct: 70 },
+      { ticker: "B", role: "satellite", sizePct: 45 },
+    ];
+    expect(summarizePortfolio(over, {}).cashPct).toBe(-15);
   });
 
-  it("does not flag when no target is set", () => {
-    expect(summarizePortfolio(entries, { maxPositionPct: 8 }).overTarget).toBe(false);
+  it("lists positions missing a size rather than guessing", () => {
+    const s = summarizePortfolio([{ ticker: "FOO", role: "satellite" }, ...entries], {});
+    expect(s.unknown).toEqual(["FOO"]);
+    expect(s.satellitePct).toBe(18);
   });
 });

@@ -37,9 +37,9 @@ Draft the **category-tailored** two-minute story for the user to react to: why t
 
 ## 5. Verdict — and file it
 
-Synthesize into "what your thesis has going for it / what it's missing / the one load-bearing assumption." **Do not issue a buy/sell call.** Then handle the notes:
+Synthesize into "what your thesis has going for it / what it's missing / the one load-bearing assumption." Then give your **reasoned verdict** — if the user wants a recommendation (start a position? pass? size it how, against the mandate?), make the call and own it, with the key risks and the falsifier attached (see the stance: caveat once, don't hedge every line). What you don't do is predict the price or place the trade. Then handle the notes:
 
 - If it survives, write/update `theses/<TICKER>-thesis.md` ([office schema](office.md)): category + which "act," the two-minute story, the famous numbers with dates, valuation & what's priced in, risks, explicit **falsifiers**, and the category's **sell signal**. Link `[[source]]` and `[[EDGES]]`; update the watchlist `status`.
-- Whatever the user decides (buy, pass, keep watching), auto-write a dated `journal/` entry: the decision, the reasoning, the falsifiers, `review-on` a few months out.
+- Whatever the user decides (buy, pass, keep watching), auto-write a dated `journal/` entry: your recommendation and their decision, the reasoning, the falsifiers, `review-on` a few months out.
 
 Run `cupel doctor`. Offer [`crux`](crux.md) (test the one claim it rests on) or [`premortem`](premortem.md) (how it fails) as follow-ups.

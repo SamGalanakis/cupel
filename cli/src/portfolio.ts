@@ -18,7 +18,9 @@ function num(v: unknown): number | undefined {
   return Number.isFinite(n) ? n : undefined;
 }
 
-// Read the position notes into parsed entries.
+// Read the position notes into parsed entries. A note whose role isn't
+// explicitly "core" is treated as a satellite pick — the safe default keeps it
+// subject to the concentration cap and the satellite target.
 export function readPositions(root: string): PositionEntry[] {
   const dir = join(root, "positions");
   if (!existsSync(dir)) return [];
@@ -27,7 +29,8 @@ export function readPositions(root: string): PositionEntry[] {
     if (!name.toLowerCase().endsWith(".md")) continue;
     const { data } = parseFrontmatter(readFileSync(join(dir, name), "utf8"));
     const ticker = typeof data.ticker === "string" && data.ticker.trim() ? data.ticker.trim() : name.replace(/\.md$/i, "");
-    out.push({ ticker, sizePct: num(data["size-pct"]) });
+    const role = typeof data.role === "string" && data.role.trim().toLowerCase() === "core" ? "core" : "satellite";
+    out.push({ ticker, role, sizePct: num(data["size-pct"]) });
   }
   return out;
 }
@@ -52,22 +55,33 @@ export function cmdPortfolio(): number {
     return 0;
   }
 
-  for (const p of s.bySize) {
-    const over = maxPositionPct !== undefined && p.sizePct > maxPositionPct;
-    const tag = over ? c(`  ⚠ over ${maxPositionPct}% cap`, RED) : "";
-    console.log(`  ${p.ticker.padEnd(6)} ${String(p.sizePct).padStart(5)}%${tag}`);
+  const row = (label: string, pct: number, tag = "") =>
+    `  ${label.padEnd(8)} ${(String(pct) + "%").padStart(6)}${tag}`;
+
+  if (s.core.length) {
+    console.log(c("  core", DIM));
+    for (const p of s.core) console.log(row(p.ticker, p.sizePct));
+  }
+  if (s.satellite.length) {
+    console.log(c("  satellite", DIM));
+    for (const p of s.satellite) {
+      const over = maxPositionPct !== undefined && p.sizePct > maxPositionPct;
+      console.log(row(p.ticker, p.sizePct, over ? c(`  ⚠ over ${maxPositionPct}% cap`, RED) : ""));
+    }
   }
   if (s.unknown.length) {
     console.log(c(`  (${s.unknown.join(", ")}: no size-pct set)`, DIM));
   }
 
   console.log("");
-  const targetTxt = satelliteTargetPct !== undefined ? ` of ${satelliteTargetPct}% satellite target` : "";
-  const totalLine = `  total satellite: ${s.totalPct}%${targetTxt}`;
-  console.log(s.overTarget ? c(totalLine + "  ⚠ over target", YELLOW) : c(totalLine, GREEN));
-  if (s.bySize.length) {
-    const top = s.bySize[0];
-    console.log(c(`  largest: ${top.ticker} (${top.sizePct}%)`, DIM));
+  console.log(c(row("core", s.corePct), DIM));
+  const targetTxt = satelliteTargetPct !== undefined ? ` (target ${satelliteTargetPct}%)` : "";
+  const satLine = row("satellite", s.satellitePct) + targetTxt;
+  console.log(s.overTarget ? c(satLine + "  ⚠ over target", YELLOW) : c(satLine, GREEN));
+  const cashTag = s.cashPct < 0 ? c("  ⚠ over-allocated (>100%)", RED) : "";
+  console.log(c(row("cash", s.cashPct, cashTag), s.cashPct < 0 ? RESET : DIM));
+  if (s.largest) {
+    console.log(c(`  largest: ${s.largest.ticker} (${s.largest.sizePct}%)`, DIM));
   }
   return 0;
 }

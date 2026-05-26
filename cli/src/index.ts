@@ -29,8 +29,8 @@ Install once globally:
   cupel init
   cd your-project && cupel skills install
 
-Discipline only: cupel sharpens your own reasoning. It does not predict prices,
-place trades, or give buy/sell calls.
+cupel gives reasoned, mandate-grounded recommendations with the risks attached.
+It refuses price predictions and bare buy/sell tips, and never places trades.
 `);
   return 0;
 }

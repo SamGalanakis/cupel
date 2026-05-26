@@ -85,7 +85,8 @@
   <span class="note">MANDATE.md</span>    <span class="cmt">goals, horizon, risk, position-size and sell rules</span>
   <span class="dir">sources/</span>      <span class="cmt">people and sources you trust, each with a last-checked date</span>
   <span class="dir">watchlist/</span>    <span class="cmt">ideas you are tracking, with provenance</span>
-  <span class="dir">positions/</span>    <span class="cmt">what you actually hold: cost basis, size, sell triggers</span>
+  <span class="dir">themes/</span>       <span class="cmt">edge trends mapped to the public names that express them</span>
+  <span class="dir">positions/</span>    <span class="cmt">what you hold (core + satellite), each with a role and size; cash is the remainder</span>
   <span class="dir">theses/</span>       <span class="cmt">full write-ups, one per idea</span>
   <span class="dir">journal/</span>      <span class="cmt">a dated decision log: every buy, sell, and pass</span></div>
       <p>Keep frontmatter minimal and put the thinking in the body. <code>PROFILE.md</code>, <code>EDGES.md</code>, and <code>MANDATE.md</code> are singletons cupel always reads; <code>PROFILE.md</code> is free-form (brokers, currency, constraints, preferences), and <code>MANDATE.md</code> frontmatter holds <code>max-position-pct</code>, <code>satellite-target-pct</code>, and <code>review-stale-days</code>, which the linter honors. Keep the whole vault under git: the decision journal&rsquo;s value compounds as its history grows.</p>
@@ -130,12 +131,14 @@ The story in two minutes. The load-bearing claim. Valuation and what is
 priced in. Risks. Falsifiers. Links: [[Dave Chen]], [[EDGES]].</code></pre>
 
       <h3 id="positions"><code>positions/&lt;TICKER&gt;.md</code></h3>
-      <p>Something actually held. <code>doctor</code> flags a <code>size-pct</code> that breaches your mandate cap.</p>
+      <p>Everything you hold — diversified core ETFs and edge picks — each tagged with a <code>role</code>. <code>size-pct</code> is a percent of total capital including cash, so cash is the remainder. <code>doctor</code> flags a <em>satellite</em> over your cap; a core holding is exempt.</p>
       <pre><code><span class="p">---</span>
 ticker: NVDA
 company: NVIDIA
-size-pct: 6              <span class="c"># doctor flags breaches of max-position-pct</span>
+role: satellite         <span class="c"># core | satellite — core is exempt from the cap</span>
+size-pct: 6             <span class="c"># % of total capital (incl. cash); core + satellite + cash ≈ 100</span>
 cost-basis: 110.40
+currency: USD           <span class="c"># currency of cost-basis / last-price</span>
 opened: 2025-02-11
 broker: DeGiro          <span class="c"># optional: which account holds it (you may use several)</span>
 source: manual          <span class="c"># manual | broker</span>
@@ -193,14 +196,15 @@ last-checked: 2026-05-20
       <ul>
         <li>Missing or malformed required frontmatter fields.</li>
         <li>Dangling <code>[[wikilinks]]</code> that point at no note.</li>
-        <li>Mandate breaches: a position over your <code>max-position-pct</code>, or total satellite over your <code>satellite-target-pct</code>.</li>
+        <li>Mandate breaches: a <em>satellite</em> over your <code>max-position-pct</code>, or satellite total over your <code>satellite-target-pct</code> (a core holding is exempt).</li>
+        <li>A large idle-cash remainder, or sizes summing past 100%.</li>
         <li>Stale reviews, measured against <code>review-stale-days</code>, and decisions whose <code>review-on</code> date has arrived.</li>
       </ul>
       <pre><code><span class="p">$</span> cupel doctor
 <span class="c"># reports time since last pulse, plus any inconsistencies</span></code></pre>
-      <p><code>cupel portfolio</code> sums your positions deterministically: each holding&rsquo;s size against the cap, and the total against your satellite target. The arithmetic is the CLI&rsquo;s; what to do about a concentrated or oversized book is the model&rsquo;s call.</p>
+      <p><code>cupel portfolio</code> reads your positions deterministically: core vs. satellite, each holding&rsquo;s size, the satellite total against your target, and the cash remainder. The arithmetic is the CLI&rsquo;s; what to do about a concentrated, over-cash, or oversized book is the model&rsquo;s call.</p>
       <pre><code><span class="p">$</span> cupel portfolio
-<span class="c"># CRWD 12% (over 8% cap) · total satellite 26% of 20% target</span></code></pre>
+<span class="c"># core VWCE 41% · satellite AMD 12% (over 10% cap) · cash 47%</span></code></pre>
       <p>Because the linter is deterministic and the office is plain files, the slow-burning value, the dated decision journal, the provenance graph, the staleness checks, stays readable and yours, with or without cupel installed.</p>
     </section>
 
@@ -224,7 +228,7 @@ last-checked: 2026-05-20
         <span>&copy; 2026 Sam Galanakis</span>
         <span class="mono">cupel.money &middot; v0.1 &middot; MIT</span>
       </div>
-      <p class="site-foot-note">cupel is not financial advice. It sharpens your own reasoning; it does not predict prices, place trades, or issue buy or sell calls.</p>
+      <p class="site-foot-note">cupel is a personal reasoning tool, not regulated financial advice. It recommends with the risks attached, refuses price predictions, and never places trades.</p>
     </div>
   </footer>
 

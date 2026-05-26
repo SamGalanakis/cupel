@@ -17,6 +17,7 @@ describe("lintNote", () => {
     const text = [
       "---",
       "ticker: NVDA",
+      "role: satellite",
       "size-pct: 6",
       "cost-basis: 100",
       "source: manual",
@@ -40,10 +41,11 @@ describe("lintNote", () => {
     expect(f.some((x) => x.rule === "dangling-link")).toBe(true);
   });
 
-  it("flags a position above the mandate cap", () => {
+  it("flags a satellite position above the mandate cap", () => {
     const text = [
       "---",
       "ticker: NVDA",
+      "role: satellite",
       "size-pct: 25",
       "cost-basis: 100",
       "source: manual",
@@ -54,6 +56,23 @@ describe("lintNote", () => {
     ].join("\n");
     const f = lintNote({ path: "positions/NVDA.md", text }, ctx());
     expect(f.some((x) => x.rule === "mandate-position-size")).toBe(true);
+  });
+
+  it("exempts a core holding from the cap (a whole-world ETF can be any size)", () => {
+    const text = [
+      "---",
+      "ticker: VWCE",
+      "role: core",
+      "size-pct: 41",
+      "cost-basis: 100",
+      "source: manual",
+      "last-synced: 2026-05-20",
+      "last-reviewed: 2026-05-20",
+      "---",
+      "the core",
+    ].join("\n");
+    const f = lintNote({ path: "positions/VWCE.md", text }, ctx());
+    expect(f.some((x) => x.rule === "mandate-position-size")).toBe(false);
   });
 
   it("resolves a display-name wikilink to a slug note (no false dangling)", () => {
@@ -82,6 +101,7 @@ describe("lintNote", () => {
     const text = [
       "---",
       "ticker: NVDA",
+      "role: satellite",
       "size-pct: 5",
       "cost-basis: 100",
       "source: manual",

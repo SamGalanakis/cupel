@@ -97,20 +97,23 @@ export function lintNote(note: OfficeNote, ctx: LintContext): Finding[] {
     }
   }
 
-  // 3. Mandate consistency: position size vs. the policy cap.
+  // 3. Mandate consistency: SATELLITE position size vs. the policy cap. A
+  // diversified core holding (role: core) is exempt — a whole-world ETF can
+  // legitimately be any size; the cap is a concentration guard on edge picks.
   if (type === "position" && ctx.maxPositionPct !== undefined) {
+    const role = typeof data["role"] === "string" ? data["role"].trim().toLowerCase() : "satellite";
     const size = asNumber(data["size-pct"]);
-    if (size !== undefined && size > ctx.maxPositionPct) {
+    if (role !== "core" && size !== undefined && size > ctx.maxPositionPct) {
       add(
         "warning",
         "mandate-position-size",
-        `position is ${size}% but MANDATE caps positions at ${ctx.maxPositionPct}%`,
+        `satellite position is ${size}% but MANDATE caps positions at ${ctx.maxPositionPct}%`,
       );
     }
   }
 
   // 4. Staleness.
-  if (type === "position" || type === "thesis" || type === "watchlist") {
+  if (type === "position" || type === "thesis" || type === "watchlist" || type === "theme") {
     const d = daysSince(data["last-reviewed"], ctx.today);
     if (d !== null && d > ctx.reviewStaleDays) {
       add("info", "stale-review", `last reviewed ${d} days ago (over ${ctx.reviewStaleDays})`);

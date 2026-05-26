@@ -17,4 +17,4 @@ Use web search for current facts; cite dates; don't fabricate.
 
 ## 3. Record
 
-Update the `[[thesis]]` to state the crux and its falsifiers explicitly (this sharpens what `pulse` later watches for). If a decision results, write a `journal/` entry. **No buy/sell call** — the output is "here is the one thing this depends on, and how you'd know if you're wrong." Run `cupel doctor`.
+Update the `[[thesis]]` to state the crux and its falsifiers explicitly (this sharpens what `pulse` later watches for). If a decision results, write a `journal/` entry. The output is "here is the one thing this depends on, and how you'd know if you're wrong" — and, if the user asks whether it still clears the bar, your reasoned take with that crux front and center. No price prediction; no placing the trade. Run `cupel doctor`.

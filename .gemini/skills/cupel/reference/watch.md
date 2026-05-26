@@ -24,4 +24,6 @@ Use web search to get the lay of the land and current facts; cite "as of" dates;
 
 Pick the one or few candidates worth tracking. For each, create `watchlist/<TICKER>.md` with the schema in [office](office.md): `status: watching`, `provenance` linking the seed, a Lynch category `#tag`, and a body capturing why it's on the radar, **what would have to be true**, and the open questions. Link the source.
 
+**When the seed has no directly investable name** — it's a private company, an open-source project, or a broad trend (common when the user's edge is in tech/infra) — don't force a fake ticker. Record a `themes/<slug>.md` note instead: the trend, why it's in the user's [[EDGES]], and the *public* names that actually express it (the picks-and-shovels supplier, the listed customer, the closest pure-play). The theme is the durable bridge from "I can see this winning" to "here's what I could own"; promising public proxies then graduate to `watchlist/`.
+
 Don't write a thesis yet — that's what [`assay`](assay.md)/[`crux`](crux.md) are for. End by offering to assay the most promising one. Run `cupel doctor`.

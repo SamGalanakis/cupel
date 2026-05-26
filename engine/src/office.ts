@@ -7,12 +7,13 @@ export const OFFICE_MARKER = ".cupel-office.json";
 
 // Each subdirectory holds one note type. The linter infers a note's type from
 // the directory it lives in.
-export const OFFICE_DIRS = ["sources", "watchlist", "positions", "theses", "journal"] as const;
+export const OFFICE_DIRS = ["sources", "watchlist", "themes", "positions", "theses", "journal"] as const;
 export type OfficeDir = (typeof OFFICE_DIRS)[number];
 
 export type NoteType =
   | "source"
   | "watchlist"
+  | "theme"
   | "position"
   | "thesis"
   | "journal"
@@ -26,16 +27,22 @@ export type NoteType =
 const DIR_TO_TYPE: Record<string, NoteType> = {
   sources: "source",
   watchlist: "watchlist",
+  themes: "theme",
   positions: "position",
   theses: "thesis",
   journal: "journal",
 };
 
 // Frontmatter keys the linter requires per note type. Bodies are free prose.
+// `role` distinguishes a diversified core holding from an edge-driven satellite
+// pick — the per-position cap and the satellite target apply to satellites only.
+// `size-pct` is the holding as a percent of TOTAL investable capital (incl.
+// cash), so core + satellite + cash sum to ~100 and cash is simply the remainder.
 export const REQUIRED_FIELDS: Partial<Record<NoteType, string[]>> = {
   source: ["name", "last-checked"],
   watchlist: ["ticker", "status", "provenance", "last-reviewed"],
-  position: ["ticker", "size-pct", "cost-basis", "source", "last-synced", "last-reviewed"],
+  theme: ["name", "last-reviewed"],
+  position: ["ticker", "role", "size-pct", "cost-basis", "source", "last-synced", "last-reviewed"],
   thesis: ["ticker", "last-reviewed"],
   journal: ["date", "kind"],
 };
@@ -69,7 +76,8 @@ your edges, your ideas, and your decisions accumulates in this one place.
 - MANDATE.md   your investment policy: goals, horizon, risk, sizing & sell rules
 - sources/     people and sources you trust, each with context and a last-checked date
 - watchlist/   ideas you're tracking, with provenance back to a source or hunch
-- positions/   what you actually hold: cost basis, size, sell triggers
+- themes/      trends from your edge mapped to the public names that actually express them
+- positions/   what you hold (core ETFs and satellite picks), each with a role and size; cash is the remainder
 - theses/      full write-ups, one per idea
 - journal/     a dated decision log — every buy, sell, and pass, with the reasoning
 
@@ -132,11 +140,20 @@ last-reviewed:
 ## Core vs. edge satellite
 
 _How much sits in a boring low-cost core, and how much is reserved for
-edge-driven picks._
+edge-driven picks. Set \`satellite-target-pct\` above; cupel measures it against
+your satellite positions only (the core never counts)._
+
+## Diversification
+
+_What is your income (human capital) correlated with — and does your portfolio
+hedge that or amplify it? A standing rule here lets cupel judge new holdings by
+whether they reduce or increase that correlation._
 
 ## Position-size rules
 
-_Set \`max-position-pct\` in the frontmatter above so cupel can flag breaches._
+_Set \`max-position-pct\` above; cupel flags any single SATELLITE position over it
+(a diversified core holding can legitimately exceed it). \`role: core\` exempts a
+holding from the cap and the satellite total._
 
 ## Sell rules
 `;

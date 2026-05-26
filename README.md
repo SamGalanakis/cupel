@@ -4,11 +4,11 @@
 
 It lives in one folder — your *office* — and accumulates what it learns about you: your circle of competence, watchlist, theses, positions, and a dated decision journal. The premise is Peter Lynch's: your edge is what you already know from your work and daily life. cupel captures that edge, turns it into researched ideas, and keeps your reasoning honest over time.
 
-cupel does not predict prices, place trades, or give buy or sell calls. It sharpens your own reasoning and surfaces what you're missing; the decisions stay yours.
+cupel gives reasoned, mandate-grounded recommendations with the risks attached — it sharpens your reasoning and tells you what it would do and why. What it refuses is fortune-telling (price predictions, market-timing) and bare tip-bot signals; it never places trades. The decisions stay yours.
 
 ## Status
 
-Early but working. The companion — onboarding, the `watch → assay → crux`/`premortem` discipline loop, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
+Early but working. The companion — onboarding, the `watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
 
 ## Quickstart
 
@@ -24,7 +24,7 @@ Then, inside your harness:
 2. **`/cupel I keep seeing <product> everywhere at work`** — hand it an edge-driven idea. It resumes any prior notes, researches the company, runs the discipline gate (good business at a fair price, inside your edge?), and files a thesis with explicit falsifiers.
 3. **`/cupel brief`** — any time later, a status check: what changed, what's over your mandate, what's due for review.
 
-cupel reads and writes your office; you make every call. It never predicts prices or tells you to buy or sell.
+cupel reads and writes your office and recommends what it would do, with the risks named; you make and place every trade. It won't predict prices or hand you tips with no reasoning.
 
 ## Install
 
@@ -77,7 +77,8 @@ Cowork installs plugins from a zip. Every [release](https://github.com/SamGalana
   MANDATE.md    your investment policy: goals, horizon, risk, position-size & sell rules
   sources/      people and sources you trust, each with context and a last-checked date
   watchlist/    ideas you're tracking, with provenance back to a source or hunch
-  positions/    what you actually hold: cost basis, size, broker, sell triggers
+  themes/       edge trends mapped to the public names that express them
+  positions/    what you hold (core + satellite), each with a role and size; cash is the remainder
   theses/       full write-ups, one per idea
   journal/      a dated decision log — every buy, sell, and pass, with the reasoning
 ```
@@ -125,6 +126,7 @@ Talk to `/cupel` and it figures out what you need. Or go direct:
 | `assay` | Test one idea: a good business at a fair price, inside your edge? |
 | `crux` | Find the single load-bearing claim a thesis rests on, and test it |
 | `premortem` | Assume it failed in three years; surface the risks you're underweighting |
+| `allocate` | Deploy cash or rebalance: exposure, correlation (incl. your human capital), a recommended shape |
 | `pulse` | Refresh the office: sweep sources, re-check staleness, run `doctor` |
 | `brief` | A `pulse` plus the executive readout: what changed, what needs attention |
 
