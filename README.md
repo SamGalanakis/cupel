@@ -88,6 +88,20 @@ Cowork installs plugins from a zip. Every [release](https://github.com/SamGalana
 
 `cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches (a position over your `max-position-pct`, or total satellite over your `satellite-target-pct`), stale reviews, and decisions whose `review-on` date has arrived. The LLM does the judgment; the linter guards the filing cabinet — pure arithmetic, dates, and string matching, no heuristics.
 
+### Choosing the office folder, and using Obsidian
+
+The office defaults to `~/cupel`. To keep it elsewhere — inside an existing Obsidian vault, or a synced folder (Dropbox, iCloud) for backup and multi-device — set `CUPEL_HOME`:
+
+```
+export CUPEL_HOME="$HOME/Documents/MyVault/cupel"   # add this to your shell profile
+cupel init
+cupel where                                          # confirms the resolved path
+```
+
+Set `CUPEL_HOME` in your **shell profile**, not just once in a terminal: the `/cupel` skill locates the office by running `cupel where`, so the variable must be in the environment your AI harness inherits. Pointing different `CUPEL_HOME` values at different folders gives you separate offices.
+
+**With Obsidian**, open the office folder as a vault. Because every note carries its provenance as `[[wikilinks]]`, the graph view becomes your idea lineage — source → edge → watchlist → thesis → position, with journal entries hanging off each — and backlinks surface every decision that touched a holding. Tags filter by Lynch category (`#fast-grower`, …) and status (`#held`, `#passed`). It's a strict superset of plain markdown, so cupel never *requires* Obsidian; Obsidian just makes the graph visible.
+
 ## CLI
 
 The deterministic tooling. You can run these yourself; the companion runs them too.
