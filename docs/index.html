@@ -69,6 +69,7 @@
             <li><a href="#cmd-assay">assay</a></li>
             <li><a href="#cmd-crux">crux</a></li>
             <li><a href="#cmd-premortem">premortem</a></li>
+            <li><a href="#cmd-allocate">allocate</a></li>
             <li><a href="#cmd-pulse">pulse</a></li>
             <li><a href="#cmd-brief">brief</a></li>
           </ol>
@@ -160,6 +161,7 @@
         <div class="ledger-row" id="cmd-assay"><span class="ledger-cmd">assay</span><span class="ledger-job">Test one idea: a good business at a fair price, inside your edge?</span></div>
         <div class="ledger-row" id="cmd-crux"><span class="ledger-cmd">crux</span><span class="ledger-job">Find the single load-bearing claim a thesis rests on, and test it.</span></div>
         <div class="ledger-row" id="cmd-premortem"><span class="ledger-cmd">premortem</span><span class="ledger-job">Assume it failed in three years; surface the risks you are underweighting.</span></div>
+        <div class="ledger-row" id="cmd-allocate"><span class="ledger-cmd">allocate</span><span class="ledger-job">Deploy cash or rebalance: exposure, correlation (incl. your human capital), a recommended shape.</span></div>
         <div class="ledger-row" id="cmd-pulse"><span class="ledger-cmd">pulse</span><span class="ledger-job">Refresh the office: sweep sources, re-check staleness, run <code>cupel doctor</code>.</span></div>
         <div class="ledger-row" id="cmd-brief"><span class="ledger-cmd">brief</span><span class="ledger-job">A <code>pulse</code> plus the executive readout: what changed, what needs attention, next moves.</span></div>
       </div>
@@ -175,13 +177,13 @@
         <div class="ledger-row" id="cli-where"><span class="ledger-cmd">where</span><span class="ledger-job">Print the office path so the skill knows where to read and write.</span></div>
         <div class="ledger-row" id="cli-doctor"><span class="ledger-cmd">doctor</span><span class="ledger-job">Check frontmatter, dangling links, mandate breaches, stale reviews, and reviews now due.</span></div>
         <div class="ledger-row" id="cli-show"><span class="ledger-cmd">show &lt;TICKER&gt;</span><span class="ledger-job">Print every note for a ticker so a session resumes with full context.</span></div>
-        <div class="ledger-row" id="cli-portfolio"><span class="ledger-cmd">portfolio</span><span class="ledger-job">Sum positions: each size against the cap, the total against your satellite target.</span></div>
+        <div class="ledger-row" id="cli-portfolio"><span class="ledger-cmd">portfolio</span><span class="ledger-job">Split core / satellite / cash: each size, the satellite total against your target, the cash remainder.</span></div>
         <div class="ledger-row" id="cli-stamp"><span class="ledger-cmd">stamp &lt;event&gt;</span><span class="ledger-job">Timestamp an event (e.g. <code>cupel stamp pulse</code>) so the front door knows how fresh the office is.</span></div>
         <div class="ledger-row" id="cli-skills"><span class="ledger-cmd">skills</span><span class="ledger-job">Install, update, or check the cupel skill across your AI harnesses.</span></div>
       </div>
       <div class="assay-note">
         <p class="label">Division of labour</p>
-        <p>The LLM does the judgment; the linter guards the filing cabinet. <code>cupel doctor</code> catches a position over your <code>max-position-pct</code> (or the whole satellite over its target), a holding unreviewed for months, a decision whose review date has arrived, or a source long unchecked, and the companion surfaces it before you act.</p>
+        <p>The LLM does the judgment; the linter guards the filing cabinet. <code>cupel doctor</code> catches a satellite over your <code>max-position-pct</code> (the core is exempt), the satellite total over its target, a large idle-cash remainder, a holding unreviewed for months, a decision whose review date has arrived, or a source long unchecked, and the companion surfaces it before you act.</p>
       </div>
     </section>
 

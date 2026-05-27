@@ -10,7 +10,7 @@ People who already work inside an AI harness (Claude Code, Cursor, Codex, Gemini
 
 ## Product Purpose
 
-cupel turns the LLM in an AI harness into a personal investing analyst: a stateful research companion that captures the user's edges and stress-tests their ideas against the investing canon. It is detection and discipline only. It does not predict prices, place trades, or issue buy or sell calls. The docs site (landing, the canon, the office) explains the concept, the vault structure, and how to install and use it. Success is a visitor who grasps the premise quickly and installs with confidence, trusting that the tool sharpens their own reasoning instead of replacing it.
+cupel turns the LLM in an AI harness into a personal investing analyst: a stateful research companion that captures the user's edges and stress-tests their ideas against the investing canon. It gives reasoned, mandate-grounded recommendations with the risks attached, but refuses price predictions and bare tip-bot signals, and never places trades. The docs site (landing, the canon, the office) explains the concept, the vault structure, and how to install and use it. Success is a visitor who grasps the premise quickly and installs with confidence, trusting that the tool sharpens their own reasoning instead of replacing it.
 
 ## Brand Personality
 
