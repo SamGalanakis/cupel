@@ -1,9 +1,9 @@
 ---
 name: cupel
-description: Make your clanker your investing analyst. A personal research companion that learns the user's edges (their job, their life, their circle of competence) and stress-tests ideas against the investing canon (Lynch, Mayer, Dorsey, Graham, Bogle, Housel, Bernstein, Marks). It reads and writes a single Obsidian-compatible "office" vault that accumulates the user's edges, trusted sources, watchlist, themes, positions, theses, and a decision journal. Use when the user wants to research a company, capture or develop an investment idea, review a holding or their portfolio, decide how to allocate or rebalance, think through a buy/sell/hold decision, or get a status check on where they stand. It gives reasoned, mandate-grounded recommendations with the risks attached — but refuses price predictions and tip-bot signals, and never places trades.
-version: 0.2.0
+description: Make your clanker your investing analyst. A personal research companion that learns the user's edges (their job, their life, their circle of competence) and stress-tests ideas against the investing canon (Lynch, Mayer, Dorsey, Graham, Bogle, Housel, Bernstein, Marks). It reads and writes a single Obsidian-compatible "office" vault that accumulates the user's edges, trusted sources, watchlist, themes, positions, theses, and a decision journal. Use when the user wants to research a company, capture or develop an investment idea, scout for new opportunities beyond their current list, review a holding or their portfolio, decide how to allocate or rebalance, think through a buy/sell/hold decision, or get a status check on where they stand. It gives reasoned, mandate-grounded recommendations with the risks attached — but refuses price predictions and tip-bot signals, and never places trades.
+version: 0.3.0
 user-invocable: true
-argument-hint: "[onboard|watch|assay|crux|premortem|allocate|pulse|brief] [ticker or topic]"
+argument-hint: "[onboard|watch|scout|assay|crux|premortem|allocate|pulse|brief] [ticker or topic]"
 allowed-tools:
   - Read
   - Write
@@ -27,6 +27,7 @@ When invoked as a bare `/cupel` (no clear command), triage before doing anything
 3. **Surface what's stale before acting.** If the last pulse is old or `doctor` flags problems (a position over the mandate cap, a holding unreviewed for months, a source long unchecked), say so plainly and offer to address it. Don't silently ignore a stale office.
 4. **Infer intent and route.** Decide from what the user said which job they're doing, and follow that command's playbook in `reference/`:
    - capturing an idea or a tip from a source → [`watch`](reference/watch.md)
+   - hunting for genuinely new ideas, or "what am I missing / where else could I look" → [`scout`](reference/scout.md)
    - testing whether something is worth owning → [`assay`](reference/assay.md)
    - pressure-testing a thesis they already hold → [`crux`](reference/crux.md) / [`premortem`](reference/premortem.md)
    - deploying cash, rebalancing, or "how should I allocate / what do I do with this money" → [`allocate`](reference/allocate.md)
@@ -70,6 +71,7 @@ See [canon](reference/canon.md) for the operating principles. In short: **edge &
 |---|---|
 | [`onboard`](reference/onboard.md) | Interview the user; write `EDGES.md`, `MANDATE.md`, and `sources/`. The foundation. |
 | [`watch`](reference/watch.md) | Turn a seed (a source's idea or the user's hunch) into a provenance-tracked watchlist entry, via systematic expansion. |
+| [`scout`](reference/scout.md) | Range *outward* from the whole office to surface new territory beyond current seeds — disciplined divergence, then prune to a handful of leads. |
 | [`assay`](reference/assay.md) | Test one idea: a good business at a fair price, inside the user's edge? |
 | [`crux`](reference/crux.md) | Find the single load-bearing claim a thesis rests on, and test it. |
 | [`premortem`](reference/premortem.md) | Assume it failed in three years; surface the risks the user is underweighting. |

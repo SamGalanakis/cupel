@@ -6,7 +6,7 @@ product
 
 ## Users
 
-People who already work inside an AI harness (Claude Code, Cursor, Codex, Gemini CLI, and similar) and want to research investments with discipline rather than tips. They are developer-adjacent and comfortable in a terminal. The guiding premise is Peter Lynch's: their edge is what they already know from their work and life. They come to the docs to understand what cupel is, install it, and learn the `watch → assay → crux/premortem` discipline loop. They are skeptical of hype and allergic to anything that smells like a trading-signal product.
+People who already work inside an AI harness (Claude Code, Cursor, Codex, Gemini CLI, and similar) and want to research investments with discipline rather than tips. They are developer-adjacent and comfortable in a terminal. The guiding premise is Peter Lynch's: their edge is what they already know from their work and life. They come to the docs to understand what cupel is, install it, and learn the `scout`/`watch → assay → crux/premortem` discipline loop. They are skeptical of hype and allergic to anything that smells like a trading-signal product.
 
 ## Product Purpose
 

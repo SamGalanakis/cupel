@@ -8,7 +8,7 @@ cupel gives reasoned, mandate-grounded recommendations with the risks attached �
 
 ## Status
 
-Early but working. The companion — onboarding, the `watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
+Early but working. The companion — onboarding, the `scout`/`watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
 
 ## Quickstart
 
@@ -123,6 +123,7 @@ Talk to `/cupel` and it figures out what you need. Or go direct:
 |---|---|
 | `onboard` | Interview you; write your edges, mandate, and trusted sources |
 | `watch` | Turn a seed (a source's idea or your hunch) into a provenance-tracked watchlist entry |
+| `scout` | Range outward from your whole office to surface new territory beyond your current seeds — disciplined divergence, then prune to a handful of leads |
 | `assay` | Test one idea: a good business at a fair price, inside your edge? |
 | `crux` | Find the single load-bearing claim a thesis rests on, and test it |
 | `premortem` | Assume it failed in three years; surface the risks you're underweighting |
