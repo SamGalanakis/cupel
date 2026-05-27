@@ -81,7 +81,10 @@
             <li><a href="#cli-where">where</a></li>
             <li><a href="#cli-doctor">doctor</a></li>
             <li><a href="#cli-show">show</a></li>
+            <li><a href="#cli-board">board</a></li>
+            <li><a href="#cli-tickers">tickers</a></li>
             <li><a href="#cli-portfolio">portfolio</a></li>
+            <li><a href="#cli-capital">capital</a></li>
             <li><a href="#cli-stamp">stamp</a></li>
             <li><a href="#cli-skills">skills</a></li>
           </ol>
@@ -94,7 +97,7 @@
       <header class="masthead">
         <p class="masthead-eyebrow">cupel &middot; v0.1 &middot; MIT</p>
         <h1 class="masthead-title">A personal investing analyst</h1>
-        <p class="masthead-lede">cupel turns the LLM in your AI harness into a research companion that learns your edges and tests your ideas against the investing canon. It lives in one folder and keeps a dated record of your thinking. It gives reasoned, mandate-grounded recommendations with the risks attached — refusing price predictions and bare tips, and never placing trades; the decisions stay yours.</p>
+        <p class="masthead-lede">cupel turns the LLM in your AI harness into a research companion that learns your edges and tests your ideas against the investing canon. It lives in one folder and keeps a dated record of your thinking. It gives reasoned, mandate-grounded calls — the likely scenarios, rough upside and timeframe, and the risks named. It refuses false precision dressed as fact and bare tips with no reasoning, and never places trades; the decisions stay yours.</p>
       </header>
 
     <section class="step" id="start">
@@ -103,7 +106,7 @@
       <p><span class="newthought">The premise is Peter Lynch&rsquo;s:</span> your edge is what you already know from your work and daily life — the products you watch take off, the industry shifts you see before the analysts do. A familiar name is only a lead, though; it still has to survive the homework.</p>
       <p>cupel turns the LLM in your AI harness into a personal research analyst that captures those edges, researches an idea properly, and keeps your reasoning honest as your thinking accumulates in one place.</p>
       <span class="sidenote">cupel lives in one folder, your <a href="office.html">office</a>, and accumulates everything it learns about you there.</span>
-      <p>cupel sharpens your own reasoning, surfaces what you are missing, and recommends what it would do and why — with the risks named. It refuses price predictions and bare buy/sell tips, and never places trades; the decisions stay yours.</p>
+      <p>cupel sharpens your own reasoning, surfaces what you are missing, and recommends what it would do and why — the likely scenarios, rough upside and timeframe, with the risks named. Investing is a bet; cupel helps you make an <em>informed</em> one. It refuses false precision dressed as fact and bare tips with no reasoning, and never places trades; the decisions stay yours.</p>
       <div class="assay-note">
         <p class="label">The stance</p>
         <p>Edge before opinion. A familiar product or a hot tip is only a lead; it still has to survive the homework. A wonderful business at the wrong price is a poor investment. Most of a normal person&rsquo;s money can sensibly sit in a low-cost index; individual picks are a considered satellite, only where you have a real edge.</p>
@@ -179,7 +182,10 @@
         <div class="ledger-row" id="cli-where"><span class="ledger-cmd">where</span><span class="ledger-job">Print the office path so the skill knows where to read and write.</span></div>
         <div class="ledger-row" id="cli-doctor"><span class="ledger-cmd">doctor</span><span class="ledger-job">Check frontmatter, dangling links, mandate breaches, stale reviews, and reviews now due.</span></div>
         <div class="ledger-row" id="cli-show"><span class="ledger-cmd">show &lt;TICKER&gt;</span><span class="ledger-job">Print every note for a ticker so a session resumes with full context.</span></div>
-        <div class="ledger-row" id="cli-portfolio"><span class="ledger-cmd">portfolio</span><span class="ledger-job">Split core / satellite / cash: each size, the satellite total against your target, the cash remainder.</span></div>
+        <div class="ledger-row" id="cli-board"><span class="ledger-cmd">board [A|B|C|PASS]</span><span class="ledger-job">The whole watchlist ranked by tier at a glance; filter to one tier.</span></div>
+        <div class="ledger-row" id="cli-tickers"><span class="ledger-cmd">tickers</span><span class="ledger-job">List every ticker the office knows; feeds scout&rsquo;s dedupe.</span></div>
+        <div class="ledger-row" id="cli-portfolio"><span class="ledger-cmd">portfolio</span><span class="ledger-job">Split core / satellite / cash: each size, the satellite total against your target, the cash remainder. Per holding, the gain % from recorded <code>cost-basis</code> to <code>last-price</code> and a size-weighted price return &mdash; and, once <code>capital</code> is set, value and gain in money. Recorded prices, never live quotes.</span></div>
+        <div class="ledger-row" id="cli-capital"><span class="ledger-cmd">capital [amount [currency]]</span><span class="ledger-job">Set or show your total investable capital, the single figure that lets <code>portfolio</code> turn allocation percentages into money. cupel never fetches account balances; you maintain it.</span></div>
         <div class="ledger-row" id="cli-stamp"><span class="ledger-cmd">stamp &lt;event&gt;</span><span class="ledger-job">Timestamp an event (e.g. <code>cupel stamp pulse</code>) so the front door knows how fresh the office is.</span></div>
         <div class="ledger-row" id="cli-skills"><span class="ledger-cmd">skills</span><span class="ledger-job">Install, update, or check the cupel skill across your AI harnesses.</span></div>
       </div>
@@ -216,7 +222,7 @@
         <span>&copy; 2026 Sam Galanakis</span>
         <span class="mono">cupel.money &middot; v0.1 &middot; MIT</span>
       </div>
-      <p class="site-foot-note">cupel is a personal reasoning tool, not regulated financial advice. It recommends with the risks attached, refuses price predictions, and never places trades.</p>
+      <p class="site-foot-note">cupel is a personal reasoning tool, not regulated financial advice. It recommends with the risks attached, refuses false precision dressed as fact and bare tips, and never places trades.</p>
     </div>
   </footer>
 

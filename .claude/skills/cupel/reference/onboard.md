@@ -34,7 +34,7 @@ Write a **Diversification** rule tied to their human-capital correlation (step 1
 
 ## 4. Sources (write `sources/<slug>.md`)
 
-Ask who and what they trust for ideas — people, newsletters, podcasts, analysts — and for each capture `name`, `domain`, why they trust them (`trust`), known `bias`, and a `url` to check their latest if there is one. Set `last-checked` to today, and `status: trusted` (or `tentative` for an unproven source the user wants to trial — its tips stay raw leads until they prove out). These become the seeds the `watch` pipeline and `pulse` sweep draw from.
+Ask who and what they trust for ideas — people, newsletters, podcasts, analysts — and for each capture `name`, `domain`, why they trust them (`trust`), known `bias`, and a `url` to check their latest if there is one. Set `last-checked` to today, and `status: trusted` (or `tentative` for an unproven source the user wants to trial — its tips stay raw leads until they prove out). These become the seeds the `watch` pipeline and `pulse` sweep draw from. **When the user hands over a big batch at once, fan out** (see *Working at scale* in [SKILL](../SKILL.md)): dispatch parallel subagents to look each one up, confirm who they are and their domain/bias, and return the captured fields — far faster than profiling thirty people serially.
 
 ## Close
 

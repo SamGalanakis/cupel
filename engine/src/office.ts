@@ -47,6 +47,26 @@ export const REQUIRED_FIELDS: Partial<Record<NoteType, string[]>> = {
   journal: ["date", "kind"],
 };
 
+// Optional-but-recommended frontmatter the companion fills in during assay/scout
+// so the office is sortable and actionable. The linter does NOT require these
+// (older notes stay green), but `cupel board` reads them and `doctor` checks the
+// freshness/consistency ones. Documented here as the single source of truth.
+//   tier         A | B | C | PASS   — the merit ranking (quality × valuation × judgeability)
+//   conviction   high | med | low
+//   edge         in-edge | anti-edge
+//   correlation  the dominant macro/personal correlation, shown as info not a discount
+//                (the user's vault uses `ai-correlation: low|med|high`)
+//   url          a link to go straight to the company / source
+//   horizon      the intended holding horizon (e.g. "3-5y")
+//   figures-as-of  date the price/financials were last pulled (drives the staleness flag)
+//   exchange / currency / tradable  where and in what currency it trades
+//   entry-trigger  (watchlist) the condition that would make it actionable; `watch-for` is an alias
+export const RECOMMENDED_FIELDS: Partial<Record<NoteType, string[]>> = {
+  watchlist: ["company", "tier", "conviction", "edge", "correlation", "url", "exchange", "currency", "tradable", "entry-trigger"],
+  thesis: ["company", "tier", "conviction", "edge", "correlation", "url", "horizon", "figures-as-of"],
+  position: ["company", "url", "last-price", "price-as-of"],
+};
+
 // Resolve a note's type from its vault-relative path (e.g. "positions/AAPL.md").
 export function noteTypeForPath(relPath: string): NoteType {
   const norm = relPath.replace(/\\/g, "/");
@@ -86,8 +106,9 @@ Notes use YAML frontmatter for structure and \`[[wikilinks]]\` for provenance
 \`[[thesis]]\`). Open the folder in Obsidian to browse the graph, or just read
 the markdown. Run \`cupel doctor\` to check the vault stays consistent.
 
-Talk to it from any harness: \`/cupel\`. Discipline only — cupel sharpens your
-own thinking; it never predicts prices or places trades.
+Talk to it from any harness: \`/cupel\`. cupel sharpens your thinking and gives
+caveated calls — the likely scenarios and the risks named — but it never places
+trades. Run \`cupel board\` for the ranked watchlist at a glance.
 `;
 
 const EDGES = `---

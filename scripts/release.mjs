@@ -8,13 +8,16 @@
 //                                       # bump the version in place, sync the
 //                                       # skill version, commit, then release
 //
-// Refuses on a dirty tree (unless --bump), an unpushed HEAD, an existing tag,
-// or a skill version that drifted from package.json. `npm publish` stays manual.
+// Refuses on a dirty tree (unless --bump), an unpushed HEAD, an existing tag, a
+// skill version that drifted from package.json, or a harness copy that drifted
+// from skills/cupel. A --bump re-mirrors the committed copies. `npm publish`
+// stays manual.
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { syncAll, checkAll } from './sync-skill-copies.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -99,6 +102,10 @@ function syncSiblings(version) {
     changed.push('.claude-plugin/marketplace.json');
   }
 
+  // Re-mirror the committed harness copies (.claude/skills/cupel, …) now that
+  // canonical changed, so they ship the new version + content instead of drifting.
+  changed.push(...syncAll());
+
   return changed;
 }
 
@@ -121,6 +128,11 @@ function verifySiblings(version) {
   if (entry.version !== version) {
     fail(`.claude-plugin/marketplace.json cupel version "${entry.version}" disagrees with package.json "${version}".`);
   }
+
+  const drifted = checkAll();
+  if (drifted.length) {
+    fail(`Harness skill copies drifted from skills/cupel:\n${drifted.map((d) => `  ${d}`).join('\n')}\nRun \`npm run sync:skills\` and commit, or re-run with --bump.`);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -137,16 +149,18 @@ if (bump) {
   const next = bumpSemver(pkg.version, bump);
   step(`Bumping ${pkg.version} → ${next}`);
   pkg.version = next;
+  let changed = [];
   if (!dryRun) {
     writePkg(pkg);
-    const changed = syncSiblings(next);
+    changed = syncSiblings(next);
     ok(`updated package.json${changed.length ? ' + ' + changed.join(', ') : ''}`);
   } else {
-    ok('would update package.json + skill + plugin manifests');
+    ok('would update package.json + skill + plugin manifests + harness copies');
   }
 
   step('Committing the bump');
-  runMutating('git add package.json skills/cupel/SKILL.md .claude-plugin/plugin.json .claude-plugin/marketplace.json');
+  // `-A` so re-mirrored copies stage file removals too, not just edits.
+  runMutating(`git add -A ${['package.json', ...changed].map((p) => `'${p}'`).join(' ')}`);
   runMutating(`git commit -m "Release v${next}"`);
   step('Pushing to origin');
   runMutating('git push');

@@ -16,6 +16,9 @@ import { readPositions } from "./portfolio.js";
 
 const SOURCE_STALE_DAYS = 30;
 const PULSE_STALE_DAYS = 14;
+// A recorded price/figures date older than this gets a "re-verify before acting"
+// nudge — markets move fast enough that a six-week-old snapshot can mislead.
+const FIGURES_STALE_DAYS = 45;
 
 function* walkMarkdown(root: string, prefix = ""): Generator<string> {
   for (const entry of readdirSync(root, { withFileTypes: true })) {
@@ -76,6 +79,7 @@ export function cmdDoctor(): number {
     maxPositionPct,
     reviewStaleDays,
     sourceStaleDays: SOURCE_STALE_DAYS,
+    figuresStaleDays: FIGURES_STALE_DAYS,
     today: new Date(),
   };
 

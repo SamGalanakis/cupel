@@ -19,7 +19,8 @@ export function isOffice(dir: string): boolean {
 interface Marker {
   created?: string;
   version?: string;
-  [event: string]: string | undefined; // last-pulse, last-brief, ...
+  // last-pulse / last-brief (ISO strings), total-capital (number), capital-currency, ...
+  [event: string]: string | number | undefined;
 }
 
 function readMarker(root: string): Marker {
@@ -110,5 +111,40 @@ export function cmdStamp(args: string[]): number {
   marker[`last-${event}`] = new Date().toISOString();
   writeMarker(root, marker);
   console.log(`stamped last-${event} = ${marker[`last-${event}`]}`);
+  return 0;
+}
+
+// Set or show the total investable capital — the anchor that lets `cupel
+// portfolio` translate allocation percentages into money (value and gain). It's
+// a single figure the user maintains; cupel never fetches account balances.
+//   cupel capital              → print the current figure
+//   cupel capital 28000 EUR    → set it (currency optional)
+export function cmdCapital(args: string[]): number {
+  const root = officePath();
+  if (!isOffice(root)) {
+    console.error(`No office at ${root}. Run \`cupel init\` first.`);
+    return 1;
+  }
+  const marker = readMarker(root);
+  if (args[0] === undefined) {
+    const cur = typeof marker["capital-currency"] === "string" ? marker["capital-currency"] + " " : "";
+    const amt = marker["total-capital"];
+    console.log(
+      typeof amt === "number"
+        ? `total-capital = ${cur}${amt.toLocaleString()}`
+        : "no total-capital set — try: cupel capital 28000 EUR",
+    );
+    return 0;
+  }
+  const amount = Number(args[0].replace(/[,_]/g, ""));
+  if (!Number.isFinite(amount) || amount < 0) {
+    console.error("usage: cupel capital <amount> [currency]   (e.g. cupel capital 28000 EUR)");
+    return 2;
+  }
+  marker["total-capital"] = amount;
+  if (args[1] && args[1].trim()) marker["capital-currency"] = args[1].trim().toUpperCase();
+  writeMarker(root, marker);
+  const cur = typeof marker["capital-currency"] === "string" ? marker["capital-currency"] + " " : "";
+  console.log(`total-capital = ${cur}${amount.toLocaleString()}`);
   return 0;
 }

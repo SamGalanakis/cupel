@@ -113,6 +113,55 @@ describe("lintNote", () => {
     const f = lintNote({ path: "positions/NVDA.md", text }, ctx());
     expect(f.some((x) => x.rule === "stale-review")).toBe(true);
   });
+
+  it("flags figures that are older than the freshness window", () => {
+    const text = [
+      "---",
+      "ticker: NVDA",
+      "last-reviewed: 2026-05-20",
+      "figures-as-of: 2026-01-01",
+      "---",
+      "snapshot",
+    ].join("\n");
+    const f = lintNote({ path: "theses/NVDA-thesis.md", text }, ctx({ figuresStaleDays: 45 }));
+    expect(f.some((x) => x.rule === "stale-figures")).toBe(true);
+  });
+
+  it("does not check figure freshness when the window is unset", () => {
+    const text = ["---", "ticker: NVDA", "last-reviewed: 2026-05-20", "figures-as-of: 2026-01-01", "---", "x"].join("\n");
+    const f = lintNote({ path: "theses/NVDA-thesis.md", text }, ctx());
+    expect(f.some((x) => x.rule === "stale-figures")).toBe(false);
+  });
+
+  it("flags a ticker that doesn't match its filename", () => {
+    const text = ["---", "ticker: NVDA", "status: watching", "provenance: hunch", "last-reviewed: 2026-05-20", "---", "x"].join("\n");
+    const f = lintNote({ path: "watchlist/NVIDIA.md", text }, ctx());
+    expect(f.some((x) => x.rule === "ticker-filename-mismatch")).toBe(true);
+  });
+
+  it("accepts a dotted ticker filed with a hyphen filename (SOP.PA -> SOP-PA.md)", () => {
+    const text = ["---", "ticker: SOP.PA", "status: watching", "provenance: hunch", "last-reviewed: 2026-05-20", "---", "x"].join("\n");
+    const f = lintNote({ path: "watchlist/SOP-PA.md", text }, ctx());
+    expect(f.some((x) => x.rule === "ticker-filename-mismatch")).toBe(false);
+  });
+
+  it("matches a thesis filename of <TICKER>-thesis", () => {
+    const ok = ["---", "ticker: SOP.PA", "last-reviewed: 2026-05-20", "---", "x"].join("\n");
+    const f = lintNote({ path: "theses/SOP-PA-thesis.md", text: ok }, ctx());
+    expect(f.some((x) => x.rule === "ticker-filename-mismatch")).toBe(false);
+  });
+});
+
+describe("slugify", () => {
+  it("maps dots to hyphens so dotted tickers link (SOP.PA -> sop-pa)", () => {
+    expect(slugify("SOP.PA")).toBe("sop-pa");
+    expect(slugify("watchlist/SOP-PA.md")).toBe("sop-pa");
+    expect(slugify("[[SOP.PA]]".replace(/\[|\]/g, ""))).toBe("sop-pa");
+  });
+
+  it("still normalizes display names", () => {
+    expect(slugify("Pragmatic Infra Letter")).toBe("pragmatic-infra-letter");
+  });
 });
 
 describe("mandateSettings", () => {

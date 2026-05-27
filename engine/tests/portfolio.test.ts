@@ -49,4 +49,24 @@ describe("summarizePortfolio", () => {
     expect(s.unknown).toEqual(["FOO"]);
     expect(s.satellitePct).toBe(18);
   });
+
+  it("computes per-holding gain and a size-weighted price return from recorded prices", () => {
+    const priced: PositionEntry[] = [
+      { ticker: "VWCE", role: "core", sizePct: 50, costBasis: 100, lastPrice: 110, currency: "EUR" }, // +10%
+      { ticker: "AMD", role: "satellite", sizePct: 10, costBasis: 160, lastPrice: 200 }, // +25%
+      { ticker: "X", role: "satellite", sizePct: 10 }, // unpriced — contributes nothing
+    ];
+    const s = summarizePortfolio(priced, {});
+    expect(s.core[0].gainPct).toBe(10);
+    expect(s.satellite.find((h) => h.ticker === "AMD")?.gainPct).toBe(25);
+    expect(s.pricedPct).toBe(60);
+    expect(s.priceReturnPct).toBe(12.5); // (50*10 + 10*25) / 60
+  });
+
+  it("leaves price return undefined when nothing has a recorded price", () => {
+    const s = summarizePortfolio(entries, {});
+    expect(s.priceReturnPct).toBeUndefined();
+    expect(s.pricedPct).toBe(0);
+    expect(s.satellite[0]).toEqual({ ticker: "AMD", sizePct: 12 }); // no gain key when unpriced
+  });
 });

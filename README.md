@@ -4,11 +4,11 @@
 
 It lives in one folder — your *office* — and accumulates what it learns about you: your circle of competence, watchlist, theses, positions, and a dated decision journal. The premise is Peter Lynch's: your edge is what you already know from your work and daily life. cupel captures that edge, turns it into researched ideas, and keeps your reasoning honest over time.
 
-cupel gives reasoned, mandate-grounded recommendations with the risks attached — it sharpens your reasoning and tells you what it would do and why. What it refuses is fortune-telling (price predictions, market-timing) and bare tip-bot signals; it never places trades. The decisions stay yours.
+cupel gives reasoned, mandate-grounded calls — the likely scenarios, rough upside and timeframe, and the risks named. Investing is a bet; cupel helps you make an *informed* one: bear/base/bull, rough magnitude and horizon, tied to your assumptions, given as ranges, with the falsifier named. What it refuses is false precision dressed as fact and bare tips with no reasoning; it never invents a number — scenarios project from real, dated figures — and it never places trades. The decisions stay yours.
 
 ## Status
 
-Early but working. The companion — onboarding, the `scout`/`watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
+Early but working. The companion — onboarding, the `scout`/`watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`, `board`, `tickers`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
 
 ## Quickstart
 
@@ -24,7 +24,7 @@ Then, inside your harness:
 2. **`/cupel I keep seeing <product> everywhere at work`** — hand it an edge-driven idea. It resumes any prior notes, researches the company, runs the discipline gate (good business at a fair price, inside your edge?), and files a thesis with explicit falsifiers.
 3. **`/cupel brief`** — any time later, a status check: what changed, what's over your mandate, what's due for review.
 
-cupel reads and writes your office and recommends what it would do, with the risks named; you make and place every trade. It won't predict prices or hand you tips with no reasoning.
+cupel reads and writes your office and gives you reasoned calls — the likely scenarios, rough upside and timeframe, with the risks named; you make and place every trade. It won't dress false precision as fact or hand you tips with no reasoning, and it never invents a number.
 
 ## Install
 
@@ -83,9 +83,9 @@ Cowork installs plugins from a zip. Every [release](https://github.com/SamGalana
   journal/      a dated decision log — every buy, sell, and pass, with the reasoning
 ```
 
-`PROFILE.md`, `EDGES.md`, and `MANDATE.md` are the three top-level notes cupel reads every session; `PROFILE.md` is free-form (your brokers, base currency, constraints, and preferences — and a place cupel records durable facts it should always remember). It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal's value compounds as its history grows.
+`PROFILE.md`, `EDGES.md`, and `MANDATE.md` are the three top-level notes cupel reads every session; `PROFILE.md` is free-form (your brokers, base currency, constraints, and preferences — and a place cupel records durable facts it should always remember). It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Watchlist and thesis notes carry optional-but-recommended frontmatter — `tier`, `conviction`, `edge`, `correlation`, `url`, `horizon`, `figures-as-of`, and `entry-trigger` — and `cupel board` ranks the watchlist by `tier` so you see what's live at a glance. The principle is *rank on merit, show correlation as information*: an idea earns its tier on its own thesis, and its correlation to what you already hold is surfaced beside it rather than baked into the score. Theses include a **Scenarios & timeframe** block (bear/base/bull with rough magnitude, horizon, and the falsifier). Dotted tickers file with a hyphen — `SOP.PA` becomes `SOP-PA.md`. Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal's value compounds as its history grows.
 
-`cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches (a position over your `max-position-pct`, or total satellite over your `satellite-target-pct`), stale reviews, and decisions whose `review-on` date has arrived. The LLM does the judgment; the linter guards the filing cabinet — pure arithmetic, dates, and string matching, no heuristics.
+`cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches (a position over your `max-position-pct`, or total satellite over your `satellite-target-pct`), stale reviews, decisions whose `review-on` date has arrived, stale figures (a `figures-as-of` date gone old), and ticker/filename mismatches. The LLM does the judgment; the linter guards the filing cabinet — pure arithmetic, dates, and string matching, no heuristics.
 
 ### Choosing the office folder, and using Obsidian
 
@@ -109,7 +109,10 @@ The deterministic tooling. You can run these yourself; the companion runs them t
 cupel init                 Scaffold the office (~/cupel, or $CUPEL_HOME)
 cupel where                Print the office path
 cupel show <ticker>        Print every note for a ticker — "where were we?"
-cupel portfolio            Sum positions: sizing vs the cap, total vs the satellite target
+cupel board [A|B|C|PASS]   The whole watchlist ranked by tier at a glance
+cupel tickers              List every ticker the office knows (feeds scout dedupe)
+cupel portfolio            What you hold: core/satellite/cash, sizing vs the cap, and gain from recorded prices
+cupel capital [amt [ccy]]  Set/show total capital, so portfolio can show value and gain in money
 cupel doctor               Check the office for inconsistencies
 cupel stamp <event>        Timestamp an event (e.g. cupel stamp pulse)
 cupel skills <subcommand>  Install / update the skill in your AI harness

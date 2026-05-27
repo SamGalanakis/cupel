@@ -14,6 +14,7 @@ export {
   OFFICE_DIRS,
   OFFICE_FILES,
   REQUIRED_FIELDS,
+  RECOMMENDED_FIELDS,
   noteTypeForPath,
 } from "./office.js";
 export type { OfficeDir, OfficeFile, NoteType } from "./office.js";

@@ -47,6 +47,13 @@ company: NVIDIA
 status: watching          # watching | researching | passed | promoted
 provenance: "[[Dave Chen]]"   # the seed: a [[source]], [[EDGES]], or a hunch
 last-reviewed: 2026-05-20
+# optional but recommended (see reference/ranking.md) — cupel board reads these:
+tier: A                   # A | B | C | PASS — the merit ranking
+conviction: med           # high | med | low
+edge: in-edge             # in-edge | anti-edge
+ai-correlation: med       # low | med | high — shown as info, not a demerit
+url: https://…            # go straight to the company / source
+entry-trigger: "below $90, or one quarter of accelerating ARR"   # what makes it actionable (alias: watch-for)
 ---
 #fast-grower
 Why it's on the radar, what would have to be true, the open questions.
@@ -59,9 +66,19 @@ Link the writeup once it exists: [[NVDA-thesis]].
 ticker: NVDA
 company: NVIDIA
 last-reviewed: 2026-05-20
+# optional but recommended:
+tier: A
+conviction: med
+edge: in-edge
+ai-correlation: med
+url: https://…
+horizon: 3-5y             # intended holding horizon
+figures-as-of: 2026-05-20 # when the price/financials were pulled; doctor flags old ones
 ---
 The story in two minutes. The load-bearing claim. Valuation and what's
-priced in. Risks. Falsifiers. Links: [[Dave Chen]], [[EDGES]].
+priced in. A **Scenarios & timeframe** block (bear/base/bull with rough
+magnitude + horizon, each tied to its assumption). Risks. Falsifiers.
+Links: [[Dave Chen]], [[EDGES]].
 ```
 
 ### `positions/<TICKER>.md` — something actually held
@@ -121,3 +138,6 @@ wrong. Links: [[NVDA-thesis]]. (On review, judge the reasoning, not just the pri
 - **`role` drives the mandate math.** `cupel portfolio` reports core and satellite separately; the satellite target and the per-position cap apply to satellites only. Never file a diversified core ETF without `role: core` — that was the trap that made a whole-world fund look like a single-stock breach.
 - **Dates are `YYYY-MM-DD`.** Keep `last-reviewed` / `last-checked` / `last-synced` current; the linter measures staleness from them.
 - `PROFILE.md`, `EDGES.md`, and `MANDATE.md` are singleton top-level notes the companion always reads. `PROFILE.md` is free-form (brokers, currency, constraints, preferences — no fixed shape). `MANDATE.md` frontmatter holds `max-position-pct`, `satellite-target-pct`, and `review-stale-days`, which the linter honors.
+- **Optional-but-recommended fields** (`tier`, `conviction`, `edge`, `correlation`/`ai-correlation`, `url`, `horizon`, `entry-trigger`, `figures-as-of`, `exchange`/`currency`/`tradable`) make the office sortable and actionable — see the [ranking rubric](ranking.md). They're optional (older notes stay green), but `cupel board` ranks the watchlist by `tier`, and `cupel doctor` flags a `figures-as-of`/`price-as-of` date that's gone stale (markets move fast — re-verify before acting).
+- **Dotted tickers** (European listings like `SOP.PA`, `REY.MI`, `AOF.DE`) are filed with the dot turned to a hyphen: `watchlist/SOP-PA.md`, thesis `theses/SOP-PA-thesis.md`. Link them as `[[SOP-PA]]` (and `[[SOP.PA]]` also resolves — slugs treat the dot as a hyphen). `cupel show SOP.PA` resolves the same way. `cupel doctor` warns when a note's `ticker` doesn't match its filename, the usual sign of a misfiled dotted ticker.
+- **P&L is from recorded prices, never live.** Put `cost-basis` and a `last-price` (with `price-as-of`) on a position and `cupel portfolio` shows that holding's **gain %** plus a size-weighted **price return** (local terms, ignoring FX). Set the portfolio's size once with `cupel capital <amount> [ccy]` and `portfolio` also reports value and gain **in money**. cupel never fetches a quote or an account balance — these are figures you or the companion record, and `doctor` flags them stale via `figures-as-of`/`price-as-of`.

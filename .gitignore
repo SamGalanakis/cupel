@@ -16,7 +16,8 @@ coverage/
 
 # Harness skill copies (.claude/skills, .cursor/skills, etc.) are committed so
 # skills.sh and each agent can discover the skill. They mirror skills/cupel;
-# re-sync with `cupel skills install --all` after editing the source.
+# re-sync with `npm run sync:skills` after editing the source (a test enforces it,
+# and `npm run release -- --bump` re-mirrors them automatically).
 
 # the skills CLI's lockfile is local state, not source
 skills-lock.json

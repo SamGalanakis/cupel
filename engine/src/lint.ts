@@ -21,6 +21,9 @@ export interface LintContext {
   maxPositionPct?: number;
   reviewStaleDays: number;
   sourceStaleDays: number;
+  // How old a recorded `figures-as-of`/`price-as-of` date may get before the
+  // numbers are flagged for re-verification. Undefined skips the check.
+  figuresStaleDays?: number;
   // Reference "now" so results are deterministic in tests.
   today: Date;
 }
@@ -47,7 +50,8 @@ function daysSince(dateStr: FrontmatterValue | undefined, today: Date): number |
 // Slugify a note name or wikilink target so display-name links resolve the way
 // humans (and Obsidian, with aliases) expect: "[[Pragmatic Infra Letter]]" and
 // "pragmatic-infra-letter.md" compare equal. Case, spaces, underscores, and
-// punctuation are normalized away.
+// punctuation are normalized away. Dots become hyphens so a dotted ticker links
+// cleanly: "[[SOP.PA]]" resolves to "SOP-PA.md".
 export function slugify(s: string): string {
   return s
     .replace(/\.md$/i, "")
@@ -55,7 +59,7 @@ export function slugify(s: string): string {
     .pop()!
     .toLowerCase()
     .trim()
-    .replace(/[\s_]+/g, "-")
+    .replace(/[\s_.]+/g, "-")
     .replace(/[^a-z0-9-]/g, "")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
@@ -132,6 +136,35 @@ export function lintNote(note: OfficeNote, ctx: LintContext): Finding[] {
     if (due !== null && due >= 0) {
       const on = typeof data["review-on"] === "string" ? data["review-on"].slice(0, 10) : "";
       add("info", "review-due", `flagged for review (review-on ${on})`);
+    }
+  }
+
+  // 5. Figures go stale fast — a price can move 40% in weeks. If a thesis or
+  // watchlist note records when its numbers were pulled (`figures-as-of`, or a
+  // position-style `price-as-of`), flag a refresh before anyone acts on them.
+  if ((type === "thesis" || type === "watchlist") && ctx.figuresStaleDays !== undefined) {
+    const f = daysSince(data["figures-as-of"] ?? data["price-as-of"], ctx.today);
+    if (f !== null && f > ctx.figuresStaleDays) {
+      add("info", "stale-figures", `figures as of ${f} days ago — re-verify price/numbers before acting`);
+    }
+  }
+
+  // 6. Ticker ↔ filename consistency. A watchlist/position note belongs at
+  // <TICKER>.md and a thesis at <TICKER>-thesis.md (a dotted ticker uses hyphens,
+  // e.g. SOP.PA → SOP-PA.md) so [[TICKER]] wikilinks resolve. A mismatch is
+  // usually a typo or a dotted ticker filed under the wrong name.
+  if (type === "watchlist" || type === "position" || type === "thesis") {
+    const ticker = typeof data["ticker"] === "string" ? data["ticker"].trim() : "";
+    if (ticker) {
+      const fileSlug = slugify(note.path);
+      const expected = type === "thesis" ? `${slugify(ticker)}-thesis` : slugify(ticker);
+      if (fileSlug !== expected) {
+        add(
+          "warning",
+          "ticker-filename-mismatch",
+          `ticker ${ticker} expects ${expected}.md but the note is ${fileSlug}.md — [[${ticker}]] links may dangle`,
+        );
+      }
     }
   }
 

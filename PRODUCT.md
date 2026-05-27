@@ -10,11 +10,11 @@ People who already work inside an AI harness (Claude Code, Cursor, Codex, Gemini
 
 ## Product Purpose
 
-cupel turns the LLM in an AI harness into a personal investing analyst: a stateful research companion that captures the user's edges and stress-tests their ideas against the investing canon. It gives reasoned, mandate-grounded recommendations with the risks attached, but refuses price predictions and bare tip-bot signals, and never places trades. The docs site (landing, the canon, the office) explains the concept, the vault structure, and how to install and use it. Success is a visitor who grasps the premise quickly and installs with confidence, trusting that the tool sharpens their own reasoning instead of replacing it.
+cupel turns the LLM in an AI harness into a personal investing analyst: a stateful research companion that captures the user's edges and stress-tests their ideas against the investing canon. It gives reasoned, mandate-grounded calls — the likely scenarios, rough upside and timeframe, and the risks named — refusing only false precision dressed as fact and bare tips with no reasoning; it never invents a number, projecting scenarios from real, dated figures, and never places trades. The docs site (landing, the canon, the office) explains the concept, the vault structure, and how to install and use it. Success is a visitor who grasps the premise quickly and installs with confidence, trusting that the tool sharpens their own reasoning instead of replacing it.
 
 ## Brand Personality
 
-Disciplined and precise. The voice is calm, exact, and literate without being ornamental. It carries assay-report rigor: every element earns its place, and restraint reads as confidence. It is credible to a technical reader without performing "developer edginess." It never hypes and never implies prediction.
+Disciplined and precise. The voice is calm, exact, and literate without being ornamental. It carries assay-report rigor: every element earns its place, and restraint reads as confidence. It is credible to a technical reader without performing "developer edginess." It never hypes; it frames upside as a caveated, reasoned bet, never as certainty.
 
 ## Anti-references
 
@@ -28,7 +28,7 @@ Disciplined and precise. The voice is calm, exact, and literate without being or
 2. **Earn every element.** Default to removing. Decoration must justify itself by aiding legibility or meaning, or it is cut.
 3. **Restraint is confidence.** Calm and exact beats loud. Trust the reader; one muted accent does more than a palette.
 4. **Content carries the product.** The writing is the substance. Typography serves hierarchy and legibility and never upstages the prose.
-5. **Honest framing.** Language and visuals stay on "detection and discipline." Never imply forecasting, trading, or guaranteed outcomes.
+5. **Honest framing.** Scenarios and upside are framed as caveated, range-based bets tied to assumptions and risks — never as certainty, guaranteed outcomes, or one-click trading signals. cupel reasons; it never executes trades.
 
 ## Accessibility & Inclusion
 

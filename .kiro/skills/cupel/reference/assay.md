@@ -28,18 +28,19 @@ Use the harness's web search/fetch to pull the current figures, cite the "as of"
 - **Inventories** — building (bad, esp. cyclicals) or lean?
 - **Book value & hidden assets** — real estate, brands, subsidiaries, cash; for asset plays, what are they worth vs. the price?
 - **Dividend** — for slow growers: history, payout ratio, coverage.
+- **Where to buy, and the link** — the exchange and currency, whether it's actually tradable on the user's broker (flag if not), and a `url` to the company/IR page so the user can go straight there. Capture these once here, not on every review.
 
-Weight them by category (see the table in [categories](categories.md)). Record the numbers in the thesis so the next review can compare.
+Weight them by category (see the table in [categories](categories.md)). Record the numbers in the thesis with a `figures-as-of` date so the next review can compare — and so `cupel doctor` can flag them when they go stale (a price can move 40% in weeks).
 
 ## 4. The two-minute drill (the gate)
 
-Draft the **category-tailored** two-minute story for the user to react to: why this is interesting, what has to happen for it to work, and the pitfalls in its path — plain enough that a non-expert gets it. If you can't tell it simply, that's the finding. Then check **price / what's priced in** (Graham margin of safety; Marks — is the good news already in the price?) and **risk/sizing** against the mandate.
+Draft the **category-tailored** two-minute story for the user to react to: why this is interesting, what has to happen for it to work, and the pitfalls in its path — plain enough that a non-expert gets it. If you can't tell it simply, that's the finding. Then check **price / what's priced in** (Graham margin of safety; Marks — is the good news already in the price?) and **risk/sizing** against the mandate. Sketch the **upside and timeframe** here too — a plain bear / base / bull with rough magnitude and horizon ("~2x over 3–5y if the crux holds; ~−50% if it breaks"), each tied to its assumption and given as a range. That's a reasoned scenario, not fortune-telling — it's allowed and it's the point (see the stance and [ranking](ranking.md)); a point price target stated as fact is not.
 
 ## 5. Verdict — and file it
 
-Synthesize into "what your thesis has going for it / what it's missing / the one load-bearing assumption." Then give your **reasoned verdict** — if the user wants a recommendation (start a position? pass? size it how, against the mandate?), make the call and own it, with the key risks and the falsifier attached (see the stance: caveat once, don't hedge every line). What you don't do is predict the price or place the trade. Then handle the notes:
+Synthesize into "what your thesis has going for it / what it's missing / the one load-bearing assumption." Then give your **reasoned verdict** — if the user wants a recommendation (start a position? pass? size it how, against the mandate?), make the call and own it — with a caveated sense of the upside and timeframe, the key risks, and the falsifier attached (see the stance: caveat once, don't hedge every line). What you don't do is state a point price target as fact, or place the trade. Then handle the notes:
 
-- If it survives, write/update `theses/<TICKER>-thesis.md` ([office schema](office.md)): category + which "act," the two-minute story, the famous numbers with dates, valuation & what's priced in, risks, explicit **falsifiers**, and the category's **sell signal**. Link `[[source]]` and `[[EDGES]]`; update the watchlist `status`.
+- If it survives, write/update `theses/<TICKER>-thesis.md` ([office schema](office.md)): category + which "act," the two-minute story, the famous numbers with dates, valuation & what's priced in, a **`## Scenarios & timeframe`** block (bear/base/bull with magnitude + horizon), risks, explicit **falsifiers**, and the category's **sell signal**. Set the merit labels in frontmatter — `tier`, `conviction`, `edge`, `correlation`/`ai-correlation`, `horizon`, `figures-as-of`, and a `url` ([ranking](ranking.md)). Link `[[source]]` and `[[EDGES]]`; update the watchlist `status` (→ `researching`).
 - Whatever the user decides (buy, pass, keep watching), auto-write a dated `journal/` entry: your recommendation and their decision, the reasoning, the falsifiers, `review-on` a few months out.
 
 Run `cupel doctor`. Offer [`crux`](crux.md) (test the one claim it rests on) or [`premortem`](premortem.md) (how it fails) as follow-ups.

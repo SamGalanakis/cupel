@@ -109,26 +109,38 @@ last-checked: 2026-05-20
 <span class="p">---</span></code></pre>
 
       <h3 id="watchlist"><code>watchlist/&lt;TICKER&gt;.md</code></h3>
-      <p>An idea you are tracking. Every entry traces to a seed.</p>
+      <p>An idea you are tracking. Every entry traces to a seed. The optional fields rank it on merit; correlation is shown as information, not a demerit.</p>
       <pre><code><span class="p">---</span>
 ticker: NVDA
 company: NVIDIA
 status: watching          <span class="c"># watching | researching | passed | promoted</span>
 provenance: "[[Dave Chen]]"   <span class="c"># a [[source]], [[EDGES]], or a hunch</span>
+tier: B                   <span class="c"># optional: A | B | C | PASS — merit ranking</span>
+conviction: medium        <span class="c"># optional: how strongly you hold the view</span>
+edge: in-edge             <span class="c"># optional: in-edge | anti-edge</span>
+correlation: high         <span class="c"># optional: overlap with what you hold — info, not a demerit</span>
+ai-correlation: high      <span class="c"># optional: exposure to the AI build-out — info</span>
+url: https://nvidia.com   <span class="c"># optional: go straight to the company</span>
+horizon: 3-5y             <span class="c"># optional: the holding horizon you have in mind</span>
+entry-trigger: pullback under 100  <span class="c"># optional: what would make you act</span>
 last-reviewed: 2026-05-20
 <span class="p">---</span>
 #fast-grower
 Why it is on the radar, what would have to be true, the open questions.</code></pre>
+      <span class="sidenote">Rank on merit; correlation is information, not a demerit. <code>cupel board</code> reads <code>tier</code> to rank the whole watchlist at a glance, and a dotted ticker files with the dot as a hyphen: <code>SOP.PA</code> becomes <code>SOP-PA.md</code>.</span>
 
       <h3 id="theses"><code>theses/&lt;TICKER&gt;-thesis.md</code></h3>
-      <p>The full write-up: the story in two minutes, the load-bearing claim, valuation and what is priced in, risks, and falsifiers.</p>
+      <p>The full write-up: the story in two minutes, the load-bearing claim, valuation and what is priced in, a <em>Scenarios &amp; timeframe</em> block (bear / base / bull with rough magnitude and horizon), risks, and falsifiers.</p>
       <pre><code><span class="p">---</span>
 ticker: NVDA
 company: NVIDIA
+figures-as-of: 2026-05-20   <span class="c"># date of the figures the scenarios project from; doctor flags stale ones</span>
 last-reviewed: 2026-05-20
 <span class="p">---</span>
 The story in two minutes. The load-bearing claim. Valuation and what is
-priced in. Risks. Falsifiers. Links: [[Dave Chen]], [[EDGES]].</code></pre>
+priced in. Scenarios &amp; timeframe: bear / base / bull, rough upside and
+horizon, projected from real, dated figures. Risks. Falsifiers.
+Links: [[Dave Chen]], [[EDGES]].</code></pre>
 
       <h3 id="positions"><code>positions/&lt;TICKER&gt;.md</code></h3>
       <p>Everything you hold — diversified core ETFs and edge picks — each tagged with a <code>role</code>. <code>size-pct</code> is a percent of total capital including cash, so cash is the remainder. <code>doctor</code> flags a <em>satellite</em> over your cap; a core holding is exempt.</p>
@@ -148,6 +160,7 @@ sell-triggers:
   - position exceeds mandate cap
 <span class="p">---</span>
 Held since 2025. Thesis: [[NVDA-thesis]].</code></pre>
+      <span class="sidenote"><code>cupel portfolio</code> reads <code>last-price</code> and <code>price-as-of</code> for the per-holding gain % &mdash; recorded prices, never live quotes. <code>doctor</code> flags a stale <code>price-as-of</code>.</span>
 
       <h3 id="journal"><code>journal/&lt;YYYY-MM-DD&gt;-&lt;slug&gt;.md</code></h3>
       <p>A decision. The <code>review-on</code> date is when <code>pulse</code> resurfaces it.</p>
@@ -199,10 +212,11 @@ last-checked: 2026-05-20
         <li>Mandate breaches: a <em>satellite</em> over your <code>max-position-pct</code>, or satellite total over your <code>satellite-target-pct</code> (a core holding is exempt).</li>
         <li>A large idle-cash remainder, or sizes summing past 100%.</li>
         <li>Stale reviews, measured against <code>review-stale-days</code>, and decisions whose <code>review-on</code> date has arrived.</li>
+        <li>Stale thesis figures, where <code>figures-as-of</code> has aged out, so scenarios never project from numbers you can no longer trust.</li>
       </ul>
       <pre><code><span class="p">$</span> cupel doctor
 <span class="c"># reports time since last pulse, plus any inconsistencies</span></code></pre>
-      <p><code>cupel portfolio</code> reads your positions deterministically: core vs. satellite, each holding&rsquo;s size, the satellite total against your target, and the cash remainder. The arithmetic is the CLI&rsquo;s; what to do about a concentrated, over-cash, or oversized book is the model&rsquo;s call.</p>
+      <p><code>cupel portfolio</code> reads your positions deterministically: core vs. satellite, each holding&rsquo;s size, the satellite total against your target, and the cash remainder. It also shows, per holding, the gain % from recorded <code>cost-basis</code> to <code>last-price</code> and a size-weighted price return &mdash; recorded prices, never live quotes &mdash; and, once <code>cupel capital</code> sets your total investable capital, value and gain in money. The arithmetic is the CLI&rsquo;s; what to do about a concentrated, over-cash, or oversized book is the model&rsquo;s call.</p>
       <pre><code><span class="p">$</span> cupel portfolio
 <span class="c"># core VWCE 41% · satellite AMD 12% (over 10% cap) · cash 47%</span></code></pre>
       <p>Because the linter is deterministic and the office is plain files, the slow-burning value, the dated decision journal, the provenance graph, the staleness checks, stays readable and yours, with or without cupel installed.</p>
@@ -228,7 +242,7 @@ last-checked: 2026-05-20
         <span>&copy; 2026 Sam Galanakis</span>
         <span class="mono">cupel.money &middot; v0.1 &middot; MIT</span>
       </div>
-      <p class="site-foot-note">cupel is a personal reasoning tool, not regulated financial advice. It recommends with the risks attached, refuses price predictions, and never places trades.</p>
+      <p class="site-foot-note">cupel is a personal reasoning tool, not regulated financial advice. It recommends with the risks attached, refuses false precision dressed as fact and bare tips, and never places trades.</p>
     </div>
   </footer>
 
