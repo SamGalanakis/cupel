@@ -4,7 +4,7 @@ The refresh primitive: bring the office up to date. Side-effecting and terse —
 
 ## Steps
 
-1. **Sweep sources due for a check.** `cupel doctor` already lists which sources are stale (`stale-source`). For each, use web search/fetch to see what that source has been saying lately. Update its `last-checked` to today. Cite "as of" dates; never fabricate. If a fetch fails, say so and leave the date unchanged — don't pretend.
+1. **Sweep sources due for a check.** `cupel doctor` already lists which sources are stale (`stale-source`). For each, use web search/fetch to see what that source has been saying lately. Update its `last-checked` to today. Cite "as of" dates; never fabricate. If a fetch fails, say so and leave the date unchanged — don't pretend. **When many sources are due, fan out** (see *Working at scale* in [SKILL](../SKILL.md)): dispatch parallel subagents, each sweeping a batch and returning a compact "what's new + any seed" summary, then synthesize — don't grind through twenty feeds serially.
 
    **Turning a sweep into a seed (use judgment here).** Infra and tech sources mostly discuss *themes*, private companies, and open-source projects — not investable tickers. So:
    - If a theme maps to an **investable company inside the user's edge**, that's a seed → [`watch`](watch.md).

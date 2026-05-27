@@ -123,7 +123,7 @@ Talk to `/cupel` and it figures out what you need. Or go direct:
 |---|---|
 | `onboard` | Interview you; write your edges, mandate, and trusted sources |
 | `watch` | Turn a seed (a source's idea or your hunch) into a provenance-tracked watchlist entry |
-| `scout` | Range outward from your whole office to surface new territory beyond your current seeds — disciplined divergence, then prune to a handful of leads |
+| `scout` | Branch outward from every seed in your office (fanned out over subagents), research the adjacencies for real, and return many ranked opportunities |
 | `assay` | Test one idea: a good business at a fair price, inside your edge? |
 | `crux` | Find the single load-bearing claim a thesis rests on, and test it |
 | `premortem` | Assume it failed in three years; surface the risks you're underweighting |

@@ -11,7 +11,7 @@
     {
       "name": "cupel",
       "description": "Personal investing research companion. /cupel onboard, watch, scout, assay, crux, premortem, pulse, brief — learns your edges (Lynch) and keeps you honest. Discipline only; never predicts prices or gives buy/sell calls.",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "author": {
         "name": "Samuel Galanakis"
       },

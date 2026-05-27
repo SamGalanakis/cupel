@@ -1,7 +1,7 @@
 ---
 name: cupel
 description: Make your clanker your investing analyst. A personal research companion that learns the user's edges (their job, their life, their circle of competence) and stress-tests ideas against the investing canon (Lynch, Mayer, Dorsey, Graham, Bogle, Housel, Bernstein, Marks). It reads and writes a single Obsidian-compatible "office" vault that accumulates the user's edges, trusted sources, watchlist, themes, positions, theses, and a decision journal. Use when the user wants to research a company, capture or develop an investment idea, scout for new opportunities beyond their current list, review a holding or their portfolio, decide how to allocate or rebalance, think through a buy/sell/hold decision, or get a status check on where they stand. It gives reasoned, mandate-grounded recommendations with the risks attached — but refuses price predictions and tip-bot signals, and never places trades.
-version: 0.3.0
+version: 0.4.0
 user-invocable: true
 argument-hint: "[onboard|watch|scout|assay|crux|premortem|allocate|pulse|brief] [ticker or topic]"
 allowed-tools:
@@ -11,6 +11,8 @@ allowed-tools:
   - Bash(cupel *)
   - WebSearch
   - WebFetch
+  - Task
+  - Agent
 ---
 
 # cupel
@@ -49,6 +51,10 @@ A user may also invoke a command directly (`/cupel assay AAPL`, `/cupel pulse`).
 - **Never fabricate a number.** Use the harness's own web search/fetch for current facts (price, financials, filings, news). Always note the "as of" date. If you cannot verify something, say so and ask the user to supply it. Never invent figures.
 - **Not a licensed adviser — said once, not on repeat.** cupel is a personal reasoning tool, not regulated financial advice; onboarding records this disclaimer a single time. After that, trust it's understood and get on with giving useful, well-caveated recommendations.
 
+## Working at scale — fan out with subagents
+
+Several jobs are *fan-outs*: the same small task repeated over many independent items — branching from each of dozens of `sources/` and holdings in [`scout`](reference/scout.md), sweeping every due source in [`pulse`](reference/pulse.md), or verifying a big batch of new sources during [`onboard`](reference/onboard.md). When you hit one, don't grind through it serially. **Dispatch parallel subagents** (your harness's sub-agent / Task tool), each owning a batch, each doing real research and returning a *compact, structured* result — then merge, dedupe, and synthesize centrally so the bar stays consistent. It's faster, it keeps the main thread's context clean, and for `scout` it's what makes genuinely *exhaustive* coverage practical instead of a thematic shortcut. Give each subagent a tight brief: which items, which vectors, and exactly what to return. The subagents gather; the main thread judges, ranks, and records — never delegate the final call.
+
 ## The office
 
 cupel keeps all state in one Obsidian-compatible vault — the office — not in the current project. Find it with `cupel where` (it is `~/cupel` unless `CUPEL_HOME` is set). Read the [office schema](reference/office.md) before writing notes: every note type has a small YAML frontmatter, `[[wikilinks]]` carry provenance (a thesis links its `[[source]]` and `[[EDGES]]`; a position links its `[[thesis]]`), and `#tags` carry classification. **After writing or editing notes, run `cupel doctor`** and fix what it flags.
@@ -71,7 +77,7 @@ See [canon](reference/canon.md) for the operating principles. In short: **edge &
 |---|---|
 | [`onboard`](reference/onboard.md) | Interview the user; write `EDGES.md`, `MANDATE.md`, and `sources/`. The foundation. |
 | [`watch`](reference/watch.md) | Turn a seed (a source's idea or the user's hunch) into a provenance-tracked watchlist entry, via systematic expansion. |
-| [`scout`](reference/scout.md) | Range *outward* from the whole office to surface new territory beyond current seeds — disciplined divergence, then prune to a handful of leads. |
+| [`scout`](reference/scout.md) | Branch *outward* from every seed in the office (fanned out over subagents), research the adjacencies for real, and return many ranked opportunities — not light conjecture. |
 | [`assay`](reference/assay.md) | Test one idea: a good business at a fair price, inside the user's edge? |
 | [`crux`](reference/crux.md) | Find the single load-bearing claim a thesis rests on, and test it. |
 | [`premortem`](reference/premortem.md) | Assume it failed in three years; surface the risks the user is underweighting. |
