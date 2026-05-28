@@ -2,19 +2,19 @@
 
 **cupel** turns the LLM in your AI harness into a personal investing analyst: a research companion that learns *your* edges and stress-tests your ideas against the investing canon.
 
-It lives in one folder — your *office* — and accumulates what it learns about you: your circle of competence, watchlist, theses, positions, and a dated decision journal. The premise is Peter Lynch's: your edge is what you already know from your work and daily life. cupel captures that edge, turns it into researched ideas, and keeps your reasoning honest over time.
+It lives in one folder — your *office* — and accumulates what it learns about you: your circle of competence, watchlist, theses, positions, and a dated decision journal. The premise is Peter Lynch's: your edge is what you already know from your work and daily life. cupel turns that edge into researched ideas and keeps your reasoning honest over time.
 
-cupel gives reasoned, mandate-grounded calls — the likely scenarios, rough upside and timeframe, and the risks named. Investing is a bet; cupel helps you make an *informed* one: bear/base/bull, rough magnitude and horizon, tied to your assumptions, given as ranges, with the falsifier named. What it refuses is false precision dressed as fact and bare tips with no reasoning; it never invents a number — scenarios project from real, dated figures — and it never places trades. The decisions stay yours.
+cupel gives reasoned, mandate-grounded calls: bear/base/bull scenarios with rough magnitude and horizon, tied to your assumptions and given as ranges, with the risks and the falsifier named. Investing is a bet; cupel helps you make an *informed* one. What it refuses is false precision dressed as fact and bare tips with no reasoning: it never invents a number — scenarios project from real, dated figures — and it never places trades. The decisions stay yours.
 
 ## Status
 
-Early but working. The companion — onboarding, the `scout`/`watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`, `board`, `tickers`) are built and dogfooded. Market data comes from a recorded market-data MCP, with `cupel data doctor` to check setup. Read-only DEGIRO CSV import is built for broker sync; live broker APIs are still planned, never order execution.
+Early but working. The companion — onboarding, the `scout`/`watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — and the deterministic office tooling are built and dogfooded. Market data comes from a recorded market-data MCP; run `cupel data doctor` to check setup. Read-only DEGIRO CSV import works today; live broker APIs are planned, never order execution.
 
-For DEGIRO specifically, cupel can import exported `Portfolio.csv` and
-`Transactions.csv` files today. A future live connector can build on the
-unofficial [`degiro-api`](https://github.com/icastillejogomez/degiro-api)
-package, but any broker connector must be read-only by default: installing a
-library is not permission to place, execute, modify, or cancel orders.
+For DEGIRO, cupel imports exported `Portfolio.csv` and `Transactions.csv`
+today. A future live connector could build on the unofficial
+[`degiro-api`](https://github.com/icastillejogomez/degiro-api) package, but any
+broker connector stays read-only by default: a library is not permission to
+place or cancel orders.
 
 ## Quickstart
 
@@ -24,36 +24,15 @@ cupel init                  # 2 · create your office at ~/cupel
 cupel skills install        # 3 · add the skill to your AI harness
 ```
 
+`cupel init` puts the office at `~/cupel`; set `CUPEL_HOME` to keep it elsewhere. `cupel skills install` auto-detects your harness (Claude Code, Cursor, Gemini CLI, Codex/Agents, OpenCode, Kiro, Pi, Qoder, Trae, GitHub Copilot); add `--all` for every provider, `cupel skills update` to re-sync after an `npm update`, and `cupel skills check` to see the installed version.
+
 Then, inside your harness:
 
-1. **`/cupel`** — on the first run it interviews you and writes your `PROFILE`, `EDGES`, `MANDATE`, and a few trusted `sources/`. A few minutes; stop and resume any time.
-2. **`/cupel I keep seeing <product> everywhere at work`** — hand it an edge-driven idea. It resumes any prior notes, researches the company, runs the discipline gate (good business at a fair price, inside your edge?), and files a thesis with explicit falsifiers.
-3. **`/cupel brief`** — any time later, a status check: what changed, what's over your mandate, what's due for review.
+1. **`/cupel`**: on the first run it interviews you and writes your `PROFILE`, `EDGES`, `MANDATE`, and a few trusted `sources/`. A few minutes; stop and resume any time.
+2. **`/cupel I keep seeing <product> everywhere at work`**: hand it an edge-driven idea. It resumes any prior notes, researches the company, runs the discipline gate (good business at a fair price, inside your edge?), and files a thesis with explicit falsifiers.
+3. **`/cupel brief`**: any time later, a status check on what changed, what's over your mandate, and what's due for review.
 
-cupel reads and writes your office and gives you reasoned calls — the likely scenarios, rough upside and timeframe, with the risks named; you make and place every trade. It won't dress false precision as fact or hand you tips with no reasoning, and it never invents a number.
-
-## Install
-
-```
-npm install -g @samgalanakis/cupel
-```
-
-Set up your office (defaults to `~/cupel`, override with `CUPEL_HOME`):
-
-```
-cupel init
-```
-
-Add the skill to your AI harness (Claude Code, Cursor, Gemini CLI, Codex/Agents, OpenCode, Kiro, Pi, Qoder, Trae, GitHub Copilot):
-
-```
-cupel skills install            # auto-detects which harness dirs exist
-cupel skills install --all      # install into every supported provider
-cupel skills update             # re-sync after `npm update -g @samgalanakis/cupel`
-cupel skills check              # show installed version + content-hash status
-```
-
-Then talk to it from any harness: `/cupel`.
+cupel reads and writes your office and gives you reasoned calls; you make and place every trade.
 
 ### Without the npm package
 
@@ -89,9 +68,13 @@ Cowork installs plugins from a zip. Every [release](https://github.com/SamGalana
   journal/      a dated decision log — every buy, sell, and pass, with the reasoning
 ```
 
-`PROFILE.md`, `EDGES.md`, and `MANDATE.md` are the three top-level notes cupel reads every session; `PROFILE.md` is free-form (your brokers, base currency, constraints, and preferences — and a place cupel records durable facts it should always remember). It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance (a thesis links its `[[source]]`; a position links its `[[thesis]]`). Watchlist and thesis notes carry optional-but-recommended frontmatter — `tier`, `conviction`, `edge`, `correlation`, `url`, `horizon`, `figures-as-of`, and `entry-trigger` — and `cupel board` ranks the watchlist by `tier` so you see what's live at a glance. The principle is *rank on merit, show correlation as information*: an idea earns its tier on its own thesis, and its correlation to what you already hold is surfaced beside it rather than baked into the score. Theses include a **Scenarios & timeframe** block (bear/base/bull with rough magnitude, horizon, and the falsifier). Dotted tickers file with a hyphen — `SOP.PA` becomes `SOP-PA.md`. Open it in Obsidian for the graph view, or just read the markdown. Keep it under git — the decision journal's value compounds as its history grows.
+`PROFILE.md`, `EDGES.md`, and `MANDATE.md` are the three top-level notes cupel reads every session; `PROFILE.md` is free-form, the place cupel records durable facts about you. It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance, so a thesis links its `[[source]]` and a position links its `[[thesis]]`.
 
-`cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches (a position over your `max-position-pct`, or total satellite over your `satellite-target-pct`), stale reviews, decisions whose `review-on` date has arrived, stale figures (a `figures-as-of` date gone old), and ticker/filename mismatches. The LLM does the judgment; the linter guards the filing cabinet — pure arithmetic, dates, and string matching, no heuristics.
+Watchlist and thesis notes carry optional frontmatter — `tier`, `conviction`, `edge`, `correlation`, `url`, `horizon`, `figures-as-of`, and `entry-trigger` — and `cupel board` ranks the watchlist by `tier`. The principle is *rank on merit, show correlation as information*: an idea earns its tier on its own thesis, and its correlation to what you already hold sits beside it rather than baked into the score.
+
+Theses include a **Scenarios & timeframe** block (bear/base/bull with rough magnitude, horizon, and the falsifier). Dotted tickers file with a hyphen: `SOP.PA` becomes `SOP-PA.md`. Open it in Obsidian for the graph view or just read the markdown, and keep it under git — the journal's value compounds as its history grows.
+
+`cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches, stale reviews and figures, decisions due for review, and ticker/filename mismatches. The LLM does the judgment; the linter guards the filing cabinet: pure arithmetic, dates, and string matching, no heuristics.
 
 ### Choosing the office folder, and using Obsidian
 
@@ -156,7 +139,7 @@ cupel's judgment is anchored in accessible investing classics, aimed at smart pe
 | Don't overpay | Benjamin Graham |
 | What's already priced in | Howard Marks |
 
-Ideas are classified into Lynch's six categories (slow grower, stalwart, fast grower, cyclical, turnaround, asset play) — the category drives which numbers matter and what signals a sell.
+Ideas are classified into Lynch's six categories (slow grower, stalwart, fast grower, cyclical, turnaround, asset play). The category drives which numbers matter and what signals a sell.
 
 ## Develop
 
