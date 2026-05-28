@@ -27,6 +27,12 @@ It reports whether `PROFILE.md` records OpenBB, whether `openbb-mcp` is on
 `PATH`, and whether common harness config files mention the MCP. If it says the
 MCP is missing from the harness config, add it and restart the harness.
 
+## Fresh enough? — the intraday-staleness trap
+
+`figures-as-of` and `cupel doctor` track staleness in **days** (`review-stale-days`). That granularity is right for fundamentals — a balance sheet doesn't move intraday — but it's a trap for **prices**. A `last-price` you (or a broker export) recorded *this morning* still carries today's date, so doctor calls the office "consistent" even after the name has moved 10–15% by the afternoon. "Same-day" is not "live."
+
+So **before you state a gain, a return, a valuation, or any scenario math, re-pull the quote for the names in play this session** — don't reuse a recorded mark, a broker fill, or a previous close as the current price. The cost is one `equity_price_quote` call (it takes a comma-separated batch, so every held name comes back at once); the failure it prevents is reporting a P&L that's materially wrong and being caught out on it. Refresh, write the new `last-price`/`price-as-of`, *then* report.
+
 ## Alternatives — the user picks; you record it
 
 The user may prefer their own feed. Whatever they choose, write it into `PROFILE.md`. Options: **Massive** (massive.com, Polygon-shaped — fast US data, but its free key is **US-only / no European exchanges**, so not a sole source for a EUR investor), or any other market-data MCP (Polygon, Twelve Data, EODHD, a broker feed). The test: it must cover the user's actual holdings — for a EUR/DEGIRO investor that means European exchanges, which rules out US-only feeds as the *only* source.

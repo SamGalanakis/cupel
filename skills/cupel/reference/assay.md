@@ -18,7 +18,7 @@ Decide which of the [six categories](categories.md) this is — slow grower, sta
 
 ## 3. The famous numbers (fetch these, don't make the user hunt)
 
-Pull the current figures from the market-data MCP recorded in `PROFILE.md` (e.g. `mcp__openbb__equity_price_quote` / `equity_fundamental_*` — see [data](data.md)); use web search only for qualitative facts (filings, news) or when no data MCP is set. Cite the "as of" date and **never invent a number** — if you can't get one, say so. Gather:
+Pull the current figures from the market-data MCP recorded in `PROFILE.md` (e.g. `mcp__openbb__equity_price_quote` / `equity_fundamental_*` — see [data](data.md)); use web search only for qualitative facts (filings, news) or when no data MCP is set. Cite the "as of" date and **never invent a number** — if you can't get one, say so. Fetch the **price live this session** rather than reusing a recorded `last-price`/`figures-as-of` mark — a same-day price still ages intraday, and the P/E, PEG, and scenarios you're about to compute all hang off it (see [data](data.md)). Gather:
 
 - **Earnings & the bottom line** — recent and trend; pretax profit margin.
 - **P/E, and PEG** — the P/E relative to the growth rate. A P/E well below the growth rate is the classic Lynch bargain; well above is the warning.

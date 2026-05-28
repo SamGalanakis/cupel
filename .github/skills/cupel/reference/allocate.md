@@ -4,7 +4,7 @@ Work at the **portfolio** level, not the single-name level: deploy new cash, reb
 
 ## 0. Resume — get the real numbers
 
-Run `cupel portfolio` for the deterministic split: core %, satellite %, **cash %** (the remainder), the largest holding, and any breach. Read `PROFILE.md` (holdings, broker, currency, constraints), `MANDATE.md` (core/satellite target, position cap, the diversification rule), and `EDGES.md`. Don't sum by hand — the CLI owns the arithmetic; you own the judgment.
+Run `cupel portfolio` for the deterministic split: core %, satellite %, **cash %** (the remainder), the largest holding, and any breach. Before you lean on its gain/return figures, refresh the held `last-price`s from the data MCP — those numbers are computed from recorded marks that age within the day, and `cupel doctor` won't flag a same-day price (see [data](data.md)). Read `PROFILE.md` (holdings, broker, currency, constraints), `MANDATE.md` (core/satellite target, position cap, the diversification rule), and `EDGES.md`. Don't sum by hand — the CLI owns the arithmetic; you own the judgment.
 
 ## 1. See the true exposure (look through the funds)
 
