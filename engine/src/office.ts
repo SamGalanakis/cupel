@@ -191,6 +191,7 @@ Worth including:
 - **Base currency** you think in, and your tax domicile if it matters.
 - **Constraints** — e.g. cash only, no margin, no options, can't buy US OTC names.
 - **Your harness** and any tools or data sources cupel should know about.
+- **Market data** — how cupel should fetch prices/fundamentals: a market-data MCP (OpenBB recommended — it covers global + European exchanges). cupel suggests this on first run if it's unset, and never scrapes quotes.
 - **How you like to work** — figures in EUR, be blunt, review monthly, and so on.
 - **Durable notes** cupel learns over time that should always be remembered.
 `;
