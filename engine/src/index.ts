@@ -27,3 +27,18 @@ export type { Finding, LintContext, OfficeNote, Severity } from "./lint.js";
 
 export { summarizePortfolio } from "./portfolio.js";
 export type { PositionEntry, PortfolioSummary } from "./portfolio.js";
+
+export {
+  aggregateDegiroTransactions,
+  parseDegiroPortfolioCsv,
+  parseDegiroTransactionsCsv,
+  round2,
+  round4,
+  summarizeDegiroAccount,
+} from "./degiro.js";
+export type {
+  DegiroAccountSummary,
+  DegiroPortfolioRow,
+  DegiroTransactionAggregate,
+  DegiroTransactionRow,
+} from "./degiro.js";

@@ -8,7 +8,13 @@ cupel gives reasoned, mandate-grounded calls — the likely scenarios, rough ups
 
 ## Status
 
-Early but working. The companion — onboarding, the `scout`/`watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`, `board`, `tickers`) are built and dogfooded. Current facts come from your harness's own web search; a read-only broker integration (e.g. DeGiro / IBKR via MCP) is planned, never order execution.
+Early but working. The companion — onboarding, the `scout`/`watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — plus the deterministic office tooling (`doctor`, `portfolio`, `show`, `board`, `tickers`) are built and dogfooded. Market data comes from a recorded market-data MCP, with `cupel data doctor` to check setup. Read-only DEGIRO CSV import is built for broker sync; live broker APIs are still planned, never order execution.
+
+For DEGIRO specifically, cupel can import exported `Portfolio.csv` and
+`Transactions.csv` files today. A future live connector can build on the
+unofficial [`degiro-api`](https://github.com/icastillejogomez/degiro-api)
+package, but any broker connector must be read-only by default: installing a
+library is not permission to place, execute, modify, or cancel orders.
 
 ## Quickstart
 
@@ -113,6 +119,9 @@ cupel board [A|B|C|PASS]   The whole watchlist ranked by tier at a glance
 cupel tickers              List every ticker the office knows (feeds scout dedupe)
 cupel portfolio            What you hold: core/satellite/cash, sizing vs the cap, and gain from recorded prices
 cupel capital [amt [ccy]]  Set/show total capital, so portfolio can show value and gain in money
+cupel import degiro --portfolio Portfolio.csv --transactions Transactions.csv
+                           Sync read-only DEGIRO exports into positions/capital/journal
+cupel data doctor          Check market-data/MCP and broker setup hints
 cupel doctor               Check the office for inconsistencies
 cupel stamp <event>        Timestamp an event (e.g. cupel stamp pulse)
 cupel skills <subcommand>  Install / update the skill in your AI harness

@@ -91,11 +91,16 @@ ticker: NVDA
 company: NVIDIA
 role: satellite         # core | satellite — core = diversified base; satellite = edge pick
 size-pct: 6             # % of TOTAL investable capital (incl. cash). doctor flags a SATELLITE over MANDATE max-position-pct; core is exempt
+quantity: 10
+isin: US67059N1081
 cost-basis: 110.40
 currency: USD           # currency of cost-basis / last-price (your trades may differ from base currency)
 opened: 2025-02-11
 last-price: 152.30      # optional — last known price + date, so reviews show P&L without re-asking. NOT a forecast.
 price-as-of: 2026-05-20
+market-value-eur: 1400
+total-cost-eur: 1100
+fees-eur: 4
 broker: DeGiro          # optional — which account holds it (you may use several)
 source: manual          # manual | broker   (broker = synced later via MCP)
 last-synced: 2026-05-20
@@ -135,6 +140,10 @@ wrong. Links: [[NVDA-thesis]]. (On review, judge the reasoning, not just the pri
   ```
 - **Tags** classify: Lynch's six categories (`#slow-grower`, `#stalwart`, `#fast-grower`, `#cyclical`, `#turnaround`, `#asset-play`) and status (`#held`, `#passed`).
 - **`size-pct` is always a percent of total investable capital, including cash.** So core + satellite + cash ≈ 100, and `cupel portfolio` derives cash as the remainder. Keep the sizes roughly current; they drift slowly (they're allocation, not price). If they sum past 100, `doctor` flags it.
+- **Broker import fields are read-only facts.** `quantity`, `isin`, `market-value-eur`,
+  `total-cost-eur`, and `fees-eur` are set by `cupel import degiro`; do not treat
+  them as trade instructions. The command updates positions, total capital, cash,
+  and a sync journal from exported broker files only.
 - **`role` drives the mandate math.** `cupel portfolio` reports core and satellite separately; the satellite target and the per-position cap apply to satellites only. Never file a diversified core ETF without `role: core` — that was the trap that made a whole-world fund look like a single-stock breach.
 - **Dates are `YYYY-MM-DD`.** Keep `last-reviewed` / `last-checked` / `last-synced` current; the linter measures staleness from them.
 - `PROFILE.md`, `EDGES.md`, and `MANDATE.md` are singleton top-level notes the companion always reads. `PROFILE.md` is free-form (brokers, currency, constraints, preferences — no fixed shape). `MANDATE.md` frontmatter holds `max-position-pct`, `satellite-target-pct`, and `review-stale-days`, which the linter honors.

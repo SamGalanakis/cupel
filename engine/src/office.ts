@@ -38,6 +38,9 @@ const DIR_TO_TYPE: Record<string, NoteType> = {
 // pick — the per-position cap and the satellite target apply to satellites only.
 // `size-pct` is the holding as a percent of TOTAL investable capital (incl.
 // cash), so core + satellite + cash sum to ~100 and cash is simply the remainder.
+// Broker imports also record quantity, ISIN, base-currency value/cost/fees, and
+// the last account mark; the portfolio summary still uses size-pct as the
+// simple mandate-facing allocation field.
 export const REQUIRED_FIELDS: Partial<Record<NoteType, string[]>> = {
   source: ["name", "last-checked"],
   watchlist: ["ticker", "status", "provenance", "last-reviewed"],
@@ -61,10 +64,12 @@ export const REQUIRED_FIELDS: Partial<Record<NoteType, string[]>> = {
 //   figures-as-of  date the price/financials were last pulled (drives the staleness flag)
 //   exchange / currency / tradable  where and in what currency it trades
 //   entry-trigger  (watchlist) the condition that would make it actionable; `watch-for` is an alias
+//   quantity / isin / market-value-eur / total-cost-eur / fees-eur
+//                (position) broker-imported account facts; read-only, never execution
 export const RECOMMENDED_FIELDS: Partial<Record<NoteType, string[]>> = {
   watchlist: ["company", "tier", "conviction", "edge", "correlation", "url", "exchange", "currency", "tradable", "entry-trigger"],
   thesis: ["company", "tier", "conviction", "edge", "correlation", "url", "horizon", "figures-as-of"],
-  position: ["company", "url", "last-price", "price-as-of"],
+  position: ["company", "url", "quantity", "isin", "last-price", "price-as-of", "market-value-eur", "total-cost-eur", "fees-eur"],
 };
 
 // Resolve a note's type from its vault-relative path (e.g. "positions/AAPL.md").
@@ -188,6 +193,7 @@ const PROFILE = `# Profile
 Worth including:
 
 - **Brokers / accounts** you use (you may have several), and roughly what sits where.
+- **Broker setup** — if you use DEGIRO, cupel can import exported CSVs read-only; a future live connector can use the unofficial degiro-api package only after you confirm setup.
 - **Base currency** you think in, and your tax domicile if it matters.
 - **Constraints** — e.g. cash only, no margin, no options, can't buy US OTC names.
 - **Your harness** and any tools or data sources cupel should know about.

@@ -7,6 +7,8 @@ import { cmdBoard } from "./board.js";
 import { cmdShow } from "./show.js";
 import { cmdTickers } from "./tickers.js";
 import { runSkills } from "./skills.js";
+import { cmdImport } from "./import.js";
+import { cmdData } from "./data.js";
 
 function cmdHelp(): number {
   console.log(`cupel — your clanker as an investing analyst
@@ -23,6 +25,9 @@ Usage:
     cupel portfolio                What you hold: core / satellite / cash, sizing + gain vs the mandate
     cupel capital [amount [ccy]]   Set/show total investable capital (lets portfolio show money)
     cupel tickers                  List every ticker the office knows (feeds scout dedupe)
+    cupel import degiro --portfolio <csv> --transactions <csv>
+                                   Sync read-only DEGIRO CSV exports into the office
+    cupel data doctor              Check market-data/MCP and broker setup hints
   Setup
     cupel skills <subcommand>      Install or update the skill in your AI harness
     cupel version  ·  cupel help
@@ -72,6 +77,12 @@ switch (command) {
     break;
   case "capital":
     exit = cmdCapital(rest);
+    break;
+  case "import":
+    exit = cmdImport(rest);
+    break;
+  case "data":
+    exit = cmdData(rest);
     break;
   case "skills":
     exit = await runSkills(rest);
