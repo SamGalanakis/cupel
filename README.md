@@ -2,144 +2,64 @@
 
 **cupel** turns the LLM in your AI harness into a personal investing analyst: a research companion that learns *your* edges and stress-tests your ideas against the investing canon.
 
-It lives in one folder — your *office* — and accumulates what it learns about you: your circle of competence, watchlist, theses, positions, and a dated decision journal. The premise is Peter Lynch's: your edge is what you already know from your work and daily life. cupel turns that edge into researched ideas and keeps your reasoning honest over time.
+**[→ cupel.money](https://cupel.money)**
 
-cupel gives reasoned, mandate-grounded calls: bear/base/bull scenarios with rough magnitude and horizon, tied to your assumptions and given as ranges, with the risks and the falsifier named. Investing is a bet; cupel helps you make an *informed* one. What it refuses is false precision dressed as fact and bare tips with no reasoning: it never invents a number — scenarios project from real, dated figures — and it never places trades. The decisions stay yours.
-
-## Status
-
-Early but working. The companion — onboarding, the `scout`/`watch → assay → crux`/`premortem` discipline loop, portfolio-level `allocate`, and `pulse`/`brief` reviews — and the deterministic office tooling are built and dogfooded. Market data comes from a recorded market-data MCP; run `cupel data doctor` to check setup. Read-only DEGIRO CSV import works today; live broker APIs are planned, never order execution.
-
-For DEGIRO, cupel imports exported `Portfolio.csv` and `Transactions.csv`
-today. A future live connector could build on the unofficial
-[`degiro-api`](https://github.com/icastillejogomez/degiro-api) package, but any
-broker connector stays read-only by default: a library is not permission to
-place or cancel orders.
+Your edge is what you already know from your work and daily life — that's Peter Lynch's premise. cupel captures it in one Obsidian-compatible folder, your *office*, and turns it into researched ideas: a watchlist, theses, positions, and a dated decision journal. It gives reasoned, mandate-grounded calls (bear/base/bull scenarios with rough magnitude, horizon, and the risks named) but refuses false precision and bare tips, never invents a number, and never places trades. The decisions stay yours.
 
 ## Quickstart
 
 ```
-npm install -g @samgalanakis/cupel        # 1 · install
-cupel init                  # 2 · create your office at ~/cupel
-cupel skills install        # 3 · add the skill to your AI harness
+npm install -g @samgalanakis/cupel   # install
+cupel init                           # create your office at ~/cupel
+cupel skills install                 # add the skill to your AI harness
 ```
 
-`cupel init` puts the office at `~/cupel`; set `CUPEL_HOME` to keep it elsewhere. `cupel skills install` auto-detects your harness (Claude Code, Cursor, Gemini CLI, Codex/Agents, OpenCode, Kiro, Pi, Qoder, Trae, GitHub Copilot); add `--all` for every provider, `cupel skills update` to re-sync after an `npm update`, and `cupel skills check` to see the installed version.
+Then talk to `/cupel` inside your harness:
 
-Then, inside your harness:
+1. **`/cupel`**: first run, it interviews you and writes your `PROFILE`, `EDGES`, `MANDATE`, and a few trusted `sources/`.
+2. **`/cupel I keep seeing <product> everywhere at work`**: hand it an edge-driven idea; it researches the company, runs the discipline gate, and files a thesis with explicit falsifiers.
+3. **`/cupel brief`**: a status check — what changed, what's over your mandate, what's due for review.
 
-1. **`/cupel`**: on the first run it interviews you and writes your `PROFILE`, `EDGES`, `MANDATE`, and a few trusted `sources/`. A few minutes; stop and resume any time.
-2. **`/cupel I keep seeing <product> everywhere at work`**: hand it an edge-driven idea. It resumes any prior notes, researches the company, runs the discipline gate (good business at a fair price, inside your edge?), and files a thesis with explicit falsifiers.
-3. **`/cupel brief`**: any time later, a status check on what changed, what's over your mandate, and what's due for review.
+Set `CUPEL_HOME` (in your shell profile) to put the office somewhere other than `~/cupel`. No npm package? Use `npx skills add SamGalanakis/cupel`, the [Claude Code plugin](https://github.com/SamGalanakis/cupel), or the Cowork zip on any [release](https://github.com/SamGalanakis/cupel/releases/latest).
 
-cupel reads and writes your office and gives you reasoned calls; you make and place every trade.
+## What `/cupel` can do
 
-### Without the npm package
-
-The skill is committed at `skills/cupel/`, so you can pull it straight from GitHub without installing the npm package first:
-
-```
-npx skills add SamGalanakis/cupel          # via skills.sh (skills.sh/SamGalanakis/cupel)
-```
-
-Or add it as a Claude Code plugin marketplace:
-
-```
-/plugin marketplace add SamGalanakis/cupel
-/plugin install cupel@cupel
-```
-
-### Claude Cowork
-
-Cowork installs plugins from a zip. Every [release](https://github.com/SamGalanakis/cupel/releases/latest) ships a `cupel-cowork.zip` asset that bundles the CLI (zero npm deps, so `cupel init`/`doctor` run in the sandbox on `node` alone). Download it, then in Cowork: Customize : Plugins : Install : upload the zip. Build it yourself with `npm run build:cowork`.
-
-## The office
-
-```
-~/cupel/
-  PROFILE.md    who you are operationally: brokers, currency, constraints, how you work
-  EDGES.md      your circle of competence — what you see before Wall Street does
-  MANDATE.md    your investment policy: goals, horizon, risk, position-size & sell rules
-  sources/      people and sources you trust, each with context and a last-checked date
-  watchlist/    ideas you're tracking, with provenance back to a source or hunch
-  themes/       edge trends mapped to the public names that express them
-  positions/    what you hold (core + satellite), each with a role and size; cash is the remainder
-  theses/       full write-ups, one per idea
-  journal/      a dated decision log — every buy, sell, and pass, with the reasoning
-```
-
-`PROFILE.md`, `EDGES.md`, and `MANDATE.md` are the three top-level notes cupel reads every session; `PROFILE.md` is free-form, the place cupel records durable facts about you. It's an Obsidian-compatible vault: notes use YAML frontmatter for structure and `[[wikilinks]]` for provenance, so a thesis links its `[[source]]` and a position links its `[[thesis]]`.
-
-Watchlist and thesis notes carry optional frontmatter — `tier`, `conviction`, `edge`, `correlation`, `url`, `horizon`, `figures-as-of`, and `entry-trigger` — and `cupel board` ranks the watchlist by `tier`. The principle is *rank on merit, show correlation as information*: an idea earns its tier on its own thesis, and its correlation to what you already hold sits beside it rather than baked into the score.
-
-Theses include a **Scenarios & timeframe** block (bear/base/bull with rough magnitude, horizon, and the falsifier). Dotted tickers file with a hyphen: `SOP.PA` becomes `SOP-PA.md`. Open it in Obsidian for the graph view or just read the markdown, and keep it under git — the journal's value compounds as its history grows.
-
-`cupel doctor` keeps the vault honest: it checks frontmatter and required fields, dangling `[[links]]`, mandate breaches, stale reviews and figures, decisions due for review, and ticker/filename mismatches. The LLM does the judgment; the linter guards the filing cabinet: pure arithmetic, dates, and string matching, no heuristics.
-
-### Choosing the office folder, and using Obsidian
-
-The office defaults to `~/cupel`. To keep it elsewhere — inside an existing Obsidian vault, or a synced folder (Dropbox, iCloud) for backup and multi-device — set `CUPEL_HOME`:
-
-```
-export CUPEL_HOME="$HOME/Documents/MyVault/cupel"   # add this to your shell profile
-cupel init
-cupel where                                          # confirms the resolved path
-```
-
-Set `CUPEL_HOME` in your **shell profile**, not just once in a terminal: the `/cupel` skill locates the office by running `cupel where`, so the variable must be in the environment your AI harness inherits. Pointing different `CUPEL_HOME` values at different folders gives you separate offices.
-
-**With Obsidian**, open the office folder as a vault. Because every note carries its provenance as `[[wikilinks]]`, the graph view becomes your idea lineage — source → edge → watchlist → thesis → position, with journal entries hanging off each — and backlinks surface every decision that touched a holding. Tags filter by Lynch category (`#fast-grower`, …) and status (`#held`, `#passed`). It's a strict superset of plain markdown, so cupel never *requires* Obsidian; Obsidian just makes the graph visible.
-
-## CLI
-
-The deterministic tooling. You can run these yourself; the companion runs them too.
-
-```
-cupel init                 Scaffold the office (~/cupel, or $CUPEL_HOME)
-cupel where                Print the office path
-cupel show <ticker>        Print every note for a ticker — "where were we?"
-cupel board [A|B|C|PASS]   The whole watchlist ranked by tier at a glance
-cupel tickers              List every ticker the office knows (feeds scout dedupe)
-cupel portfolio            What you hold: core/satellite/cash, sizing vs the cap, and gain from recorded prices
-cupel capital [amt [ccy]]  Set/show total capital, so portfolio can show value and gain in money
-cupel import degiro --portfolio Portfolio.csv --transactions Transactions.csv
-                           Sync read-only DEGIRO exports into positions/capital/journal
-cupel data doctor          Check market-data/MCP and broker setup hints
-cupel doctor               Check the office for inconsistencies
-cupel stamp <event>        Timestamp an event (e.g. cupel stamp pulse)
-cupel skills <subcommand>  Install / update the skill in your AI harness
-```
-
-## Commands inside the harness
-
-Talk to `/cupel` and it figures out what you need. Or go direct:
+Talk to `/cupel` and it figures out what you need, or go direct:
 
 | Command | Job |
 |---|---|
 | `onboard` | Interview you; write your edges, mandate, and trusted sources |
 | `watch` | Turn a seed (a source's idea or your hunch) into a provenance-tracked watchlist entry |
-| `scout` | Branch outward from every seed in your office (fanned out over subagents), research the adjacencies for real, and return many ranked opportunities |
+| `scout` | Branch outward from every seed in your office, research the adjacencies, and return ranked opportunities |
 | `assay` | Test one idea: a good business at a fair price, inside your edge? |
 | `crux` | Find the single load-bearing claim a thesis rests on, and test it |
 | `premortem` | Assume it failed in three years; surface the risks you're underweighting |
-| `allocate` | Deploy cash or rebalance: exposure, correlation (incl. your human capital), a recommended shape |
+| `allocate` | Deploy cash or rebalance: exposure, correlation, a recommended shape |
 | `pulse` | Refresh the office: sweep sources, re-check staleness, run `doctor` |
 | `brief` | A `pulse` plus the executive readout: what changed, what needs attention |
 
+## The office
+
+Everything lives in one Obsidian-compatible folder of plain markdown:
+
+```
+~/cupel/
+  PROFILE.md    who you are operationally: brokers, currency, constraints
+  EDGES.md      your circle of competence: what you see before Wall Street does
+  MANDATE.md    your investment policy: goals, horizon, risk, sizing & sell rules
+  sources/      people and sources you trust
+  watchlist/    ideas you're tracking, with provenance back to a source or hunch
+  themes/       edge trends mapped to the public names that express them
+  positions/    what you hold, each with a role and size
+  theses/       full write-ups, one per idea
+  journal/      a dated decision log: every buy, sell, and pass, with the reasoning
+```
+
+Notes link to each other with `[[wikilinks]]`, so the Obsidian graph becomes your idea lineage: source → edge → watchlist → thesis → position. `cupel doctor` keeps it honest, checking frontmatter, dangling links, mandate breaches, and stale figures. More at [cupel.money/office](https://cupel.money/office.html).
+
 ## The canon
 
-cupel's judgment is anchored in accessible investing classics, aimed at smart people who are experts in other fields rather than finance professionals:
-
-| Lens | Thinkers |
-|---|---|
-| Edge / what to buy | Peter Lynch (*One Up on Wall Street*), Christopher Mayer (*100 Baggers*) |
-| Quality / moats | Pat Dorsey |
-| Behavior / temperament | Morgan Housel (*The Psychology of Money*) |
-| Humility / risk / cost | Bogle, William Bernstein |
-| Don't overpay | Benjamin Graham |
-| What's already priced in | Howard Marks |
-
-Ideas are classified into Lynch's six categories (slow grower, stalwart, fast grower, cyclical, turnaround, asset play). The category drives which numbers matter and what signals a sell.
+cupel's judgment is anchored in accessible investing classics — Lynch, Mayer, Dorsey, Housel, Bogle, Bernstein, Graham, Marks — aimed at smart people who are experts in other fields, not finance professionals. See [cupel.money/canon](https://cupel.money/canon.html).
 
 ## Develop
 
