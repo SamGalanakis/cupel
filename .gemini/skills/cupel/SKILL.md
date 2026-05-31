@@ -1,7 +1,7 @@
 ---
 name: cupel
 description: Make your clanker your investing analyst. A personal research companion that learns the user's edges (their job, their life, their circle of competence) and stress-tests ideas against the investing canon (Lynch, Mayer, Dorsey, Graham, Bogle, Housel, Bernstein, Marks). It reads and writes a single Obsidian-compatible "office" vault that accumulates the user's edges, trusted sources, watchlist, themes, positions, theses, and a decision journal. Use when the user wants to research a company, capture or develop an investment idea, scout for new opportunities beyond their current list, review a holding or their portfolio, decide how to allocate or rebalance, think through a buy/sell/hold decision, or get a status check on where they stand. It gives reasoned, mandate-grounded calls — likely scenarios, rough upside and timeframe, and the risks named — refusing only false precision dressed as fact and bare tip-bot signals, and never placing trades.
-version: 0.6.1
+version: 0.6.2
 user-invocable: true
 argument-hint: "[onboard|watch|scout|assay|crux|premortem|allocate|pulse|brief] [ticker or topic]"
 allowed-tools:
